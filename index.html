@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hagai Heshes — Human-Centered Consultant</title>
+    <meta
+      name="description"
+      content="Hagai Heshes — human-centered marketing, business and innovation consultant. Helping startups and enterprises profile audiences, sharpen value props, and ship products people love."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: [
+                "Inter",
+                "ui-sans-serif",
+                "system-ui",
+                "-apple-system",
+                "Segoe UI",
+                "Roboto",
+                "sans-serif",
+              ],
+            },
+            letterSpacing: {
+              tightest: "-0.045em",
+            },
+            colors: {
+              ink: {
+                50: "#FAFAFA",
+                100: "#F4F4F5",
+                200: "#E4E4E7",
+                500: "#71717A",
+                700: "#3F3F46",
+                900: "#0A0A0A",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-feature-settings: "cv11", "ss01", "ss03";
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .hero-gradient {
+        background:
+          radial-gradient(1100px 520px at 15% -10%, rgba(99, 102, 241, 0.12), transparent 60%),
+          radial-gradient(900px 500px at 95% 5%, rgba(244, 114, 182, 0.10), transparent 60%),
+          radial-gradient(800px 500px at 50% 110%, rgba(59, 130, 246, 0.08), transparent 60%);
+      }
+      .grid-bg {
+        background-image:
+          linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: radial-gradient(ellipse at center, black 55%, transparent 85%);
+        -webkit-mask-image: radial-gradient(ellipse at center, black 55%, transparent 85%);
+      }
+      /* ── Scroll reveal ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* Staggered children */
+      .reveal-stagger > * {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .reveal-stagger.is-visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0ms; }
+      .reveal-stagger.is-visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 90ms; }
+      .reveal-stagger.is-visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 180ms; }
+      .reveal-stagger.is-visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 270ms; }
+      .reveal-stagger.is-visible > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 360ms; }
+      .reveal-stagger.is-visible > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 450ms; }
+      .reveal-stagger.is-visible > *:nth-child(n+7) { opacity: 1; transform: translateY(0); transition-delay: 540ms; }
+
+      .logo-mark {
+        filter: grayscale(100%);
+        opacity: 0.65;
+        transition: filter 300ms ease, opacity 300ms ease, transform 300ms ease;
+      }
+      .logo-mark:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: translateY(-1px);
+      }
+    </style>
+  </head>
+
+  <body class="bg-ink-50 text-ink-900 antialiased">
+    <!-- ============== NAV ============== -->
+    <header
+      class="sticky top-0 z-50 border-b border-ink-200/70 bg-ink-50/75 backdrop-blur-md"
+    >
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <a href="#" class="flex items-center gap-2">
+          <span
+            class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-ink-900 text-ink-50 text-sm font-bold tracking-tight"
+            >H</span
+          >
+          <span class="text-[15px] font-semibold tracking-tight">Hagai Heshes</span>
+        </a>
+
+        <nav class="hidden items-center gap-9 md:flex">
+          <a href="#about" class="text-sm font-medium text-ink-700 transition hover:text-ink-900">About</a>
+          <a href="#clients" class="text-sm font-medium text-ink-700 transition hover:text-ink-900">Clients</a>
+          <a href="#services" class="text-sm font-medium text-ink-700 transition hover:text-ink-900">Services</a>
+          <a href="#media" class="text-sm font-medium text-ink-700 transition hover:text-ink-900">Media</a>
+          <a href="#contact" class="text-sm font-medium text-ink-700 transition hover:text-ink-900">Contact</a>
+        </nav>
+
+        <a
+          href="#contact"
+          class="group inline-flex items-center gap-2 rounded-full bg-ink-900 px-4 py-2 text-sm font-medium text-ink-50 transition hover:bg-ink-700"
+        >
+          Get in touch
+          <svg
+            class="h-3.5 w-3.5 transition group-hover:translate-x-0.5"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 8h10M9 4l4 4-4 4" />
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- ============== HERO ============== -->
+    <section class="relative overflow-hidden hero-gradient">
+      <div class="absolute inset-0 grid-bg pointer-events-none"></div>
+
+      <div class="relative mx-auto max-w-7xl px-6 pt-24 pb-28 md:pt-36 md:pb-40">
+        <div class="mx-auto max-w-4xl text-center">
+          <span
+            class="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white/70 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-ink-700 backdrop-blur"
+          >
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+            Human-Centered Consultant
+          </span>
+
+          <h1
+            class="mt-8 font-extrabold tracking-tightest text-[44px] leading-[1.02] sm:text-6xl md:text-7xl lg:text-[88px]"
+          >
+            Marketing, business &amp;
+            <span class="relative whitespace-nowrap">
+              <span
+                class="bg-gradient-to-r from-indigo-600 via-fuchsia-500 to-rose-500 bg-clip-text text-transparent"
+                >innovation</span
+              >
+            </span>
+            built around humans.
+          </h1>
+
+          <p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-ink-500 md:text-xl">
+            I help startups and global corporations profile their audiences, sharpen
+            value propositions, refine messaging, and ship products people actually
+            want to use.
+          </p>
+
+          <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+            <a
+              href="#contact"
+              class="group inline-flex items-center justify-center gap-2 rounded-full bg-ink-900 px-6 py-3 text-sm font-medium text-ink-50 shadow-sm transition hover:bg-ink-700"
+            >
+              Work with me
+              <svg
+                class="h-4 w-4 transition group-hover:translate-x-0.5"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </a>
+            <a
+              href="#clients"
+              class="inline-flex items-center justify-center gap-2 rounded-full border border-ink-200 bg-white px-6 py-3 text-sm font-medium text-ink-900 transition hover:border-ink-900"
+            >
+              See clients
+            </a>
+          </div>
+
+          <!-- Stats -->
+          <div
+            class="mx-auto mt-16 grid max-w-3xl grid-cols-3 divide-x divide-ink-200 rounded-2xl border border-ink-200 bg-white/60 backdrop-blur"
+          >
+            <div class="px-4 py-5">
+              <div class="text-2xl font-semibold tracking-tight md:text-3xl">20+</div>
+              <div class="mt-1 text-xs uppercase tracking-widest text-ink-500">Years experience</div>
+            </div>
+            <div class="px-4 py-5">
+              <div class="text-2xl font-semibold tracking-tight md:text-3xl">50+</div>
+              <div class="mt-1 text-xs uppercase tracking-widest text-ink-500">Products launched</div>
+            </div>
+            <div class="px-4 py-5">
+              <div class="text-2xl font-semibold tracking-tight md:text-3xl">Global</div>
+              <div class="mt-1 text-xs uppercase tracking-widest text-ink-500">Startups &amp; enterprise</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== TRUSTED BY ============== -->
+    <section id="clients" class="border-y border-ink-200 bg-white">
+      <div class="mx-auto max-w-7xl px-6 py-20 md:py-24">
+        <div class="text-center reveal">
+          <span
+            class="text-[11px] font-medium uppercase tracking-[0.22em] text-ink-500"
+            >Trusted by teams at</span
+          >
+          <h2 class="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">
+            Global brands and breakthrough startups
+          </h2>
+        </div>
+
+        <div
+          class="mt-14 grid grid-cols-2 items-center gap-x-10 gap-y-12 sm:grid-cols-3 lg:grid-cols-5 reveal-stagger"
+        >
+          <div class="flex items-center justify-center">
+            <img
+              src="images/Wix.com_Logo.png"
+              alt="Wix"
+              class="logo-mark h-10 w-auto max-w-[160px] object-contain"
+            />
+          </div>
+          <div class="flex items-center justify-center">
+            <img
+              src="images/medtronic.png"
+              alt="Medtronic"
+              class="logo-mark h-16 w-auto max-w-[220px] object-contain"
+            />
+          </div>
+          <div class="flex items-center justify-center pl-8">
+            <img
+              src="images/WD02-scaled.webp"
+              alt="Western Digital"
+              class="logo-mark h-24 w-auto max-w-[240px] object-contain"
+            />
+          </div>
+          <div class="flex items-center justify-center">
+            <img
+              src="images/iaf-logo.jpg"
+              alt="Israeli Air Force"
+              class="logo-mark h-16 w-auto max-w-[200px] object-contain"
+            />
+          </div>
+          <div class="flex items-center justify-center">
+            <img
+              src="images/powermat-logo.png"
+              alt="Powermat"
+              class="logo-mark h-24 w-auto max-w-[280px] object-contain"
+            />
+          </div>
+          <div class="flex items-center justify-center">
+            <img
+              src="images/SCiO_Logo_.webp"
+              alt="SCiO"
+              class="logo-mark h-11 w-auto max-w-[170px] object-contain"
+            />
+          </div>
+          <div class="flex items-center justify-center">
+            <img
+              src="images/angelsence-logo.webp"
+              alt="AngelSense"
+              class="logo-mark h-16 w-auto max-w-[200px] object-contain"
+            />
+          </div>
+          <div class="flex items-center justify-center">
+            <img
+              src="images/imperson-logo.jpg"
+              alt="Imperson"
+              class="logo-mark h-16 w-auto max-w-[180px] object-contain"
+            />
+          </div>
+          <div class="flex items-center justify-center">
+            <img
+              src="images/secubit.avif"
+              alt="Secubit"
+              class="logo-mark h-16 w-auto max-w-[200px] object-contain"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== ABOUT ============== -->
+    <section id="about" class="relative">
+      <div class="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          <!-- Portrait -->
+          <div class="lg:col-span-5 reveal" style="transition-delay:0ms">
+            <div class="relative">
+              <div
+                class="absolute -inset-4 -z-10 rounded-[28px] bg-gradient-to-br from-indigo-200/50 via-fuchsia-200/40 to-rose-200/40 blur-2xl"
+              ></div>
+              <div
+                class="overflow-hidden rounded-3xl border border-ink-200 bg-white shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)]"
+              >
+                <img
+                  src="images/hagai%20paris.avif"
+                  alt="Portrait of Hagai Heshes"
+                  class="aspect-[4/5] w-full object-cover"
+                />
+              </div>
+              <div
+                class="absolute -bottom-5 -right-5 hidden rounded-2xl border border-ink-200 bg-white px-5 py-4 shadow-lg md:block"
+              >
+                <div class="text-xs uppercase tracking-widest text-ink-500">Based in</div>
+                <div class="text-sm font-semibold text-ink-900">Tel Aviv · Global</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Copy -->
+          <div class="lg:col-span-7 reveal" style="transition-delay:120ms">
+            <span
+              class="text-[11px] font-medium uppercase tracking-[0.22em] text-ink-500"
+              >About</span
+            >
+            <h2
+              class="mt-3 text-3xl font-bold tracking-tight text-ink-900 md:text-5xl md:leading-[1.1]"
+            >
+              I'm a human-centered marketing, business and innovation consultant.
+            </h2>
+
+            <div class="mt-7 space-y-5 text-[17px] leading-relaxed text-ink-700">
+              <p>
+                I've learned through experience that in order to increase chances of
+                business success, one must focus on the humans at the receiving end —
+                the users, the customers, the website visitors, the brochure readers,
+                the marketing campaign targets — addressing their needs and solving
+                their pains.
+              </p>
+              <p>
+                I help startups and big corporations profile their target audience,
+                crystallize their value propositions, refine their messages, build
+                marketing plans, define marketing collateral, and execute them.
+              </p>
+              <p>
+                I also lead and mentor innovation processes as the co-founder of the
+                <a
+                  href="http://www.leanovation.co/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-medium text-ink-900 underline decoration-ink-900/30 underline-offset-4 transition hover:decoration-ink-900"
+                  >Leanovation</a
+                >
+                consulting group, which helps identify user needs, ideate, prototype
+                and validate products and services in the market.
+              </p>
+              <p>
+                I have over 20 years of experience launching new products and services
+                into the global market. I got my BA in Computer Science from Tel Aviv
+                University and my Master's in Psychology from the University of
+                Pennsylvania.
+              </p>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-2">
+              <span class="rounded-full border border-ink-200 bg-white px-3 py-1 text-xs font-medium text-ink-700">
+                BA · Computer Science, Tel Aviv
+              </span>
+              <span class="rounded-full border border-ink-200 bg-white px-3 py-1 text-xs font-medium text-ink-700">
+                MA · Psychology, UPenn
+              </span>
+              <span class="rounded-full border border-ink-200 bg-white px-3 py-1 text-xs font-medium text-ink-700">
+                Co-founder · Leanovation
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== SERVICES ============== -->
+    <section id="services" class="border-t border-ink-200 bg-ink-100/60">
+      <div class="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div class="max-w-2xl reveal">
+          <span
+            class="text-[11px] font-medium uppercase tracking-[0.22em] text-ink-500"
+            >Services</span
+          >
+          <h2 class="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
+            Three practices, one mindset.
+          </h2>
+          <p class="mt-5 text-lg leading-relaxed text-ink-500">
+            Methodology-driven work across the product, marketing and innovation stack
+            — always anchored in the people you're building for.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 md:grid-cols-3 reveal-stagger">
+          <!-- Innovation -->
+          <article
+            class="group relative rounded-3xl border border-ink-200 bg-white p-8 transition hover:-translate-y-1 hover:shadow-[0_20px_60px_-20px_rgba(0,0,0,0.2)]"
+          >
+            <div
+              class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-ink-900 text-ink-50"
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z" />
+              </svg>
+            </div>
+            <div class="mt-6 flex items-center gap-3">
+              <span class="text-xs font-medium text-ink-500">01</span>
+              <span class="h-px flex-1 bg-ink-200"></span>
+            </div>
+            <h3 class="mt-3 text-xl font-semibold tracking-tight">Innovation</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-ink-700">
+              Generating new ideas, prototyping and testing them in the market. Finding
+              problem–solution fit, product–market fit and business-model fit by
+              applying proven methodologies.
+            </p>
+          </article>
+
+          <!-- Marketing -->
+          <article
+            class="group relative rounded-3xl border border-ink-200 bg-white p-8 transition hover:-translate-y-1 hover:shadow-[0_20px_60px_-20px_rgba(0,0,0,0.2)]"
+          >
+            <div
+              class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-ink-900 text-ink-50"
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 11v2a2 2 0 0 0 2 2h2l6 4V5L7 9H5a2 2 0 0 0-2 2zM19 8a5 5 0 0 1 0 8" />
+              </svg>
+            </div>
+            <div class="mt-6 flex items-center gap-3">
+              <span class="text-xs font-medium text-ink-500">02</span>
+              <span class="h-px flex-1 bg-ink-200"></span>
+            </div>
+            <h3 class="mt-3 text-xl font-semibold tracking-tight">Marketing</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-ink-700">
+              Profiling targets, tailoring value props and messages, picking the right
+              channels, generating content, managing budget, testing, monitoring and
+              optimizing based on data.
+            </p>
+          </article>
+
+          <!-- Product -->
+          <article
+            class="group relative rounded-3xl border border-ink-200 bg-white p-8 transition hover:-translate-y-1 hover:shadow-[0_20px_60px_-20px_rgba(0,0,0,0.2)]"
+          >
+            <div
+              class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-ink-900 text-ink-50"
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16zM3.3 7 12 12l8.7-5M12 22V12" />
+              </svg>
+            </div>
+            <div class="mt-6 flex items-center gap-3">
+              <span class="text-xs font-medium text-ink-500">03</span>
+              <span class="h-px flex-1 bg-ink-200"></span>
+            </div>
+            <h3 class="mt-3 text-xl font-semibold tracking-tight">Product</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-ink-700">
+              Defining prototypes, MVPs, guiding UX work, prioritizing features, and
+              advocating for the end users at every step of the build.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== MEDIA ============== -->
+    <section id="media" class="border-t border-ink-200 bg-white">
+      <div class="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div class="max-w-2xl reveal">
+          <span class="text-[11px] font-medium uppercase tracking-[0.22em] text-ink-500"
+            >Media</span
+          >
+          <h2 class="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
+            Hagai in the Press
+          </h2>
+          <p class="mt-5 text-lg leading-relaxed text-ink-500">
+            Insights on innovation, marketing, and the human side of technology.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-8 md:grid-cols-2 reveal-stagger">
+          <!-- CNBC Interview -->
+          <div
+            class="group overflow-hidden rounded-3xl border border-ink-200 bg-ink-50 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.15)] transition hover:-translate-y-1 hover:shadow-[0_20px_60px_-16px_rgba(0,0,0,0.22)]"
+          >
+            <div class="relative aspect-video w-full overflow-hidden bg-ink-900">
+              <iframe
+                src="https://www.youtube.com/embed/yOG024NXeEQ"
+                title="Hagai Heshes — CNBC Interview"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                class="absolute inset-0 h-full w-full border-0"
+              ></iframe>
+            </div>
+            <div class="px-6 py-5">
+              <div class="flex items-center gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 rounded-full bg-red-50 px-2.5 py-1 text-[11px] font-medium text-red-600"
+                >
+                  <svg class="h-3 w-3 fill-red-500" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.27 8.27 0 0 0 4.84 1.55V6.79a4.85 4.85 0 0 1-1.07-.1z"/></svg>
+                  CNBC
+                </span>
+              </div>
+              <h3 class="mt-3 text-lg font-semibold tracking-tight text-ink-900">
+                CNBC Interview
+              </h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-ink-500">
+                Hagai Heshes speaks on innovation, startups, and human-centered
+                product development.
+              </p>
+            </div>
+          </div>
+
+          <!-- Product Demo -->
+          <div
+            class="group overflow-hidden rounded-3xl border border-ink-200 bg-ink-50 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.15)] transition hover:-translate-y-1 hover:shadow-[0_20px_60px_-16px_rgba(0,0,0,0.22)]"
+          >
+            <div class="relative aspect-video w-full overflow-hidden bg-ink-900">
+              <iframe
+                src="https://www.youtube.com/embed/6KhOIhyc8_Y"
+                title="Hagai Heshes — Product Demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                class="absolute inset-0 h-full w-full border-0"
+              ></iframe>
+            </div>
+            <div class="px-6 py-5">
+              <div class="flex items-center gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-2.5 py-1 text-[11px] font-medium text-indigo-600"
+                >
+                  <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                  </svg>
+                  Demo
+                </span>
+              </div>
+              <h3 class="mt-3 text-lg font-semibold tracking-tight text-ink-900">
+                Product Demo
+              </h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-ink-500">
+                A live walkthrough showcasing how human-centered design translates
+                into products people actually use.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== CONTACT / CTA ============== -->
+    <section id="contact" class="relative overflow-hidden bg-ink-900 text-ink-50">
+      <div
+        class="pointer-events-none absolute inset-0 opacity-60"
+        style="
+          background:
+            radial-gradient(700px 340px at 15% 0%, rgba(99, 102, 241, 0.35), transparent 60%),
+            radial-gradient(700px 340px at 100% 100%, rgba(244, 114, 182, 0.25), transparent 60%);
+        "
+      ></div>
+
+      <div class="relative mx-auto max-w-5xl px-6 py-24 md:py-32">
+        <div class="text-center">
+          <span
+            class="text-[11px] font-medium uppercase tracking-[0.22em] text-ink-50/60"
+            >Contact</span
+          >
+          <h2
+            class="mt-4 text-4xl font-extrabold tracking-tightest md:text-6xl"
+          >
+            Let's build something people love.
+          </h2>
+          <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-50/70">
+            Whether you're launching a new product, rethinking your go-to-market, or
+            looking to run an innovation sprint — I'd love to hear from you.
+          </p>
+
+          <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=hagai@hagaiheshes.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-ink-900 transition hover:bg-ink-100"
+            >
+              hagai@hagaiheshes.com
+              <svg
+                class="h-4 w-4 transition group-hover:translate-x-0.5"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative border-t border-ink-50/10">
+        <div
+          class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-6 text-xs text-ink-50/60 md:flex-row"
+        >
+          <div>© 2026 Hagai Heshes. All rights reserved.</div>
+          <div class="flex items-center gap-6">
+            <a href="#about" class="transition hover:text-ink-50">About</a>
+            <a href="#clients" class="transition hover:text-ink-50">Clients</a>
+            <a href="#services" class="transition hover:text-ink-50">Services</a>
+            <a href="#media" class="transition hover:text-ink-50">Media</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      (function () {
+        const THRESHOLD = 0.12;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target); // fire once
+              }
+            });
+          },
+          { threshold: THRESHOLD, rootMargin: "0px 0px -48px 0px" }
+        );
+
+        // Observe both single-reveal and stagger-parent elements
+        document
+          .querySelectorAll(".reveal, .reveal-stagger")
+          .forEach((el) => observer.observe(el));
+      })();
+    </script>
+  </body>
+</html>
