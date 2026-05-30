@@ -1,755 +1,1557 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hagai Heshes — Human-Centered Consultant</title>
-    <meta
-      name="description"
-      content="Hagai Heshes — human-centered marketing, business and innovation consultant. Helping startups and enterprises profile audiences, sharpen value props, and ship products people love."
-    />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hagai Heshes: The Crystallizer</title>
+  <meta name="description" content="Positioning and go-to-market for companies that cannot afford to be misunderstood. Hagai Heshes distills what you're really about, then helps you take it to market.">
 
-    <!-- Bricolage Grotesque — distinctive variable grotesque, warm personality at display sizes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap"
-      rel="stylesheet"
-    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Bricolage Grotesque", "ui-sans-serif", "system-ui", "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --ink:      #0f0f0e;
+      --ink-80:   rgba(15,15,14,0.80);
+      --ink-60:   rgba(15,15,14,0.60);
+      --ink-40:   rgba(15,15,14,0.40);
+      --ink-15:   rgba(15,15,14,0.15);
+      --ink-06:   rgba(15,15,14,0.06);
+      --bg:       #fafaf9;
+      --bg-alt:   #f4f3f0;
+      --gold:     #b8975a;
+      --gold-lt:  #e8d4a8;
+      --gold-dim: rgba(184,151,90,0.18);
+      --line:     rgba(15,15,14,0.10);
+      --line-md:  rgba(15,15,14,0.16);
+      --maxw:     1080px;
+      --nav-h:    64px;
+    }
 
-    <style>
-      :root {
-        --warm-50:   oklch(97.5% 0.008 65);
-        --warm-100:  oklch(93%   0.010 65);
-        --warm-200:  oklch(87%   0.014 65);
-        --warm-500:  oklch(55%   0.016 55);
-        --warm-700:  oklch(40%   0.016 50);
-        --warm-900:  oklch(19%   0.012 45);
-        --accent:    oklch(57%   0.160 35);
-        --accent-bg: oklch(95%   0.020 35);
-      }
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
-      html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-      body {
-        font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-        font-feature-settings: "ss01", "ss03";
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        background: var(--warm-50);
-        color: var(--warm-900);
-      }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
 
-      /* ── Nav ── */
-      header nav a {
-        color: var(--warm-700);
-        transition: color 0.15s ease;
-      }
-      header nav a:hover,
-      header nav a.nav-active {
-        color: var(--warm-900);
-        font-weight: 600;
-      }
+    /* ── Focus States (Accessibility) ── */
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
 
-      /* ── Scroll reveal ── */
-      .reveal {
-        opacity: 0;
-        transform: translateY(28px);
-        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: opacity, transform;
-      }
-      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    /* ── Typography Scale ── */
+    .t-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-40);
+    }
 
-      .reveal-stagger > * {
-        opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: opacity, transform;
-      }
-      .reveal-stagger.is-visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0ms; }
-      .reveal-stagger.is-visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 110ms; }
-      .reveal-stagger.is-visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 220ms; }
-      .reveal-stagger.is-visible > *:nth-child(n+4) { opacity: 1; transform: translateY(0); transition-delay: 330ms; }
+    .t-serif {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
 
-      /* ── Logo marquee ── */
-      .logo-mark {
-        filter: grayscale(100%);
-        opacity: 0.5;
-        transition: filter 300ms ease, opacity 300ms ease;
-      }
-      .logo-mark:hover { filter: grayscale(0%); opacity: 1; }
+    /* ── Layout ── */
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    @media (max-width: 600px) {
+      .wrap { padding: 0 20px; }
+    }
 
-      @keyframes marquee {
-        0%   { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+    /* ── Horizontal rules ── */
+    hr.rule {
+      border: none;
+      border-top: 1px solid var(--line);
+    }
+
+    /* ── Scroll margin for anchor links ── */
+    section[id] {
+      scroll-margin-top: var(--nav-h);
+    }
+
+    /* ──────────────────────────────────────────────
+       NAV
+    ────────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: var(--nav-h);
+      background: rgba(250,250,249,0.92);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-80);
+      letter-spacing: 0.01em;
+      transition: color 0.15s ease;
+      position: relative;
+      padding: 4px 0;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+    .nav-cta {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--ink);
+      border: 1px solid var(--line-md);
+      border-radius: 5px;
+      padding: 7px 16px;
+      transition: border-color 0.15s ease, background 0.15s ease;
+      letter-spacing: 0.01em;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-cta:hover {
+      border-color: var(--ink);
+      background: var(--ink-06);
+    }
+
+    /* Hamburger */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 11px 8px;
+      background: none;
+      border: none;
+      min-width: 44px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+    }
+    .nav-burger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .mobile-drawer {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      padding: 20px 20px 24px;
+      z-index: 199;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+      pointer-events: none;
+    }
+    .mobile-drawer.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-drawer nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .mobile-drawer a {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink-80);
+      padding: 11px 8px;
+      border-radius: 6px;
+      transition: color 0.15s ease, background 0.15s ease;
+      border-bottom: 1px solid var(--line);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      touch-action: manipulation;
+    }
+    .mobile-drawer a:last-child { border-bottom: none; }
+    .mobile-drawer a:hover { color: var(--ink); background: var(--ink-06); }
+    .mobile-drawer .drawer-cta {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: var(--ink);
+      color: var(--bg);
+      padding: 13px 24px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      font-weight: 500;
+      min-height: 48px;
+      touch-action: manipulation;
+    }
+
+    @media (max-width: 720px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+    }
+    @media (min-width: 721px) {
+      .mobile-drawer { display: none; }
+    }
+
+    /* ──────────────────────────────────────────────
+       HERO (Hero A — split)
+    ────────────────────────────────────────────── */
+    .hero {
+      min-height: calc(100svh - var(--nav-h));
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      border-bottom: 1px solid var(--line-md);
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle radial ambient glow — not a decorative stripe */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -100px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,151,90,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Grain texture overlay */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-text {
+      padding: 60px 48px 60px 32px;
+      max-width: 560px;
+      margin-left: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Warm left-side radial accent behind hero text */
+    .hero-text::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(184,151,90,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(52px, 6vw, 88px);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 24px;
+      text-wrap: balance;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-tagline {
+      font-size: clamp(16px, 1.6vw, 18px);
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--ink-80);
+      margin-bottom: 14px;
+      max-width: 38ch;
+    }
+
+    .hero-lede {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ink-80);
+      max-width: 44ch;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--ink);
+      color: var(--bg);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 12px 22px;
+      border-radius: 5px;
+      transition: background 0.15s ease, transform 0.15s ease;
+      letter-spacing: 0.01em;
+      min-height: 44px;
+      touch-action: manipulation;
+    }
+    .btn-primary:hover { background: #2a2a28; transform: translateY(-1px); }
+    .btn-primary svg { transition: transform 0.2s ease; }
+    .btn-primary:hover svg { transform: translateX(3px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line-md);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      padding: 12px 22px;
+      border-radius: 5px;
+      transition: border-color 0.15s ease, background 0.15s ease;
+      letter-spacing: 0.01em;
+      min-height: 44px;
+      touch-action: manipulation;
+    }
+    .btn-ghost:hover { border-color: var(--ink-40); background: var(--ink-06); }
+
+    /* Crystal column */
+    .hero-crystal-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      border-left: 1px solid var(--line);
+      padding: 56px 24px 56px 32px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .crystal-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .crystal-glow {
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,151,90,0.20) 0%, transparent 70%);
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    .crystal-svg {
+      position: relative;
+      z-index: 2;
+      animation: crystal-float 6s ease-in-out infinite;
+      transform-origin: center center;
+      cursor: default;
+      transition: filter 0.4s ease;
+    }
+    .crystal-svg:hover {
+      filter: drop-shadow(0 8px 40px rgba(184,151,90,0.35));
+    }
+
+    @keyframes crystal-float {
+      0%   { transform: translateY(0px) rotate(0deg); }
+      25%  { transform: translateY(-8px) rotate(0.8deg); }
+      50%  { transform: translateY(-14px) rotate(0deg); }
+      75%  { transform: translateY(-8px) rotate(-0.8deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
       }
-      .marquee-wrapper {
-        overflow: hidden;
-        mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      .hero-crystal-col {
+        border-left: none;
+        border-top: 1px solid var(--line);
+        padding: 40px 20px 48px;
       }
-      .marquee-track {
-        display: flex;
-        width: max-content;
-        animation: marquee 30s linear infinite;
+      .hero-text {
+        padding: 60px 20px 40px;
+        margin-left: 0;
+        max-width: 100%;
       }
-      .marquee-track:hover { animation-play-state: paused; }
-      .marquee-item {
-        display: flex;
-        align-items: center;
+    }
+
+    /* ──────────────────────────────────────────────
+       PILLARS (Crystallization + GTM)
+    ────────────────────────────────────────────── */
+    .pillars-section {
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-alt);
+    }
+    .pillars-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .pillar {
+      padding: 48px 40px;
+      position: relative;
+      transition: background 0.2s ease;
+    }
+    .pillar:first-child {
+      border-right: 1px solid var(--line);
+    }
+    .pillar:hover {
+      background: rgba(15,15,14,0.04);
+    }
+
+    /* Gold rule above each pillar title */
+    .pillar-rule {
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .pillar-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 16px;
+      text-wrap: balance;
+    }
+    .pillar-body {
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: var(--ink-80);
+      max-width: 40ch;
+    }
+    @media (max-width: 680px) {
+      .pillars-inner { grid-template-columns: 1fr; }
+      .pillar:first-child { border-right: none; border-bottom: 1px solid var(--line); }
+      .pillar { padding: 40px 20px; }
+    }
+
+    /* ──────────────────────────────────────────────
+       CLIENTS
+    ────────────────────────────────────────────── */
+    .clients-section {
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+    }
+    .clients-header {
+      padding: 40px 32px 24px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .clients-header h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .clients-logos {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    .client-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 24px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+    }
+    .client-logo img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.55;
+      transition: opacity 0.3s ease, filter 0.3s ease;
+      display: block;
+    }
+    .client-logo:hover img {
+      opacity: 1;
+      filter: grayscale(0%);
+    }
+    @media (max-width: 600px) {
+      .clients-logos { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .clients-header {
+        padding: 40px 20px 24px;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+    }
+
+    /* ──────────────────────────────────────────────
+       HOW I WORK — dark section
+    ────────────────────────────────────────────── */
+    .how-section {
+      border-bottom: 1px solid rgba(250,250,249,0.08);
+      background: var(--ink);
+    }
+    .how-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 80px 32px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .how-label-col {
+      padding-top: 4px;
+    }
+
+    /* Section title default (light sections) */
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      line-height: 1.2;
+      text-wrap: balance;
+    }
+
+    /* Section title override for dark sections */
+    .how-section .section-title {
+      font-size: clamp(28px, 3.5vw, 42px);
+      color: var(--bg);
+    }
+
+    .how-body p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: rgba(250,250,249,0.75);
+      margin-bottom: 20px;
+      max-width: 65ch;
+    }
+    .how-body p:last-child { margin-bottom: 0; }
+
+    @media (max-width: 720px) {
+      .how-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 60px 20px;
+      }
+    }
+
+    /* ──────────────────────────────────────────────
+       DELIVERABLES
+    ────────────────────────────────────────────── */
+    .deliv-section {
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+    }
+    .deliv-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 60px 32px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .deliv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 64px;
+    }
+    .deliv-group {}
+    .deliv-group-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      font-weight: 500;
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 0;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .deliv-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+    .deliv-list li {
+      font-size: 14.5px;
+      color: var(--ink-80);
+      line-height: 1.55;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .deliv-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .deliv-list li::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 720px) {
+      .deliv-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 52px 20px;
+      }
+      .deliv-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    /* ──────────────────────────────────────────────
+       ABOUT
+    ────────────────────────────────────────────── */
+    .about-section {
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-alt);
+    }
+    .about-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 72px 32px;
+      display: grid;
+      grid-template-columns: 1fr 520px;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-photo-col {
+      position: relative;
+    }
+    .about-photo-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+    }
+    .about-photo-wrap img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Signature name below photo */
+    .about-photo-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink-60);
+      margin-top: 14px;
+      text-align: center;
+      letter-spacing: -0.01em;
+    }
+
+    .about-content { padding-top: 8px; }
+    .about-content .section-title { margin-bottom: 28px; }
+    .about-content p {
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: var(--ink-80);
+      margin-bottom: 18px;
+      max-width: 65ch;
+    }
+    .about-content p:last-of-type { margin-bottom: 0; }
+
+    @media (max-width: 860px) {
+      .about-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 52px 20px;
+      }
+      .about-photo-wrap { max-width: 300px; }
+    }
+
+    /* ──────────────────────────────────────────────
+       CONTACT
+    ────────────────────────────────────────────── */
+    .contact-section {
+      background: var(--ink);
+      color: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      bottom: -120px; right: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,151,90,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .contact-inner {
+      position: relative;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 72px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .contact-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(250,250,249,0.45);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .contact-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--bg);
+      margin-bottom: 20px;
+      text-wrap: balance;
+    }
+    .contact-headline em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+
+    .contact-sub {
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(250,250,249,0.72);
+      max-width: 44ch;
+      margin-bottom: 36px;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 13px 22px;
+      border-radius: 5px;
+      transition: background 0.15s ease, transform 0.15s ease;
+      letter-spacing: 0.01em;
+      min-height: 48px;
+      touch-action: manipulation;
+    }
+    .contact-email:hover { background: #f0efe9; transform: translateY(-1px); }
+    .contact-email svg { transition: transform 0.2s ease; }
+    .contact-email:hover svg { transform: translateX(3px); }
+
+    .contact-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(250,250,249,0.18);
+      color: rgba(250,250,249,0.85);
+      font-size: 13.5px;
+      font-weight: 400;
+      padding: 13px 22px;
+      border-radius: 5px;
+      transition: border-color 0.15s ease, color 0.15s ease;
+      letter-spacing: 0.01em;
+      min-height: 48px;
+      touch-action: manipulation;
+    }
+    .contact-whatsapp:hover { border-color: rgba(250,250,249,0.45); color: var(--bg); }
+
+    .contact-crystal {
+      opacity: 0.12;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 860px) {
+      .contact-inner {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 72px 20px;
+      }
+      .contact-crystal { display: none; }
+    }
+
+    /* ──────────────────────────────────────────────
+       FOOTER
+    ────────────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid rgba(250,250,249,0.08);
+      background: var(--ink);
+    }
+    .footer-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 22px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(250,250,249,0.35);
+    }
+    .footer-nav {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-nav a {
+      font-size: 12px;
+      color: rgba(250,250,249,0.35);
+      transition: color 0.15s ease;
+      padding: 6px 2px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      touch-action: manipulation;
+    }
+    .footer-nav a:hover { color: rgba(250,250,249,0.7); }
+
+    @media (max-width: 480px) {
+      .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+      .footer-nav { gap: 16px; flex-wrap: wrap; justify-content: center; }
+    }
+
+    /* ──────────────────────────────────────────────
+       SCROLL-TO-TOP
+    ────────────────────────────────────────────── */
+    .scroll-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--bg);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.25s ease, transform 0.25s ease, background 0.15s ease;
+      pointer-events: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      touch-action: manipulation;
+    }
+    .scroll-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .scroll-top:hover { background: #2a2a28; }
+
+    /* ──────────────────────────────────────────────
+       REVEAL ANIMATIONS
+    ────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-left.in-view { opacity: 1; transform: translateX(0); }
+
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .stagger.in-view > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0ms; }
+    .stagger.in-view > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 80ms; }
+    .stagger.in-view > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 160ms; }
+    .stagger.in-view > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 240ms; }
+    .stagger.in-view > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 320ms; }
+    .stagger.in-view > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 400ms; }
+    .stagger.in-view > *:nth-child(7) { opacity: 1; transform: none; transition-delay: 480ms; }
+    .stagger.in-view > *:nth-child(8) { opacity: 1; transform: none; transition-delay: 560ms; }
+
+    /* Hero entrance */
+    .hero-text .hero-title,
+    .hero-text .hero-tagline,
+    .hero-text .hero-lede,
+    .hero-text .hero-actions {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-crystal-col {
+      opacity: 0;
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    }
+    body.loaded .hero-text .hero-title    { opacity: 1; transform: none; transition-delay: 0.15s; }
+    body.loaded .hero-text .hero-tagline  { opacity: 1; transform: none; transition-delay: 0.25s; }
+    body.loaded .hero-text .hero-lede     { opacity: 1; transform: none; transition-delay: 0.35s; }
+    body.loaded .hero-text .hero-actions  { opacity: 1; transform: none; transition-delay: 0.45s; }
+    body.loaded .hero-crystal-col         { opacity: 1; }
+
+    /* Nav entrance */
+    .nav {
+      opacity: 0;
+      transition: opacity 0.4s ease 0.1s;
+    }
+    body.loaded .nav { opacity: 1; }
+
+    /* ──────────────────────────────────────────────
+       SECTION HEADER SHARED
+    ────────────────────────────────────────────── */
+    .section-header {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 48px 32px 36px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .section-header .t-label { flex-shrink: 0; }
+    .section-header .section-title { margin-left: 0; }
+
+    /* Fine detail: active nav link */
+    .nav-links a.active {
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    /* ──────────────────────────────────────────────
+       PREFERS REDUCED MOTION
+    ────────────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ──────────────────────────────────────────────
+       MOBILE ADAPTATIONS
+    ────────────────────────────────────────────── */
+
+    /* --- Hero --- */
+    @media (max-width: 860px) {
+      .hero-title {
+        font-size: clamp(36px, 9vw, 52px);
+      }
+      .hero-text {
+        padding-top: 40px;
+      }
+      .hero-lede {
+        font-size: 15px;
+      }
+      .hero-crystal-col {
+        padding: 28px 20px 36px;
+      }
+      .crystal-svg svg {
+        width: 130px;
+        height: 170px;
+      }
+      .crystal-glow {
+        width: 180px;
+        height: 180px;
+      }
+      .btn-primary,
+      .btn-ghost {
+        padding: 13px 22px;
+        min-height: 44px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero-crystal-col { display: none; }
+    }
+
+    /* --- About --- */
+    @media (max-width: 860px) {
+      .about-photo-wrap {
+        max-width: 300px;
+        margin: 0 auto;
+      }
+      .about-photo-col {
+        margin-bottom: 28px;
+      }
+    }
+
+    /* --- Contact --- */
+    @media (max-width: 480px) {
+      .contact-inner {
+        padding: 60px 20px 52px;
+      }
+      .contact-links {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .contact-email,
+      .contact-whatsapp {
         justify-content: center;
-        padding: 0 2.75rem;
-        flex-shrink: 0;
+        min-height: 48px;
+        word-break: break-all;
+        overflow-wrap: break-word;
+        text-align: center;
       }
+    }
 
-      /* ── Service rows ── */
-      .service-row {
-        border-top: 1px solid var(--warm-200);
-        transition: background 0.2s ease;
+    /* Footer nav: add vertical padding for touch */
+    @media (max-width: 720px) {
+      .footer-nav a {
+        padding: 8px 4px;
       }
-      .service-row:last-child { border-bottom: 1px solid var(--warm-200); }
-      .service-row:hover { background: var(--warm-100); }
-
-      .service-num {
-        font-size: clamp(3.5rem, 8vw, 6.5rem);
-        font-weight: 200;
-        line-height: 1;
-        letter-spacing: -0.04em;
-        color: var(--warm-200);
-        transition: color 0.2s ease;
-        flex-shrink: 0;
-        width: clamp(5rem, 12vw, 9rem);
+      .footer-inner {
+        padding: 16px 20px;
       }
-      .service-row:hover .service-num { color: var(--accent); }
+    }
 
-      /* ── Media cards hover ── */
-      .media-card {
-        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    /* --- Section header padding on small screens --- */
+    @media (max-width: 600px) {
+      .section-header {
+        padding: 48px 20px 36px;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
       }
-      .media-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 24px 64px -16px oklch(19% 0.012 45 / 0.18);
+    }
+
+    /* --- Deliverables: list items readable at 14px --- */
+    @media (max-width: 600px) {
+      .deliv-list li {
+        font-size: 14.5px;
       }
+    }
+  </style>
+</head>
 
-      /* ── Scroll-to-top ── */
-      #scroll-top {
-        position: fixed;
-        bottom: 1.75rem;
-        right: 1.75rem;
-        z-index: 99;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 9999px;
-        background: var(--warm-900);
-        color: var(--warm-50);
-        box-shadow: 0 4px 24px oklch(19% 0.012 45 / 0.3);
-        border: none;
-        cursor: pointer;
-        opacity: 0;
-        transform: translateY(12px);
-        transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
-        pointer-events: none;
-      }
-      #scroll-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-      #scroll-top:hover { background: var(--warm-700); }
-    </style>
-  </head>
+<body>
 
-  <body>
-    <!-- ============== NAV ============== -->
-    <header
-      class="sticky top-0 z-50"
-      style="border-bottom: 1px solid var(--warm-200); background: oklch(97.5% 0.008 65 / 0.85); backdrop-filter: blur(14px);"
-    >
-      <div class="mx-auto flex max-w-screen-xl items-center justify-between px-4 sm:px-6 py-4">
-        <a href="#" class="flex items-center gap-3">
-          <span
-            class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-sm font-bold"
-            style="background: var(--warm-900); color: var(--warm-50);"
-            >H</span
-          >
-          <span class="text-[15px] font-semibold tracking-tight" style="color: var(--warm-900);">Hagai Heshes</span>
-        </a>
-
-        <nav class="hidden items-center gap-9 md:flex">
-          <a href="#about"    class="text-sm font-medium">About</a>
-          <a href="#clients"  class="text-sm font-medium">Clients</a>
-          <a href="#services" class="text-sm font-medium">Services</a>
-          <a href="#media"    class="text-sm font-medium">Media</a>
-          <a href="#contact"  class="text-sm font-medium">Contact</a>
-        </nav>
-
-        <div class="flex items-center gap-2">
-          <a
-            href="#contact"
-            class="group hidden md:inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition"
-            style="background: var(--warm-900); color: var(--warm-50);"
-          >
-            Get in touch
-            <svg class="h-3.5 w-3.5 transition group-hover:translate-x-0.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8h10M9 4l4 4-4 4" />
-            </svg>
-          </a>
-
-          <button
-            id="nav-toggle"
-            class="inline-flex items-center justify-center rounded-lg p-2 transition md:hidden"
-            style="color: var(--warm-700);"
-            aria-label="Toggle menu"
-            aria-expanded="false"
-          >
-            <svg id="icon-open" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
-            <svg id="icon-close" class="hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Mobile menu -->
-      <div
-        id="mobile-menu"
-        class="hidden px-4 pb-5 pt-3 md:hidden"
-        style="border-top: 1px solid var(--warm-200); background: oklch(97.5% 0.008 65 / 0.97); backdrop-filter: blur(14px);"
-      >
-        <nav class="flex flex-col gap-1">
-          <a href="#about"    class="rounded-lg px-3 py-2.5 text-sm font-medium transition" style="color: var(--warm-700);">About</a>
-          <a href="#clients"  class="rounded-lg px-3 py-2.5 text-sm font-medium transition" style="color: var(--warm-700);">Clients</a>
-          <a href="#services" class="rounded-lg px-3 py-2.5 text-sm font-medium transition" style="color: var(--warm-700);">Services</a>
-          <a href="#media"    class="rounded-lg px-3 py-2.5 text-sm font-medium transition" style="color: var(--warm-700);">Media</a>
-          <a href="#contact"  class="rounded-lg px-3 py-2.5 text-sm font-medium transition" style="color: var(--warm-700);">Contact</a>
-        </nav>
-        <div class="mt-4 pt-4" style="border-top: 1px solid var(--warm-200);">
-          <a
-            href="#contact"
-            class="group inline-flex w-full items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-medium transition"
-            style="background: var(--warm-900); color: var(--warm-50);"
-          >
-            Get in touch
-            <svg class="h-3.5 w-3.5 transition group-hover:translate-x-0.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
-          </a>
-        </div>
-      </div>
-    </header>
-
-    <!-- ============== HERO ============== -->
-    <section class="relative overflow-hidden" style="background: var(--warm-50);">
-      <div class="mx-auto max-w-screen-xl px-4 sm:px-6 pt-20 pb-24 md:pt-36 md:pb-40">
-        <!-- Left-aligned, not centered -->
-        <div class="max-w-5xl">
-          <div class="flex items-center gap-2 mb-10">
-            <span class="h-1.5 w-1.5 rounded-full" style="background: var(--accent);"></span>
-            <span class="text-xs font-medium uppercase tracking-[0.18em]" style="color: var(--warm-500);">Human-Centered Consultant</span>
-          </div>
-
-          <h1
-            style="
-              font-size: clamp(2.4rem, 7.5vw, 6.25rem);
-              line-height: 1.04;
-              letter-spacing: -0.04em;
-              font-weight: 800;
-              color: var(--warm-900);
-            "
-          >
-            Marketing, business &amp;<br>
-            <em style="font-style: italic; color: var(--accent);">innovation</em>
-            built around humans.
-          </h1>
-
-          <p
-            class="mt-8 text-lg leading-relaxed md:text-xl"
-            style="max-width: 52ch; color: var(--warm-500);"
-          >
-            I help startups and global corporations profile their audiences, sharpen
-            value propositions, refine messaging, and ship products people actually
-            want to use.
-          </p>
-
-          <div class="mt-10 flex flex-wrap gap-3">
-            <a
-              href="#contact"
-              class="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition"
-              style="background: var(--warm-900); color: var(--warm-50);"
-            >
-              Work with me
-              <svg class="h-4 w-4 transition group-hover:translate-x-0.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
-            </a>
-            <a
-              href="#clients"
-              class="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition"
-              style="border: 1px solid var(--warm-200); color: var(--warm-900); background: transparent;"
-            >
-              See clients
-            </a>
-          </div>
-
-          <!-- Stats — simple horizontal list, not a glassmorphism card -->
-          <div class="mt-16 flex flex-wrap gap-12 pt-10" style="border-top: 1px solid var(--warm-200);">
-            <div>
-              <div class="text-3xl font-bold tracking-tight" style="color: var(--warm-900); letter-spacing: -0.03em;" data-counter="20" data-suffix="+">20+</div>
-              <div class="mt-1 text-xs uppercase tracking-widest" style="color: var(--warm-500);">Years experience</div>
-            </div>
-            <div>
-              <div class="text-3xl font-bold tracking-tight" style="color: var(--warm-900); letter-spacing: -0.03em;" data-counter="50" data-suffix="+">50+</div>
-              <div class="mt-1 text-xs uppercase tracking-widest" style="color: var(--warm-500);">Products launched</div>
-            </div>
-            <div>
-              <div class="text-3xl font-bold tracking-tight" style="color: var(--warm-900); letter-spacing: -0.03em;">Global</div>
-              <div class="mt-1 text-xs uppercase tracking-widest" style="color: var(--warm-500);">Startups &amp; enterprise</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== TRUSTED BY ============== -->
-    <section id="clients" style="border-top: 1px solid var(--warm-200); border-bottom: 1px solid var(--warm-200); background: white;">
-      <div class="mx-auto max-w-screen-xl px-4 sm:px-6 py-12 md:py-20">
-        <div class="reveal">
-          <p class="text-xs font-medium uppercase tracking-[0.22em]" style="color: var(--warm-500);">Trusted by teams at</p>
-          <h2 class="mt-3 text-xl font-semibold tracking-tight sm:text-2xl" style="color: var(--warm-900); letter-spacing: -0.02em;">
-            Global brands and breakthrough startups
-          </h2>
-        </div>
-
-        <div class="marquee-wrapper mt-10 md:mt-12">
-          <div class="marquee-track">
-            <div class="marquee-item"><img src="images/Wix.com_Logo.png"      alt="Wix"             class="logo-mark h-7 sm:h-8 md:h-9 w-auto object-contain" /></div>
-            <div class="marquee-item"><img src="images/medtronic.png"         alt="Medtronic"       class="logo-mark h-8 sm:h-9 md:h-11 w-auto object-contain" /></div>
-            <div class="marquee-item"><img src="images/WD02-scaled.webp"      alt="Western Digital" class="logo-mark h-9 sm:h-10 md:h-12 w-auto object-contain" /></div>
-            <div class="marquee-item"><img src="images/iaf-logo.jpg"          alt="Israeli Air Force" class="logo-mark h-8 sm:h-9 md:h-11 w-auto object-contain" /></div>
-            <div class="marquee-item"><img src="images/powermat-logo.png"     alt="Powermat"        class="logo-mark h-8 sm:h-9 md:h-11 w-auto object-contain" /></div>
-            <div class="marquee-item"><img src="images/SCiO_Logo_.webp"       alt="SCiO"            class="logo-mark h-7 sm:h-8 md:h-9 w-auto object-contain" /></div>
-            <div class="marquee-item"><img src="images/angelsence-logo.webp"  alt="AngelSense"      class="logo-mark h-8 sm:h-9 md:h-11 w-auto object-contain" /></div>
-            <div class="marquee-item"><img src="images/imperson-logo.jpg"     alt="Imperson"        class="logo-mark h-8 sm:h-9 md:h-11 w-auto object-contain" /></div>
-            <div class="marquee-item"><img src="images/secubit.avif"          alt="Secubit"         class="logo-mark h-8 sm:h-9 md:h-11 w-auto object-contain" /></div>
-            <!-- Duplicate set for seamless loop -->
-            <div class="marquee-item" aria-hidden="true"><img src="images/Wix.com_Logo.png"      alt="" class="logo-mark h-7 sm:h-8 md:h-9 w-auto object-contain" /></div>
-            <div class="marquee-item" aria-hidden="true"><img src="images/medtronic.png"         alt="" class="logo-mark h-8 sm:h-9 md:h-11 w-auto object-contain" /></div>
-            <div class="marquee-item" aria-hidden="true"><img src="images/WD02-scaled.webp"      alt="" class="logo-mark h-9 sm:h-10 md:h-12 w-auto object-contain" /></div>
-            <div class="marquee-item" aria-hidden="true"><img src="images/iaf-logo.jpg"          alt="" class="logo-mark h-8 sm:h-9 md:h-11 w-auto object-contain" /></div>
-            <div class="marquee-item" aria-hidden="true"><img src="images/powermat-logo.png"     alt="" class="logo-mark h-8 sm:h-9 md:h-11 w-auto object-contain" /></div>
-            <div class="marquee-item" aria-hidden="true"><img src="images/SCiO_Logo_.webp"       alt="" class="logo-mark h-7 sm:h-8 md:h-9 w-auto object-contain" /></div>
-            <div class="marquee-item" aria-hidden="true"><img src="images/angelsence-logo.webp"  alt="" class="logo-mark h-8 sm:h-9 md:h-11 w-auto object-contain" /></div>
-            <div class="marquee-item" aria-hidden="true"><img src="images/imperson-logo.jpg"     alt="" class="logo-mark h-8 sm:h-9 md:h-11 w-auto object-contain" /></div>
-            <div class="marquee-item" aria-hidden="true"><img src="images/secubit.avif"          alt="" class="logo-mark h-8 sm:h-9 md:h-11 w-auto object-contain" /></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== ABOUT ============== -->
-    <section id="about" style="background: var(--warm-50);">
-      <div class="mx-auto max-w-screen-xl px-4 sm:px-6 py-20 md:py-32">
-        <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-20">
-          <!-- Portrait -->
-          <div class="lg:col-span-5 reveal" style="transition-delay: 0ms;">
-            <div class="relative">
-              <div
-                class="overflow-hidden"
-                style="
-                  border-radius: 1.5rem;
-                  border: 1px solid var(--warm-200);
-                  box-shadow: 0 32px 80px -20px oklch(19% 0.012 45 / 0.16);
-                "
-              >
-                <img
-                  src="images/hagai%20paris.avif"
-                  alt="Portrait of Hagai Heshes"
-                  class="aspect-[4/5] w-full object-cover"
-                />
-              </div>
-              <div
-                class="absolute -bottom-5 -right-5 hidden md:block"
-                style="
-                  border-radius: 0.75rem;
-                  border: 1px solid var(--warm-200);
-                  background: var(--warm-50);
-                  padding: 0.875rem 1.25rem;
-                  box-shadow: 0 8px 24px oklch(19% 0.012 45 / 0.1);
-                "
-              >
-                <div class="text-xs uppercase tracking-widest" style="color: var(--warm-500);">Based in</div>
-                <div class="mt-0.5 text-sm font-semibold" style="color: var(--warm-900);">Tel Aviv · Global</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Copy -->
-          <div class="lg:col-span-7 reveal" style="transition-delay: 120ms;">
-            <h2
-              class="text-2xl font-bold sm:text-3xl md:text-5xl"
-              style="color: var(--warm-900); line-height: 1.1; letter-spacing: -0.03em;"
-            >
-              I'm a human-centered marketing, business and innovation consultant.
-            </h2>
-
-            <div class="mt-8 space-y-5 text-[17px] leading-relaxed" style="color: var(--warm-700);">
-              <p>
-                I've learned through experience that in order to increase chances of
-                business success, one must focus on the humans at the receiving end —
-                the users, the customers, the website visitors, the brochure readers,
-                the marketing campaign targets — addressing their needs and solving
-                their pains.
-              </p>
-              <p>
-                I help startups and big corporations profile their target audience,
-                crystallize their value propositions, refine their messages, build
-                marketing plans, define marketing collateral, and execute them.
-              </p>
-              <p>
-                I also lead and mentor innovation processes as the co-founder of the
-                <a
-                  href="http://www.leanovation.co/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style="color: var(--warm-900); font-weight: 500; text-decoration: underline; text-decoration-color: oklch(19% 0.012 45 / 0.3); text-underline-offset: 4px; transition: text-decoration-color 0.15s ease;"
-                  >Leanovation</a
-                >
-                consulting group, which helps identify user needs, ideate, prototype
-                and validate products and services in the market.
-              </p>
-              <p>
-                I have over 20 years of experience launching new products and services
-                into the global market. I got my BA in Computer Science from Tel Aviv
-                University and my Master's in Psychology from the University of
-                Pennsylvania.
-              </p>
-            </div>
-
-            <div class="mt-8 flex flex-wrap gap-2">
-              <span class="rounded-full px-3 py-1 text-xs font-medium" style="border: 1px solid var(--warm-200); color: var(--warm-700); background: white;">BA · Computer Science, Tel Aviv</span>
-              <span class="rounded-full px-3 py-1 text-xs font-medium" style="border: 1px solid var(--warm-200); color: var(--warm-700); background: white;">MA · Psychology, UPenn</span>
-              <span class="rounded-full px-3 py-1 text-xs font-medium" style="border: 1px solid var(--warm-200); color: var(--warm-700); background: white;">Co-founder · Leanovation</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== SERVICES ============== -->
-    <section id="services" style="border-top: 1px solid var(--warm-200); background: white;">
-      <div class="mx-auto max-w-screen-xl px-4 sm:px-6 py-20 md:py-32">
-        <div class="max-w-2xl reveal mb-16 md:mb-20">
-          <h2
-            class="text-2xl font-bold tracking-tight sm:text-3xl md:text-5xl"
-            style="color: var(--warm-900); letter-spacing: -0.03em;"
-          >
-            Three practices, one mindset.
-          </h2>
-          <p class="mt-5 text-lg leading-relaxed" style="color: var(--warm-500);">
-            Methodology-driven work across the product, marketing and innovation stack
-            — always anchored in the people you're building for.
-          </p>
-        </div>
-
-        <!-- Numbered list layout — not identical icon cards -->
-        <div class="reveal-stagger">
-          <div class="service-row flex items-start gap-6 py-10 md:py-12">
-            <div class="service-num">01</div>
-            <div class="flex-1 pt-2 md:pt-3">
-              <h3 class="text-2xl font-bold md:text-3xl" style="color: var(--warm-900); letter-spacing: -0.02em;">Innovation</h3>
-              <p class="mt-3 text-[16px] leading-relaxed md:text-lg md:max-w-2xl" style="color: var(--warm-500);">
-                Generating new ideas, prototyping and testing them in the market. Finding
-                problem–solution fit, product–market fit and business-model fit by
-                applying proven methodologies.
-              </p>
-            </div>
-          </div>
-
-          <div class="service-row flex items-start gap-6 py-10 md:py-12">
-            <div class="service-num">02</div>
-            <div class="flex-1 pt-2 md:pt-3">
-              <h3 class="text-2xl font-bold md:text-3xl" style="color: var(--warm-900); letter-spacing: -0.02em;">Marketing</h3>
-              <p class="mt-3 text-[16px] leading-relaxed md:text-lg md:max-w-2xl" style="color: var(--warm-500);">
-                Profiling targets, tailoring value props and messages, picking the right
-                channels, generating content, managing budget, testing, monitoring and
-                optimizing based on data.
-              </p>
-            </div>
-          </div>
-
-          <div class="service-row flex items-start gap-6 py-10 md:py-12">
-            <div class="service-num">03</div>
-            <div class="flex-1 pt-2 md:pt-3">
-              <h3 class="text-2xl font-bold md:text-3xl" style="color: var(--warm-900); letter-spacing: -0.02em;">Product</h3>
-              <p class="mt-3 text-[16px] leading-relaxed md:text-lg md:max-w-2xl" style="color: var(--warm-500);">
-                Defining prototypes, MVPs, guiding UX work, prioritizing features, and
-                advocating for the end users at every step of the build.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== MEDIA ============== -->
-    <section id="media" style="border-top: 1px solid var(--warm-200); background: var(--warm-50);">
-      <div class="mx-auto max-w-screen-xl px-4 sm:px-6 py-20 md:py-32">
-        <div class="max-w-2xl reveal mb-14">
-          <h2
-            class="text-2xl font-bold tracking-tight sm:text-3xl md:text-5xl"
-            style="color: var(--warm-900); letter-spacing: -0.03em;"
-          >
-            Hagai in the Press
-          </h2>
-          <p class="mt-5 text-lg leading-relaxed" style="color: var(--warm-500);">
-            Insights on innovation, marketing, and the human side of technology.
-          </p>
-        </div>
-
-        <div class="mt-14 grid gap-8 md:grid-cols-2 reveal-stagger">
-          <div
-            class="media-card overflow-hidden"
-            style="
-              border-radius: 1.5rem;
-              border: 1px solid var(--warm-200);
-              background: white;
-              box-shadow: 0 8px 32px -12px oklch(19% 0.012 45 / 0.1);
-            "
-          >
-            <div class="relative aspect-video w-full overflow-hidden" style="background: var(--warm-900);">
-              <iframe
-                src="https://www.youtube.com/embed/yOG024NXeEQ"
-                title="Hagai Heshes — CNBC Interview"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                class="absolute inset-0 h-full w-full border-0"
-              ></iframe>
-            </div>
-            <div class="px-6 py-5">
-              <span
-                class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium"
-                style="background: oklch(96% 0.015 25); color: oklch(40% 0.18 25);"
-              >
-                CNBC
-              </span>
-              <h3 class="mt-3 text-lg font-semibold tracking-tight" style="color: var(--warm-900);">CNBC Interview</h3>
-              <p class="mt-1.5 text-sm leading-relaxed" style="color: var(--warm-500);">
-                Hagai Heshes speaks on innovation, startups, and human-centered product development.
-              </p>
-            </div>
-          </div>
-
-          <div
-            class="media-card overflow-hidden"
-            style="
-              border-radius: 1.5rem;
-              border: 1px solid var(--warm-200);
-              background: white;
-              box-shadow: 0 8px 32px -12px oklch(19% 0.012 45 / 0.1);
-            "
-          >
-            <div class="relative aspect-video w-full overflow-hidden" style="background: var(--warm-900);">
-              <iframe
-                src="https://www.youtube.com/embed/6KhOIhyc8_Y"
-                title="Hagai Heshes — Product Demo"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                class="absolute inset-0 h-full w-full border-0"
-              ></iframe>
-            </div>
-            <div class="px-6 py-5">
-              <span
-                class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium"
-                style="background: var(--accent-bg); color: var(--accent);"
-              >
-                Demo
-              </span>
-              <h3 class="mt-3 text-lg font-semibold tracking-tight" style="color: var(--warm-900);">Product Demo</h3>
-              <p class="mt-1.5 text-sm leading-relaxed" style="color: var(--warm-500);">
-                A live walkthrough showcasing how human-centered design translates
-                into products people actually use.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============== CONTACT ============== -->
-    <section id="contact" class="relative overflow-hidden" style="background: var(--warm-900);">
-      <!-- Single warm accent glow, not the indigo/fuchsia AI gradient -->
-      <div
-        class="pointer-events-none absolute inset-0"
-        style="background: radial-gradient(700px 400px at 80% 110%, oklch(57% 0.16 35 / 0.25), transparent 60%);"
-      ></div>
-
-      <div class="relative mx-auto max-w-5xl px-4 sm:px-6 py-20 md:py-32">
-        <div class="max-w-3xl">
-          <h2
-            class="text-3xl font-extrabold sm:text-4xl md:text-6xl"
-            style="color: var(--warm-50); letter-spacing: -0.04em; line-height: 1.05;"
-          >
-            Let's build something people love.
-          </h2>
-          <p
-            class="mt-6 max-w-2xl text-lg leading-relaxed"
-            style="color: oklch(97.5% 0.008 65 / 0.6);"
-          >
-            Whether you're launching a new product, rethinking your go-to-market, or
-            looking to run an innovation sprint — I'd love to hear from you.
-          </p>
-
-          <div class="mt-10">
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=hagai@hagaiheshes.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition"
-              style="background: var(--warm-50); color: var(--warm-900);"
-            >
-              hagai@hagaiheshes.com
-              <svg
-                class="h-4 w-4 transition group-hover:translate-x-0.5"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M3 8h10M9 4l4 4-4 4" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="relative" style="border-top: 1px solid oklch(97.5% 0.008 65 / 0.08);">
-        <div
-          class="mx-auto flex max-w-screen-xl flex-col items-center justify-between gap-3 px-4 sm:px-6 py-6 text-xs md:flex-row"
-          style="color: oklch(97.5% 0.008 65 / 0.45);"
-        >
-          <div>© 2026 Hagai Heshes. All rights reserved.</div>
-          <div class="flex items-center gap-6">
-            <a href="#about"    class="transition hover:opacity-100">About</a>
-            <a href="#clients"  class="transition hover:opacity-100">Clients</a>
-            <a href="#services" class="transition hover:opacity-100">Services</a>
-            <a href="#media"    class="transition hover:opacity-100">Media</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Scroll-to-top button -->
-    <button id="scroll-top" aria-label="Back to top">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
-        <path d="M8 12V4M4 8l4-4 4 4"/>
+<!-- ═══════════════════════════════════════
+     NAV
+═══════════════════════════════════════ -->
+<header class="nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Hagai Heshes — Home">
+      <!-- Inline crystal mark -->
+      <svg class="nav-logo-mark" viewBox="0 0 28 28" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="translate(14,14)">
+          <polygon points="0,-11 -5.5,-4 0,-2" fill="#0f0f0e" fill-opacity="0.08"/>
+          <polygon points="0,-11 5.5,-4 0,-2" fill="#0f0f0e" fill-opacity="0.14"/>
+          <polygon points="-5.5,-4 -7,5.5 0,7 0,-2" fill="#0f0f0e" fill-opacity="0.18"/>
+          <polygon points="5.5,-4 7,5.5 0,7 0,-2" fill="#0f0f0e" fill-opacity="0.28"/>
+          <polygon points="-7,5.5 0,11 0,7" fill="#0f0f0e" fill-opacity="0.09"/>
+          <polygon points="7,5.5 0,11 0,7" fill="#0f0f0e" fill-opacity="0.30"/>
+          <polygon points="0,-11 5.5,-4 7,5.5 0,11 -7,5.5 -5.5,-4" stroke="#0f0f0e" stroke-opacity="0.2" stroke-width="0.5"/>
+        </g>
       </svg>
+      <span class="nav-logo-name">Hagai Heshes</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#how">Approach</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+    </ul>
+
+    <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
     </button>
+  </div>
+</header>
 
-    <script>
-      (function () {
-        const toggle    = document.getElementById('nav-toggle');
-        const menu      = document.getElementById('mobile-menu');
-        const iconOpen  = document.getElementById('icon-open');
-        const iconClose = document.getElementById('icon-close');
+<!-- Mobile drawer -->
+<div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#how">Approach</a>
+    <a href="#about">About</a>
+  </nav>
+  <a href="#contact" class="drawer-cta">Get in touch</a>
+</div>
 
-        toggle.addEventListener('click', () => {
-          const isOpen = !menu.classList.contains('hidden');
-          menu.classList.toggle('hidden');
-          iconOpen.classList.toggle('hidden');
-          iconClose.classList.toggle('hidden');
-          toggle.setAttribute('aria-expanded', String(!isOpen));
-        });
+<!-- ═══════════════════════════════════════
+     HERO — Split (A)
+═══════════════════════════════════════ -->
+<section class="hero" id="hero" aria-label="Introduction">
+  <div class="hero-text wrap">
+    <h1 class="hero-title t-serif">
+      The<br><em>Crystallizer</em>
+    </h1>
 
-        menu.querySelectorAll('a').forEach((link) => {
-          link.addEventListener('click', () => {
-            menu.classList.add('hidden');
-            iconOpen.classList.remove('hidden');
-            iconClose.classList.add('hidden');
-            toggle.setAttribute('aria-expanded', 'false');
-          });
-        });
-      })();
-    </script>
+    <p class="hero-tagline">
+      You know what you've built.<br>I make sure everyone else does too.
+    </p>
 
-    <script>
-      (function () {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.12, rootMargin: "0px 0px -48px 0px" }
-        );
-        document.querySelectorAll(".reveal, .reveal-stagger").forEach((el) => observer.observe(el));
-      })();
-    </script>
+    <p class="hero-lede">
+      Positioning and go-to-market for companies that can't afford to be misunderstood. I distill what you're really about, then help you take it to market.
+    </p>
 
-    <script>
-      (function () {
-        function animateCounter(el) {
-          const target   = parseInt(el.dataset.counter, 10);
-          const suffix   = el.dataset.suffix || '';
-          const duration = 1400;
-          let startTime  = null;
-          const step = (ts) => {
-            if (!startTime) startTime = ts;
-            const progress = Math.min((ts - startTime) / duration, 1);
-            const eased    = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.floor(eased * target) + suffix;
-            if (progress < 1) requestAnimationFrame(step);
-          };
-          requestAnimationFrame(step);
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        Let's talk
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </a>
+      <a href="#work" class="btn-ghost">See my work</a>
+    </div>
+  </div>
+
+  <div class="hero-crystal-col" aria-hidden="true">
+    <div class="crystal-container">
+      <div class="crystal-glow"></div>
+      <div class="crystal-svg" id="hero-crystal" title="The Crystallizer">
+        <!-- Full crystal SVG — 260×340 viewBox -->
+        <svg width="300" height="394" viewBox="0 0 260 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(130,170)">
+            <!-- upper termination facets -->
+            <polygon points="0,-150 -72,-55 0,-30" fill="#b8975a" opacity="0.15"/>
+            <polygon points="0,-150 72,-55 0,-30" fill="#b8975a" opacity="0.28"/>
+            <!-- left prism face -->
+            <polygon points="-72,-55 -90,72 0,95 0,-30" fill="#b8975a" opacity="0.18"/>
+            <!-- right prism face — brightest -->
+            <polygon points="72,-55 90,72 0,95 0,-30" fill="#b8975a" opacity="0.42"/>
+            <!-- lower left termination -->
+            <polygon points="-90,72 0,150 0,95" fill="#b8975a" opacity="0.11"/>
+            <!-- lower right termination — catches most light -->
+            <polygon points="90,72 0,150 0,95" fill="#b8975a" opacity="0.55"/>
+            <!-- silhouette outline -->
+            <polygon points="0,-150 72,-55 90,72 0,150 -90,72 -72,-55"
+              stroke="#b8975a" stroke-opacity="0.40" stroke-width="0.75" fill="none"/>
+            <!-- inner edge: centre line -->
+            <line x1="0" y1="-150" x2="0" y2="150" stroke="#b8975a" stroke-opacity="0.12" stroke-width="0.5"/>
+            <!-- inner facet lines -->
+            <line x1="-72" y1="-55" x2="0" y2="-30" stroke="#b8975a" stroke-opacity="0.15" stroke-width="0.5"/>
+            <line x1="72" y1="-55"  x2="0" y2="-30" stroke="#b8975a" stroke-opacity="0.15" stroke-width="0.5"/>
+            <line x1="-90" y1="72" x2="0" y2="95"  stroke="#b8975a" stroke-opacity="0.15" stroke-width="0.5"/>
+            <line x1="90"  y1="72" x2="0" y2="95"  stroke="#b8975a" stroke-opacity="0.15" stroke-width="0.5"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     TWO PILLARS
+═══════════════════════════════════════ -->
+<section class="pillars-section" id="services">
+  <div class="pillars-inner">
+    <div class="pillar reveal">
+      <span class="pillar-rule" aria-hidden="true"></span>
+      <h2 class="pillar-title t-serif">Crystallization</h2>
+      <p class="pillar-body">
+        I absorb everything about your company and compress it into something essential: what you are, who you're truly for, why you win, and how to talk about it.
+      </p>
+    </div>
+    <div class="pillar reveal" style="transition-delay:0.1s">
+      <span class="pillar-rule" aria-hidden="true"></span>
+      <h2 class="pillar-title t-serif">Go-to-Market</h2>
+      <p class="pillar-body">
+        Once the foundation is solid, we go on the attack: the right motion, channels, and sequence to take it to market.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     CLIENTS
+═══════════════════════════════════════ -->
+<section class="clients-section" id="work">
+  <div class="clients-header reveal">
+    <h2 class="t-serif">Selected clients</h2>
+  </div>
+
+  <div class="clients-logos stagger">
+    <div class="client-logo"><img src="logos/tytocare_logo-removebg-preview.png" alt="TytoCare" loading="lazy" height="36" width="auto"></div>
+    <div class="client-logo"><img src="logos/quantalx_logo-removebg-preview.png" alt="QuantalX" loading="lazy" height="36" width="auto"></div>
+    <div class="client-logo"><img src="logos/neurolief_logo-removebg-preview.png" alt="Neurolief" loading="lazy" height="36" width="auto"></div>
+    <div class="client-logo"><img src="logos/Band-Logo.webp" alt="BAND.ai" loading="lazy" height="36" width="auto"></div>
+    <div class="client-logo"><img src="logos/wd_logo-removebg-preview.png" alt="Western Digital" loading="lazy" height="36" width="auto"></div>
+    <div class="client-logo"><img src="logos/seagate_logo-removebg-preview.png" alt="Seagate" loading="lazy" height="36" width="auto"></div>
+    <div class="client-logo"><img src="logos/monday_logo-removebg-preview.png" alt="Monday.com" loading="lazy" height="36" width="auto"></div>
+    <div class="client-logo"><img src="logos/wix_logo-removebg-preview.png" alt="Wix" loading="lazy" height="36" width="auto"></div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     HOW I WORK
+═══════════════════════════════════════ -->
+<section class="how-section" id="how">
+  <div class="how-inner">
+    <div class="how-label-col reveal">
+      <h2 class="section-title t-serif">How I work</h2>
+    </div>
+    <div class="how-body reveal" style="transition-delay:0.12s">
+      <p>I work with a small number of clients at a time. Deeply, not broadly.</p>
+      <p>No fluff, no shelfware. I move fast, get to the essential quickly, and leave you with something you can actually use.</p>
+      <p>Most clients come through referral.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     DELIVERABLES
+═══════════════════════════════════════ -->
+<section class="deliv-section" id="deliverables">
+  <div class="deliv-inner">
+    <div class="how-label-col reveal">
+      <h2 class="section-title t-serif">What you walk away with</h2>
+    </div>
+    <div class="deliv-grid stagger">
+      <div class="deliv-group">
+        <div class="deliv-group-title t-serif">Crystallization</div>
+        <ul class="deliv-list">
+          <li>Positioning and messaging framework</li>
+          <li>Value propositions</li>
+          <li>Company and product narrative</li>
+          <li>Investor story</li>
+        </ul>
+      </div>
+      <div class="deliv-group">
+        <div class="deliv-group-title t-serif">Go-to-Market</div>
+        <ul class="deliv-list">
+          <li>GTM strategy and plan</li>
+          <li>Sales deck</li>
+          <li>Website copy</li>
+          <li>Sales enablement materials</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════ -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-photo-col reveal-left">
+      <div class="about-photo-wrap">
+        <img src="logos/hagai.jpeg" alt="Portrait of Hagai Heshes" width="520" height="650" loading="lazy">
+      </div>
+      <p class="about-photo-name">Hagai Heshes</p>
+    </div>
+
+    <div class="about-content reveal" style="transition-delay:0.1s">
+      <h2 class="section-title t-serif" style="margin-bottom:28px;">About</h2>
+      <p>
+        Twenty years of GTM experience across Fortune 500 enterprises and startups: B2B, B2B2C and D2C, spanning healthcare, tech, defense and beyond. I know the U.S. market from the inside, having lived and worked there for over a decade.
+      </p>
+      <p>
+        My background is an unusual mix: Computer Science, a Master's in Psychology from UPenn, and a career spent at the intersection of strategic clarity and human insight. I understand not just markets, but the people in them.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════ -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <span class="contact-label">Contact</span>
+      <h2 class="contact-headline t-serif">
+        If this sounds like<br>what you <em>need</em>,<br>let's talk.
+      </h2>
+      <p class="contact-sub">
+        I work with a small number of clients. If you're building something and can't afford to be misunderstood, reach out.
+      </p>
+      <div class="contact-links">
+        <a href="https://mail.google.com/mail/?view=cm&to=hagaiheshes@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-email">
+          hagaiheshes@gmail.com
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </a>
+        <a href="https://wa.me/972532851277" class="contact-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Contact via WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Decorative crystal -->
+    <div class="contact-crystal" aria-hidden="true">
+      <svg width="180" height="236" viewBox="0 0 260 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(130,170)">
+          <polygon points="0,-150 -72,-55 0,-30" fill="#fafaf9" opacity="0.10"/>
+          <polygon points="0,-150 72,-55 0,-30" fill="#fafaf9" opacity="0.20"/>
+          <polygon points="-72,-55 -90,72 0,95 0,-30" fill="#fafaf9" opacity="0.15"/>
+          <polygon points="72,-55 90,72 0,95 0,-30" fill="#fafaf9" opacity="0.35"/>
+          <polygon points="-90,72 0,150 0,95" fill="#fafaf9" opacity="0.08"/>
+          <polygon points="90,72 0,150 0,95" fill="#fafaf9" opacity="0.45"/>
+          <polygon points="0,-150 72,-55 90,72 0,150 -90,72 -72,-55" stroke="#fafaf9" stroke-opacity="0.25" stroke-width="0.75" fill="none"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-copy">&#169; 2026 Hagai Heshes. All rights reserved.</span>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="#work">Work</a>
+      <a href="#how">Approach</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+
+<!-- Scroll-to-top -->
+<button class="scroll-top" id="scroll-top" aria-label="Back to top">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V3M3 7l4-4 4 4"/></svg>
+</button>
+
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════ -->
+<script>
+(function() {
+  // Page load entrance
+  window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+  });
+
+  // Scroll reveal
+  var revealEls = document.querySelectorAll('.reveal, .reveal-left, .stagger');
+  if ('IntersectionObserver' in window) {
+    var isMobile = window.matchMedia('(max-width: 720px)').matches;
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
         }
+      });
+    }, {
+      threshold: isMobile ? 0.05 : 0.08,
+      rootMargin: isMobile ? '0px 0px -10px 0px' : '0px 0px -40px 0px'
+    });
+    revealEls.forEach(function(el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function(el) { el.classList.add('in-view'); });
+  }
 
-        const counterObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              animateCounter(entry.target);
-              counterObserver.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.6 });
-        document.querySelectorAll('[data-counter]').forEach((el) => counterObserver.observe(el));
-      })();
+  // Nav mobile drawer
+  var burger = document.getElementById('nav-burger');
+  var drawer = document.getElementById('mobile-drawer');
+  var isOpen = false;
+  function toggleDrawer(open) {
+    isOpen = open;
+    burger.classList.toggle('open', isOpen);
+    drawer.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', String(isOpen));
+    drawer.setAttribute('aria-hidden', String(!isOpen));
+  }
+  burger.addEventListener('click', function() { toggleDrawer(!isOpen); });
+  drawer.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() { toggleDrawer(false); });
+  });
+  // close on outside click
+  document.addEventListener('click', function(e) {
+    if (isOpen && !drawer.contains(e.target) && !burger.contains(e.target)) {
+      toggleDrawer(false);
+    }
+  });
 
-      (function () {
-        const btn = document.getElementById('scroll-top');
-        window.addEventListener('scroll', () => {
-          btn.classList.toggle('visible', window.scrollY > 400);
-        }, { passive: true });
-        btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      })();
+  // Scroll-to-top
+  var scrollBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', function() {
+    scrollBtn.classList.toggle('visible', window.scrollY > 500);
+  }, { passive: true });
+  scrollBtn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
-      (function () {
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('header nav a[href^="#"]');
-        const navObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const id = entry.target.id;
-              navLinks.forEach((link) => {
-                link.classList.toggle('nav-active', link.getAttribute('href') === '#' + id);
-              });
-            }
-          });
-        }, { threshold: 0.35, rootMargin: '-60px 0px -40% 0px' });
-        sections.forEach((s) => navObserver.observe(s));
-      })();
-    </script>
-  </body>
+  // Active nav link highlighting
+  var sections = document.querySelectorAll('section[id]');
+  var navAs = document.querySelectorAll('.nav-links a');
+  var sectionIo = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        var id = e.target.id;
+        navAs.forEach(function(a) {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-64px 0px -40% 0px' });
+  sections.forEach(function(s) { sectionIo.observe(s); });
+
+  // Crystal mouse-parallax on hero
+  var heroSection = document.querySelector('.hero');
+  var crystalEl = document.getElementById('hero-crystal');
+  if (heroSection && crystalEl) {
+    heroSection.addEventListener('mousemove', function(e) {
+      var rect = heroSection.getBoundingClientRect();
+      var cx = rect.width / 2;
+      var cy = rect.height / 2;
+      var dx = (e.clientX - rect.left - cx) / cx;
+      var dy = (e.clientY - rect.top  - cy) / cy;
+      crystalEl.style.transform = 'translateX(' + (dx * 10) + 'px) translateY(' + (dy * 8 - 7) + 'px)';
+    }, { passive: true });
+    heroSection.addEventListener('mouseleave', function() {
+      crystalEl.style.transform = '';
+    });
+  }
+})();
+</script>
+</body>
 </html>

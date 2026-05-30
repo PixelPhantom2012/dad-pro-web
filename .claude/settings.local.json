@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Skill(impeccable)",
-      "Skill(impeccable:*)"
+      "Skill(impeccable:*)",
+      "WebFetch(domain:docs.google.com)",
+      "WebFetch(domain:doc-0k-1s-docstext.googleusercontent.com)",
+      "Bash(powershell *)",
+      "WebFetch(domain:drive.google.com)",
+      "mcp__claude_ai_Google_Drive__search_files",
+      "Bash(node *)",
+      "Bash(python3 *)",
+      "PowerShell(python \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\ui-ux-pro-max\\\\scripts\\\\search.py\" \"personal consulting portfolio brand minimal editorial\" --design-system -p \"Hagai Heshes\" -f markdown 2>&1)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }
