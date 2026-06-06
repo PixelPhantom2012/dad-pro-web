@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full Page Design — Warm Premium Personal Brand</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: Georgia, serif;
+    background: #f5f2ee;
+    color: #333;
+    direction: ltr;
+  }
+
+  .page-label {
+    background: #1e1612;
+    color: #faf8f4;
+    font-family: -apple-system, sans-serif;
+    font-size: 12px;
+    padding: 10px 20px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .site-wrap {
+    max-width: 800px;
+    margin: 24px auto;
+    background: #faf8f4;
+    border: 1px solid #e0d6c8;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(30,22,18,0.10);
+  }
+
+  /* Section labels */
+  .sec-label {
+    font-family: -apple-system, sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #9a8a78;
+    padding: 5px 10px;
+    background: #f0e9de;
+    border-bottom: 1px solid #e8ddd0;
+    display: block;
+  }
+
+  /* ── NAV ── */
+  .s-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    border-bottom: 1px solid #e8ddd0;
+    background: #faf8f4;
+  }
+  .nav-logo { font-size: 15px; color: #1e1612; letter-spacing: -0.01em; }
+  .nav-links { display: flex; gap: 20px; align-items: center; }
+  .nav-links span { font-family: -apple-system,sans-serif; font-size: 11px; color: #7a6a58; }
+  .nav-cta {
+    background: none;
+    border: 1px solid #c9a96e;
+    color: #c9a96e;
+    font-family: -apple-system,sans-serif;
+    font-size: 10px;
+    padding: 5px 14px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── HERO ── */
+  .s-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 320px;
+    border-bottom: 1px solid #e8ddd0;
+  }
+  .hero-text {
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid #e8ddd0;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .eyebrow-line { width: 20px; height: 1px; background: #c9a96e; display: block; }
+  .eyebrow-text {
+    font-family: -apple-system, sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #c9a96e;
+  }
+  .hero-title { font-size: 52px; line-height: 0.95; color: #1e1612; margin-bottom: 14px; }
+  .hero-title em { color: #c9a96e; font-style: italic; display: block; }
+  .hero-tagline {
+    font-family: -apple-system, sans-serif;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #5a4a3a;
+    margin-bottom: 6px;
+    max-width: 28ch;
+    font-weight: 400;
+  }
+  .hero-sub {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    line-height: 1.8;
+    color: #9a8a78;
+    margin-bottom: 22px;
+    max-width: 34ch;
+  }
+  .hero-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-main {
+    background: #c9a96e;
+    color: #fff;
+    font-family: -apple-system, sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 9px 18px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .btn-ghost2 {
+    border: 1px solid #d0c4b4;
+    color: #7a6a58;
+    font-family: -apple-system, sans-serif;
+    font-size: 10px;
+    padding: 9px 16px;
+  }
+
+  /* Photo column */
+  .hero-photo {
+    background: linear-gradient(160deg, #e8ddd0 0%, #d4c4ae 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-placeholder {
+    width: 120px;
+    height: 180px;
+    background: linear-gradient(180deg, #c4b09a 0%, #a08060 100%);
+    border-radius: 1px;
+    opacity: 0.55;
+    margin-bottom: 0;
+  }
+  .photo-name {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    font-style: italic;
+    color: #7a5a3a;
+    white-space: nowrap;
+    font-family: Georgia, serif;
+  }
+
+  /* ── STATEMENT STRIP ── */
+  .s-statement {
+    background: #1e1612;
+    padding: 32px 48px;
+    border-bottom: 1px solid #2e2018;
+  }
+  .statement-text {
+    font-size: 20px;
+    line-height: 1.45;
+    color: #f0e9de;
+    max-width: 52ch;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .statement-text em { color: #c9a96e; font-style: italic; }
+
+  /* ── PILLARS ── */
+  .s-pillars {
+    border-bottom: 1px solid #e8ddd0;
+    background: #faf8f4;
+  }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .pillar {
+    padding: 28px 32px;
+    border-right: 1px solid #e8ddd0;
+  }
+  .pillar:last-child { border-right: none; }
+  .pillar-num {
+    font-family: -apple-system, sans-serif;
+    font-size: 9px;
+    color: #c9a96e;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .pillar-title { font-size: 18px; color: #1e1612; margin-bottom: 8px; line-height: 1.1; }
+  .pillar-body {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    line-height: 1.75;
+    color: #7a6a58;
+    max-width: 28ch;
+  }
+
+  /* ── CLIENTS ── */
+  .s-clients {
+    background: #f0e9de;
+    border-bottom: 1px solid #e8ddd0;
+  }
+  .clients-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 22px 32px 14px;
+    border-bottom: 1px solid #e0d6c8;
+  }
+  .clients-title { font-size: 16px; color: #1e1612; }
+  .clients-eyebrow {
+    font-family: -apple-system, sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: #9a8a78;
+    text-transform: uppercase;
+  }
+  .logos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .logo-cell {
+    padding: 18px;
+    border-right: 1px solid #e0d6c8;
+    border-bottom: 1px solid #e0d6c8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-cell:nth-child(4n) { border-right: none; }
+  .logo-cell:nth-child(n+5) { border-bottom: none; }
+  .logo-stub {
+    height: 18px;
+    background: #b8a898;
+    opacity: 0.35;
+    border-radius: 1px;
+    width: 60px;
+  }
+
+  /* ── DELIVERABLES ── */
+  .s-deliv {
+    background: #faf8f4;
+    border-bottom: 1px solid #e8ddd0;
+    padding: 32px 32px;
+  }
+  .deliv-header { margin-bottom: 20px; }
+  .deliv-header-label {
+    font-family: -apple-system, sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    color: #c9a96e;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .deliv-header-title { font-size: 22px; color: #1e1612; }
+  .deliv-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .deliv-col-title {
+    font-size: 13px;
+    font-style: italic;
+    color: #1e1612;
+    border-bottom: 1px solid #e8ddd0;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+  .deliv-item {
+    font-family: -apple-system, sans-serif;
+    font-size: 10px;
+    color: #7a6a58;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0e9de;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .deliv-dot { width: 3px; height: 3px; border-radius: 50%; background: #c9a96e; opacity: 0.7; flex-shrink: 0; }
+
+  /* ── ABOUT ── */
+  .s-about {
+    background: #f0e9de;
+    border-bottom: 1px solid #e8ddd0;
+    padding: 32px 32px;
+  }
+  .about-label {
+    font-family: -apple-system, sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    color: #9a8a78;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .about-rule { width: 24px; height: 1px; background: #c9a96e; margin-bottom: 14px; opacity: 0.7; }
+  .about-title { font-size: 22px; color: #1e1612; margin-bottom: 14px; }
+  .about-p {
+    font-family: -apple-system, sans-serif;
+    font-size: 12px;
+    line-height: 1.8;
+    color: #5a4a3a;
+    max-width: 60ch;
+    margin-bottom: 10px;
+  }
+
+  /* ── CONTACT ── */
+  .s-contact {
+    background: #1e1612;
+    padding: 40px 48px;
+    border-bottom: 1px solid #2e2018;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-headline { font-size: 30px; line-height: 1.1; color: #f0e9de; margin-bottom: 10px; }
+  .contact-headline em { color: #c9a96e; font-style: italic; }
+  .contact-sub {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    line-height: 1.75;
+    color: #9a8a78;
+    max-width: 40ch;
+    margin-bottom: 20px;
+  }
+  .contact-btns { display: flex; gap: 10px; }
+  .btn-contact-main {
+    background: #c9a96e;
+    color: #1e1612;
+    font-family: -apple-system, sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 10px 20px;
+    letter-spacing: 0.04em;
+  }
+  .btn-contact-ghost {
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #9a8a78;
+    font-family: -apple-system, sans-serif;
+    font-size: 10px;
+    padding: 10px 18px;
+  }
+  .contact-crystal {
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.08;
+  }
+
+  /* ── FOOTER ── */
+  .s-footer {
+    background: #1a1008;
+    padding: 14px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-family: -apple-system, sans-serif;
+    font-size: 10px;
+    color: #5a4a3a;
+  }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links span {
+    font-family: -apple-system, sans-serif;
+    font-size: 10px;
+    color: #5a4a3a;
+  }
+
+  /* Annotations */
+  .annotation {
+    background: #fffbe6;
+    border-left: 3px solid #c9a96e;
+    font-family: -apple-system, sans-serif;
+    font-size: 10px;
+    color: #5a4a3a;
+    padding: 6px 10px;
+    margin: 0 0 0 auto;
+    max-width: 220px;
+    line-height: 1.5;
+  }
+  .ann-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 12px 6px 0;
+    justify-content: flex-end;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-label">📋 מבנה הדף המלא — Warm Premium Personal Brand | לחץ בטרמינל לאישור</div>
+
+<div style="max-width:1040px;margin:24px auto;display:grid;grid-template-columns:1fr 260px;gap:16px;align-items:start;padding:0 16px">
+
+<div class="site-wrap">
+
+  <!-- NAV -->
+  <span class="sec-label">NAV</span>
+  <nav class="s-nav">
+    <span class="nav-logo">Hagai Heshes</span>
+    <div class="nav-links">
+      <span>Work</span>
+      <span>Approach</span>
+      <span>About</span>
+      <span class="nav-cta">Get in touch</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <span class="sec-label">HERO — טקסט שמאל + תמונת הגי מימין</span>
+  <section class="s-hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">Positioning &amp; Go-to-Market</span>
+      </div>
+      <h1 class="hero-title">The<br><em>Crystal-<br>lizer</em></h1>
+      <p class="hero-tagline">You know what you've built.<br>I make sure everyone else does too.</p>
+      <p class="hero-sub">Positioning and go-to-market for companies that can't afford to be misunderstood.</p>
+      <div class="hero-btns">
+        <span class="btn-main">Let's talk →</span>
+        <span class="btn-ghost2">See my work</span>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-placeholder"></div>
+      <span class="photo-name">Hagai Heshes</span>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <span class="sec-label">STATEMENT STRIP — פסקת אמירה חזקה</span>
+  <div class="s-statement">
+    <p class="statement-text">
+      "The world is full of great products<br>that never found their people.<br>I fix <em>that</em>."
+    </p>
+  </div>
+
+  <!-- PILLARS -->
+  <span class="sec-label">PILLARS — שני השירותים</span>
+  <section class="s-pillars">
+    <div class="pillars-grid">
+      <div class="pillar">
+        <span class="pillar-num">01</span>
+        <h2 class="pillar-title">Crystallization</h2>
+        <p class="pillar-body">I absorb everything about your company and compress it into something essential.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">02</span>
+        <h2 class="pillar-title">Go-to-Market</h2>
+        <p class="pillar-body">Once the foundation is solid, we go on the attack.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS -->
+  <span class="sec-label">CLIENTS — 8 לוגואים בגריד</span>
+  <section class="s-clients">
+    <div class="clients-header">
+      <h2 class="clients-title">Selected clients</h2>
+      <span class="clients-eyebrow">Portfolio</span>
+    </div>
+    <div class="logos-grid">
+      <div class="logo-cell"><div class="logo-stub"></div></div>
+      <div class="logo-cell"><div class="logo-stub" style="width:50px"></div></div>
+      <div class="logo-cell"><div class="logo-stub" style="width:70px"></div></div>
+      <div class="logo-cell"><div class="logo-stub" style="width:45px"></div></div>
+      <div class="logo-cell"><div class="logo-stub" style="width:55px"></div></div>
+      <div class="logo-cell"><div class="logo-stub" style="width:65px"></div></div>
+      <div class="logo-cell"><div class="logo-stub" style="width:48px"></div></div>
+      <div class="logo-cell"><div class="logo-stub" style="width:58px"></div></div>
+    </div>
+  </section>
+
+  <!-- DELIVERABLES -->
+  <span class="sec-label">DELIVERABLES — מה מקבלים</span>
+  <section class="s-deliv">
+    <div class="deliv-header">
+      <span class="deliv-header-label">Deliverables</span>
+      <h2 class="deliv-header-title">What you walk away with</h2>
+    </div>
+    <div class="deliv-cols">
+      <div>
+        <div class="deliv-col-title">Crystallization</div>
+        <div class="deliv-item"><span class="deliv-dot"></span>Positioning &amp; messaging framework</div>
+        <div class="deliv-item"><span class="deliv-dot"></span>Value propositions</div>
+        <div class="deliv-item"><span class="deliv-dot"></span>Company &amp; product narrative</div>
+        <div class="deliv-item"><span class="deliv-dot"></span>Investor story</div>
+      </div>
+      <div>
+        <div class="deliv-col-title">Go-to-Market</div>
+        <div class="deliv-item"><span class="deliv-dot"></span>GTM strategy &amp; plan</div>
+        <div class="deliv-item"><span class="deliv-dot"></span>Sales deck</div>
+        <div class="deliv-item"><span class="deliv-dot"></span>Website copy</div>
+        <div class="deliv-item"><span class="deliv-dot"></span>Sales enablement materials</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <span class="sec-label">ABOUT — ביוגרפיה (ללא תמונה, כבר בהירו)</span>
+  <section class="s-about">
+    <span class="about-label">About</span>
+    <div class="about-rule"></div>
+    <h2 class="about-title">Twenty years of making<br>things clear.</h2>
+    <p class="about-p">GTM experience across Fortune 500 enterprises and startups: B2B, B2B2C and D2C, spanning healthcare, tech, defense and beyond.</p>
+    <p class="about-p">Computer Science, a Master's in Psychology from UPenn, and a career spent at the intersection of strategic clarity and human insight.</p>
+  </section>
+
+  <!-- CONTACT -->
+  <span class="sec-label">CONTACT — CTA כהה</span>
+  <section class="s-contact">
+    <h2 class="contact-headline">If this sounds like<br>what you <em>need</em>,<br>let's talk.</h2>
+    <p class="contact-sub">I work with a small number of clients. If you're building something and can't afford to be misunderstood, reach out.</p>
+    <div class="contact-btns">
+      <span class="btn-contact-main">hagaiheshes@gmail.com →</span>
+      <span class="btn-contact-ghost">WhatsApp</span>
+    </div>
+    <div class="contact-crystal">
+      <svg width="120" height="158" viewBox="0 0 260 340" fill="none">
+        <g transform="translate(130,170)">
+          <polygon points="0,-150 -72,-55 0,-30" fill="#c9a96e" opacity="0.5"/>
+          <polygon points="0,-150 72,-55 0,-30" fill="#c9a96e" opacity="0.9"/>
+          <polygon points="-72,-55 -90,72 0,95 0,-30" fill="#c9a96e" opacity="0.6"/>
+          <polygon points="72,-55 90,72 0,95 0,-30" fill="#c9a96e" opacity="1"/>
+          <polygon points="-90,72 0,150 0,95" fill="#c9a96e" opacity="0.4"/>
+          <polygon points="90,72 0,150 0,95" fill="#c9a96e" opacity="1"/>
+          <polygon points="0,-150 72,-55 90,72 0,150 -90,72 -72,-55" stroke="#c9a96e" stroke-opacity="0.7" stroke-width="1.5" fill="none"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <span class="sec-label">FOOTER</span>
+  <footer class="s-footer">
+    <span class="footer-copy">© 2026 Hagai Heshes</span>
+    <div class="footer-links">
+      <span>Work</span><span>Approach</span><span>About</span><span>Contact</span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Annotations column -->
+<div style="position:sticky;top:50px">
+  <div style="font-family:-apple-system,sans-serif;font-size:11px;font-weight:700;color:#1e1612;margin-bottom:12px;letter-spacing:0.05em">הערות DESIGN</div>
+
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div class="annotation">
+      <strong>צבעים:</strong> רקע קרם #faf8f4, זהב חם #c9a96e, שחור-חם #1e1612
+    </div>
+    <div class="annotation">
+      <strong>פונטים:</strong> Gloock (כותרות) + Figtree (גוף) — כמו עכשיו
+    </div>
+    <div class="annotation">
+      <strong>הירו:</strong> תמונת הגי מימין, גריד 50/50. תמונה אמיתית מ-hagai.jpeg
+    </div>
+    <div class="annotation">
+      <strong>Statement Strip:</strong> חציצה כהה עם ציטוט חזק — שובר את המונוטוניות של הלבן
+    </div>
+    <div class="annotation">
+      <strong>Clients:</strong> על רקע קרם כהה יותר — contrast עדין מהגוף
+    </div>
+    <div class="annotation">
+      <strong>About:</strong> ביוגרפיה בלי תמונה (כבר בהירו). פשוט, אמין.
+    </div>
+    <div class="annotation">
+      <strong>Contact:</strong> הסקשן הכהה היחיד (חוץ מה-strip) — נותן דרמה לסיום
+    </div>
+    <div class="annotation">
+      <strong>אנימציות:</strong> scroll reveal עדין על כל section
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
