@@ -565,6 +565,60 @@
       .pillar:last-child { border-bottom: none; }
     }
 
+    /* ── CLIENTS ── */
+    .clients-section {
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--line);
+    }
+    .clients-header {
+      padding: 56px 48px 28px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .clients-header h2 {
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--navy);
+    }
+    .clients-logos {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    .client-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      transition: background 0.22s var(--ease-out);
+      cursor: default;
+    }
+    .client-logo:hover { background: var(--bg); }
+    .client-logo img {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.35;
+      transition: opacity 0.3s var(--ease-out), filter 0.3s var(--ease-out), transform 0.25s var(--ease-spring);
+    }
+    .client-logo:hover img { opacity: 0.9; filter: grayscale(0%); transform: scale(1.05); }
+
+    @media (max-width: 600px) {
+      .clients-logos { grid-template-columns: repeat(2, 1fr); }
+      .clients-header { padding: 44px 20px 20px; flex-direction: column; gap: 6px; }
+    }
+
   </style>
 </head>
 <body>
@@ -694,6 +748,24 @@
         Once the foundation is solid, we go on the attack: the right motion, channels, and sequence to take it to market.
       </p>
     </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients-section" id="work">
+  <div class="clients-header reveal">
+    <h2>Selected clients</h2>
+    <span class="t-label">Portfolio</span>
+  </div>
+  <div class="clients-logos stagger">
+    <div class="client-logo"><img src="logos/tytocare_logo-removebg-preview.png" alt="TytoCare" loading="lazy" height="28"></div>
+    <div class="client-logo"><img src="logos/quantalx_logo-removebg-preview.png" alt="QuantalX" loading="lazy" height="28"></div>
+    <div class="client-logo"><img src="logos/neurolief_logo-removebg-preview.png" alt="Neurolief" loading="lazy" height="28"></div>
+    <div class="client-logo"><img src="logos/Band-Logo.webp" alt="BAND.ai" loading="lazy" height="28"></div>
+    <div class="client-logo"><img src="logos/wd_logo-removebg-preview.png" alt="Western Digital" loading="lazy" height="28"></div>
+    <div class="client-logo"><img src="logos/seagate_logo-removebg-preview.png" alt="Seagate" loading="lazy" height="28"></div>
+    <div class="client-logo"><img src="logos/monday_logo-removebg-preview.png" alt="Monday.com" loading="lazy" height="28"></div>
+    <div class="client-logo"><img src="logos/wix_logo-removebg-preview.png" alt="Wix" loading="lazy" height="28"></div>
   </div>
 </section>
 
