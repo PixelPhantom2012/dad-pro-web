@@ -506,6 +506,65 @@
       to   { transform: translateX(-50%); }
     }
 
+    /* ── PILLARS ── */
+    .pillars-section {
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .pillars-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    .pillar {
+      padding: 72px 56px;
+      border-right: 1px solid var(--line);
+      position: relative;
+    }
+    .pillar:last-child { border-right: none; }
+    .pillar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--indigo);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.32s var(--ease-spring);
+    }
+    .pillar:hover::before { transform: scaleX(1); }
+    .pillar-num {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--indigo);
+      opacity: 0.55;
+      margin-bottom: 28px;
+      display: block;
+    }
+    .pillar-title {
+      font-size: clamp(26px, 2.4vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--navy);
+      margin-bottom: 16px;
+      line-height: 1.05;
+    }
+    .pillar-body {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-dim);
+      max-width: 36ch;
+    }
+
+    @media (max-width: 680px) {
+      .pillars-inner { grid-template-columns: 1fr; }
+      .pillar { border-right: none; border-bottom: 1px solid var(--line); padding: 44px 20px; }
+      .pillar:last-child { border-bottom: none; }
+    }
+
   </style>
 </head>
 <body>
@@ -617,6 +676,26 @@
     </div>
   </div>
 </div>
+
+<!-- PILLARS -->
+<section class="pillars-section" id="services">
+  <div class="pillars-inner">
+    <div class="pillar reveal">
+      <span class="pillar-num">01</span>
+      <h2 class="pillar-title">Crystallization</h2>
+      <p class="pillar-body">
+        I absorb everything about your company and compress it into something essential: what you are, who you're truly for, why you win, and how to talk about it.
+      </p>
+    </div>
+    <div class="pillar reveal" style="transition-delay:0.1s">
+      <span class="pillar-num">02</span>
+      <h2 class="pillar-title">Go-to-Market</h2>
+      <p class="pillar-body">
+        Once the foundation is solid, we go on the attack: the right motion, channels, and sequence to take it to market.
+      </p>
+    </div>
+  </div>
+</section>
 
 <!-- sections go here -->
 
