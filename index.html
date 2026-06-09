@@ -1249,7 +1249,192 @@
 
 <script>
 (function () {
-  /* JS goes here in Task 10 */
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── Page load entrance ── */
+  window.addEventListener('load', function () {
+    document.body.classList.add('loaded');
+  });
+
+  /* ── Split-text hero title (word-by-word reveal) ── */
+  function splitTitle(el, baseDelay) {
+    if (!el) return;
+    var nodes = el.childNodes;
+    var wordIndex = 0;
+    var fragment = '';
+
+    function wrapText(text, delay) {
+      var words = text.split(' ');
+      var result = '';
+      words.forEach(function (w, i) {
+        if (!w) return;
+        var d = delay + wordIndex * 60;
+        result += '<span class="hero-title-word"><span class="hero-title-word-inner" style="transition-delay:' + d + 'ms">' + w + '</span></span>';
+        if (i < words.length - 1) result += ' ';
+        wordIndex++;
+      });
+      return result;
+    }
+
+    nodes.forEach(function (node) {
+      if (node.nodeType === 3) {
+        fragment += wrapText(node.textContent, baseDelay);
+      } else if (node.nodeName === 'BR') {
+        fragment += '<br>';
+        wordIndex = 0;
+      } else if (node.nodeName === 'SPAN') {
+        var cls = node.className;
+        var inner = wrapText(node.textContent, baseDelay + wordIndex * 60);
+        fragment += '<span class="' + cls + '">' + inner + '</span>';
+      } else if (node.nodeName === 'EM') {
+        var inner = wrapText(node.textContent, baseDelay + wordIndex * 60);
+        fragment += '<em>' + inner + '</em>';
+      }
+    });
+    el.innerHTML = fragment;
+  }
+
+  function splitTagline(el, baseDelay) {
+    if (!el) return;
+    var text = el.textContent;
+    var words = text.split(' ');
+    var output = '';
+    words.forEach(function (w, i) {
+      if (!w) return;
+      var d = baseDelay + i * 55;
+      output += '<span class="hero-tagline-word"><span class="hero-tagline-word-inner" style="transition-delay:' + d + 'ms">' + w + '</span></span>';
+      if (i < words.length - 1) output += ' ';
+    });
+    el.innerHTML = output;
+  }
+
+  if (!prefersReduced) {
+    splitTitle(document.getElementById('hero-title'), 140);
+    splitTagline(document.getElementById('hero-tagline'), 420);
+
+    var heroLede = document.querySelector('.hero-lede');
+    if (heroLede) heroLede.style.transitionDelay = '0.56s';
+
+    var heroActions = document.querySelector('.hero-actions');
+    if (heroActions) heroActions.style.transitionDelay = '0.64s';
+  } else {
+    var heroTitle = document.getElementById('hero-title');
+    var heroTagline = document.getElementById('hero-tagline');
+    if (heroTitle) { heroTitle.style.opacity = '1'; heroTitle.style.transform = 'none'; }
+    if (heroTagline) { heroTagline.style.opacity = '1'; heroTagline.style.transform = 'none'; }
+  }
+
+  /* ── Scroll reveals ── */
+  var revealEls = document.querySelectorAll('.reveal, .reveal-left, .stagger');
+  if ('IntersectionObserver' in window) {
+    var isMobile = window.matchMedia('(max-width: 720px)').matches;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, {
+      threshold: isMobile ? 0.05 : 0.08,
+      rootMargin: isMobile ? '0px 0px -10px 0px' : '0px 0px -40px 0px'
+    });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in-view'); });
+  }
+
+  /* ── Nav scroll shadow ── */
+  var nav = document.getElementById('site-nav');
+  var navScrolled = false;
+  window.addEventListener('scroll', function () {
+    var past = window.scrollY > 80;
+    if (past !== navScrolled) {
+      navScrolled = past;
+      nav.classList.toggle('scrolled', navScrolled);
+    }
+  }, { passive: true });
+
+  /* ── Crystal mouse parallax ── */
+  if (!prefersReduced) {
+    var lerpX = 0, lerpY = 0, lerpR = 0;
+    var targetX = 0, targetY = 0, targetR = 0;
+
+    document.addEventListener('mousemove', function (e) {
+      var cx = window.innerWidth / 2;
+      var cy = window.innerHeight / 2;
+      var dx = (e.clientX - cx) / cx;
+      var dy = (e.clientY - cy) / cy;
+      targetX = dx * 8;
+      targetY = dy * 6;
+      targetR = dx * 4;
+    });
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function tickParallax() {
+      lerpX = lerp(lerpX, targetX, 0.06);
+      lerpY = lerp(lerpY, targetY, 0.06);
+      lerpR = lerp(lerpR, targetR, 0.06);
+
+      var navCrystal = document.getElementById('nav-crystal');
+      if (navCrystal) {
+        navCrystal.style.transform = 'translate(' + (lerpX * 0.3).toFixed(2) + 'px, ' + (lerpY * 0.3).toFixed(2) + 'px) rotate(' + (lerpR * 0.5).toFixed(2) + 'deg)';
+      }
+      requestAnimationFrame(tickParallax);
+    }
+    requestAnimationFrame(tickParallax);
+  }
+
+  /* ── Mobile drawer ── */
+  var burger = document.getElementById('nav-burger');
+  var drawer = document.getElementById('mobile-drawer');
+  var isOpen = false;
+
+  function toggleDrawer(open) {
+    isOpen = open;
+    burger.classList.toggle('open', isOpen);
+    drawer.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', String(isOpen));
+    drawer.setAttribute('aria-hidden', String(!isOpen));
+  }
+
+  burger.addEventListener('click', function () { toggleDrawer(!isOpen); });
+  drawer.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { toggleDrawer(false); });
+  });
+  document.addEventListener('click', function (e) {
+    if (isOpen && !drawer.contains(e.target) && !burger.contains(e.target)) {
+      toggleDrawer(false);
+    }
+  });
+
+  /* ── Scroll-to-top ── */
+  var scrollBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', function () {
+    scrollBtn.classList.toggle('visible', window.scrollY > 500);
+  }, { passive: true });
+  scrollBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ── Active nav links ── */
+  var sections = document.querySelectorAll('section[id]');
+  var navAs = document.querySelectorAll('.nav-links a');
+  if ('IntersectionObserver' in window) {
+    var sectionIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var id = e.target.id;
+          navAs.forEach(function (a) {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '-64px 0px -40% 0px' });
+    sections.forEach(function (s) { sectionIo.observe(s); });
+  }
+
 })();
 </script>
 
