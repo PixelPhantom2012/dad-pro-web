@@ -222,6 +222,248 @@
     }
     @media (min-width: 721px) { .mobile-drawer { display: none; } }
 
+    /* ── HERO ── */
+    .hero {
+      min-height: calc(100svh - var(--nav-h));
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 48px;
+      gap: 64px;
+    }
+    .hero-text { padding: 80px 0; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--indigo-bg);
+      border: 1px solid oklch(50% 0.2 268 / 0.2);
+      color: var(--indigo);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 14px 5px 10px;
+      border-radius: 100px;
+      margin-bottom: 44px;
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--indigo);
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: badge-pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes badge-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Split-text word containers */
+    .hero-title-word {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+    }
+    .hero-title-word-inner {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%);
+      transition: opacity 0.6s var(--ease-spring), transform 0.6s var(--ease-spring);
+    }
+    body.loaded .hero-title-word-inner { opacity: 1; transform: translateY(0); }
+
+    .hero-tagline-word {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+    }
+    .hero-tagline-word-inner {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%);
+      transition: opacity 0.55s var(--ease-spring), transform 0.55s var(--ease-spring);
+    }
+    body.loaded .hero-tagline-word-inner { opacity: 1; transform: translateY(0); }
+
+    .hero-title {
+      font-size: clamp(64px, 7.5vw, 96px);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      margin-bottom: 28px;
+    }
+    .hero-title .the {
+      display: block;
+      font-weight: 300;
+      font-size: 0.52em;
+      letter-spacing: -0.03em;
+      color: var(--text-dim);
+      margin-bottom: 2px;
+    }
+    .hero-title .main {
+      display: block;
+      color: var(--indigo);
+    }
+
+    .hero-tagline {
+      font-size: clamp(17px, 1.6vw, 20px);
+      font-weight: 400;
+      color: var(--text-body);
+      line-height: 1.5;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+    .hero-lede {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.75;
+      max-width: 44ch;
+      margin-bottom: 52px;
+      font-weight: 400;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s var(--ease-spring), transform 0.65s var(--ease-spring);
+    }
+    body.loaded .hero-lede { opacity: 1; transform: translateY(0); }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s var(--ease-spring), transform 0.6s var(--ease-spring);
+    }
+    body.loaded .hero-actions { opacity: 1; transform: translateY(0); }
+
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--indigo);
+      color: #fff;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 13px 26px;
+      border-radius: var(--r);
+      letter-spacing: -0.01em;
+      min-height: 44px;
+      touch-action: manipulation;
+      transition: background 0.22s var(--ease-out), transform 0.15s var(--ease-out), box-shadow 0.22s var(--ease-out);
+      box-shadow: 0 4px 16px oklch(50% 0.2 268 / 0.28);
+    }
+    .btn-primary:hover {
+      background: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px oklch(50% 0.2 268 / 0.35);
+    }
+    .btn-primary:active { transform: scale(0.97); }
+    .btn-primary svg { transition: transform 0.22s var(--ease-spring); }
+    .btn-primary:hover svg { transform: translateX(4px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      padding-bottom: 2px;
+      border-bottom: 1px solid var(--line);
+      letter-spacing: -0.01em;
+      min-height: 44px;
+      align-items: center;
+      touch-action: manipulation;
+      transition: color 0.15s var(--ease-out), border-color 0.15s var(--ease-out);
+    }
+    .btn-ghost:hover { color: var(--navy); border-color: var(--navy); }
+    .btn-ghost:active { transform: scale(0.98); }
+
+    /* Photo column */
+    .hero-photo-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 0;
+      opacity: 0;
+      transition: opacity 1s var(--ease-out) 0.45s;
+    }
+    body.loaded .hero-photo-col { opacity: 1; }
+
+    .photo-frame {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+    }
+    .photo-bg-shape {
+      position: absolute;
+      inset: -28px -28px -28px -12px;
+      background: var(--indigo-bg);
+      border-radius: 24px;
+      z-index: 0;
+    }
+    .photo-main {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 16px;
+      display: block;
+      box-shadow: 0 24px 60px oklch(13% 0.04 265 / 0.18);
+    }
+    .photo-name-tag {
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: oklch(99% 0.003 265);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      padding: 8px 22px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      white-space: nowrap;
+      z-index: 2;
+      box-shadow: 0 4px 16px oklch(13% 0.04 265 / 0.08);
+      letter-spacing: -0.02em;
+    }
+
+    /* Hero eyebrow entrance */
+    .hero-badge {
+      opacity: 0;
+      transform: translateX(-16px);
+      transition: opacity 0.5s var(--ease-out), transform 0.6s var(--ease-spring);
+    }
+    body.loaded .hero-badge { opacity: 1; transform: translateX(0); transition-delay: 0.04s; }
+
+    /* Nav entrance */
+    .nav { opacity: 0; transition: opacity 0.35s var(--ease-out) 0.06s, background 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out); }
+    body.loaded .nav { opacity: 1; }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; padding: 0 20px; gap: 0; }
+      .hero-text { padding: 64px 0 44px; }
+      .hero-photo-col { padding: 0 0 56px; }
+      .photo-frame { max-width: 320px; }
+    }
+    @media (max-width: 720px) {
+      .hero-photo-col { display: none; }
+    }
+
   </style>
 </head>
 <body>
@@ -268,6 +510,41 @@
   </nav>
   <a href="#contact" class="drawer-cta">Get in touch</a>
 </div>
+
+<!-- HERO -->
+<section class="hero" id="hero" aria-label="Introduction">
+  <div class="hero-text">
+    <div class="hero-badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Positioning &amp; Go-to-Market
+    </div>
+    <h1 class="hero-title" id="hero-title">
+      <span class="the">The</span>
+      <span class="main">Crystallizer</span>
+    </h1>
+    <p class="hero-tagline" id="hero-tagline">
+      You know what you've built. I make sure everyone else does too.
+    </p>
+    <p class="hero-lede">
+      Positioning and go-to-market for companies that can't afford to be misunderstood. I distill what you're really about, then help you take it to market.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <span>Let's talk</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </a>
+      <a href="#work" class="btn-ghost">See my work</a>
+    </div>
+  </div>
+
+  <div class="hero-photo-col" aria-hidden="true">
+    <div class="photo-frame">
+      <div class="photo-bg-shape"></div>
+      <img class="photo-main" src="logos/hagai.jpeg" alt="Portrait of Hagai Heshes" width="380" height="507" loading="eager">
+      <span class="photo-name-tag">Hagai Heshes</span>
+    </div>
+  </div>
+</section>
 
 <!-- sections go here -->
 
