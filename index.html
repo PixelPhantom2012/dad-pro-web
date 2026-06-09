@@ -464,6 +464,48 @@
       .hero-photo-col { display: none; }
     }
 
+    /* ── STATEMENT STRIP ── */
+    .statement-section {
+      background: var(--dark-bg);
+      border-top: 1px solid oklch(50% 0.2 268 / 0.3);
+      border-bottom: 1px solid oklch(50% 0.2 268 / 0.3);
+      overflow: hidden;
+    }
+    .statement-marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 26s linear infinite;
+      padding: 28px 0;
+    }
+    .statement-marquee-track:hover { animation-play-state: paused; }
+    .statement-marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+      padding: 0 56px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .statement-text {
+      font-size: clamp(15px, 1.5vw, 18px);
+      font-weight: 400;
+      color: oklch(94% 0.005 265 / 0.65);
+      letter-spacing: -0.02em;
+    }
+    .statement-text em { font-style: italic; color: var(--indigo-dim); }
+    .statement-diamond {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      background: oklch(50% 0.2 268 / 0.6);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
   </style>
 </head>
 <body>
@@ -545,6 +587,36 @@
     </div>
   </div>
 </section>
+
+<!-- STATEMENT STRIP -->
+<div class="statement-section" aria-label="Mission statement">
+  <div class="statement-marquee-track" aria-hidden="true">
+    <div class="statement-marquee-item">
+      <p class="statement-text">The world is full of great products that never found their people. I fix <em>that</em>.</p>
+      <span class="statement-diamond"></span>
+    </div>
+    <div class="statement-marquee-item">
+      <p class="statement-text">Clarity is a competitive advantage. Most companies don't have it.</p>
+      <span class="statement-diamond"></span>
+    </div>
+    <div class="statement-marquee-item">
+      <p class="statement-text">If you can't explain what you do in a sentence, your customers can't either.</p>
+      <span class="statement-diamond"></span>
+    </div>
+    <div class="statement-marquee-item">
+      <p class="statement-text">The world is full of great products that never found their people. I fix <em>that</em>.</p>
+      <span class="statement-diamond"></span>
+    </div>
+    <div class="statement-marquee-item">
+      <p class="statement-text">Clarity is a competitive advantage. Most companies don't have it.</p>
+      <span class="statement-diamond"></span>
+    </div>
+    <div class="statement-marquee-item">
+      <p class="statement-text">If you can't explain what you do in a sentence, your customers can't either.</p>
+      <span class="statement-diamond"></span>
+    </div>
+  </div>
+</div>
 
 <!-- sections go here -->
 
