@@ -74,9 +74,200 @@
 
     section[id] { scroll-margin-top: var(--nav-h); }
 
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: var(--nav-h);
+      background: oklch(98.5% 0.005 265 / 0.88);
+      backdrop-filter: saturate(160%) blur(16px);
+      -webkit-backdrop-filter: saturate(160%) blur(16px);
+      border-bottom: 1px solid var(--line);
+      transition: background 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+    }
+    .nav.scrolled {
+      background: oklch(98.5% 0.005 265 / 0.97);
+      box-shadow: 0 1px 0 var(--line), 0 4px 24px oklch(13% 0.04 265 / 0.06);
+    }
+    .nav-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.035em;
+    }
+    .nav-logo-mark { width: 22px; height: 22px; flex-shrink: 0; }
+    .nav-right { display: flex; align-items: center; gap: 32px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-dim);
+      letter-spacing: -0.01em;
+      transition: color 0.15s var(--ease-out);
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-links a.active { color: var(--navy); font-weight: 500; }
+    .nav-cta {
+      position: relative;
+      overflow: hidden;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--indigo);
+      border-radius: var(--r);
+      padding: 8px 20px;
+      letter-spacing: -0.01em;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      transition: background 0.22s var(--ease-out), transform 0.15s var(--ease-out);
+    }
+    .nav-cta:hover { background: var(--navy); transform: translateY(-1px); }
+    .nav-cta:active { transform: scale(0.97); }
+    .nav-cta span { position: relative; z-index: 1; }
+
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 11px 8px;
+      background: none;
+      border: none;
+      min-width: 44px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+    }
+    .nav-burger span {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: transform 0.28s var(--ease-spring), opacity 0.2s var(--ease-out);
+    }
+    .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-drawer {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      padding: 20px 20px 28px;
+      z-index: 199;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.35s var(--ease-spring), opacity 0.22s var(--ease-out);
+      pointer-events: none;
+    }
+    .mobile-drawer.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .mobile-drawer nav { display: flex; flex-direction: column; gap: 2px; }
+    .mobile-drawer a {
+      font-size: 15px;
+      color: var(--text-body);
+      padding: 12px 8px;
+      border-radius: var(--r);
+      transition: color 0.15s var(--ease-out), background 0.15s var(--ease-out);
+      border-bottom: 1px solid var(--line);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      touch-action: manipulation;
+    }
+    .mobile-drawer a:last-child { border-bottom: none; }
+    .mobile-drawer a:hover { color: var(--navy); background: var(--bg-alt); }
+    .mobile-drawer .drawer-cta {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--indigo);
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: var(--r);
+      font-size: 13.5px;
+      font-weight: 600;
+      min-height: 48px;
+      touch-action: manipulation;
+      letter-spacing: -0.01em;
+      transition: background 0.18s var(--ease-out), transform 0.15s var(--ease-out);
+    }
+    .mobile-drawer .drawer-cta:active { transform: scale(0.97); }
+
+    @media (max-width: 720px) {
+      .nav-right { display: none; }
+      .nav-burger { display: flex; }
+      .nav-inner { padding: 0 20px; }
+    }
+    @media (min-width: 721px) { .mobile-drawer { display: none; } }
+
   </style>
 </head>
 <body>
+
+<!-- NAV -->
+<header class="nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Hagai Heshes — Home">
+      <svg class="nav-logo-mark" id="nav-crystal" viewBox="0 0 28 28" width="22" height="22" fill="none" aria-hidden="true">
+        <g transform="translate(14,14)">
+          <polygon points="0,-11 -5.5,-4 0,-2" fill="var(--indigo)" fill-opacity="0.22"/>
+          <polygon points="0,-11 5.5,-4 0,-2" fill="var(--indigo)" fill-opacity="0.45"/>
+          <polygon points="-5.5,-4 -7,5.5 0,7 0,-2" fill="var(--indigo)" fill-opacity="0.32"/>
+          <polygon points="5.5,-4 7,5.5 0,7 0,-2" fill="var(--indigo)" fill-opacity="0.72"/>
+          <polygon points="-7,5.5 0,11 0,7" fill="var(--indigo)" fill-opacity="0.18"/>
+          <polygon points="7,5.5 0,11 0,7" fill="var(--indigo)" fill-opacity="0.62"/>
+          <polygon points="0,-11 5.5,-4 7,5.5 0,11 -7,5.5 -5.5,-4" stroke="var(--indigo)" stroke-opacity="0.45" stroke-width="0.5"/>
+        </g>
+      </svg>
+      <span>Hagai Heshes</span>
+    </a>
+
+    <div class="nav-right">
+      <ul class="nav-links" role="list">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#how">Approach</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta"><span>Get in touch</span></a>
+    </div>
+
+    <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile drawer -->
+<div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#how">Approach</a>
+    <a href="#about">About</a>
+  </nav>
+  <a href="#contact" class="drawer-cta">Get in touch</a>
+</div>
 
 <!-- sections go here -->
 
