@@ -904,6 +904,65 @@
     .scroll-top:hover { background: var(--indigo-bg); color: var(--indigo); }
     .scroll-top:active { transform: scale(0.95); }
 
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.75s var(--ease-spring), transform 0.75s var(--ease-spring);
+      will-change: opacity, transform;
+    }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-28px);
+      transition: opacity 0.75s var(--ease-spring), transform 0.75s var(--ease-spring);
+    }
+    .reveal-left.in-view { opacity: 1; transform: translateX(0); }
+
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s var(--ease-spring), transform 0.65s var(--ease-spring);
+    }
+    .stagger.in-view > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0ms; }
+    .stagger.in-view > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 60ms; }
+    .stagger.in-view > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 120ms; }
+    .stagger.in-view > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 180ms; }
+    .stagger.in-view > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 240ms; }
+    .stagger.in-view > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 300ms; }
+    .stagger.in-view > *:nth-child(7) { opacity: 1; transform: none; transition-delay: 360ms; }
+    .stagger.in-view > *:nth-child(8) { opacity: 1; transform: none; transition-delay: 420ms; }
+
+    /* ── CRYSTAL PARALLAX ── */
+    .crystal-parallax {
+      display: block;
+      transform-origin: center center;
+      will-change: transform;
+    }
+
+    /* ── REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .hero-title-word-inner,
+      .hero-tagline-word-inner,
+      .hero-lede,
+      .hero-actions,
+      .hero-badge,
+      .hero-photo-col,
+      .nav {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      body.loaded .hero-title-word-inner,
+      body.loaded .hero-tagline-word-inner { opacity: 1; transform: none; }
+      .reveal, .reveal-left, .stagger > * { opacity: 1; transform: none; }
+    }
+
   </style>
 </head>
 <body>
@@ -912,7 +971,7 @@
 <header class="nav" id="site-nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo" aria-label="Hagai Heshes — Home">
-      <svg class="nav-logo-mark" id="nav-crystal" viewBox="0 0 28 28" width="22" height="22" fill="none" aria-hidden="true">
+      <svg class="nav-logo-mark crystal-parallax" id="nav-crystal" viewBox="0 0 28 28" width="22" height="22" fill="none" aria-hidden="true">
         <g transform="translate(14,14)">
           <polygon points="0,-11 -5.5,-4 0,-2" fill="var(--indigo)" fill-opacity="0.22"/>
           <polygon points="0,-11 5.5,-4 0,-2" fill="var(--indigo)" fill-opacity="0.45"/>
