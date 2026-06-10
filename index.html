@@ -383,57 +383,24 @@
     .btn-ghost:hover { color: var(--navy); border-color: var(--navy); }
     .btn-ghost:active { transform: scale(0.98); }
 
-    /* Photo column */
-    .hero-photo-col {
+    /* Crystal column */
+    .hero-crystal-col {
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 48px 0;
-      opacity: 0;
-      transition: opacity 1s var(--ease-out) 0.45s;
+      justify-content: flex-end;
+      overflow: visible;
+      mix-blend-mode: multiply;
     }
-    body.loaded .hero-photo-col { opacity: 1; }
 
-    .photo-frame {
-      position: relative;
-      width: 100%;
-      max-width: 380px;
-    }
-    .photo-bg-shape {
-      position: absolute;
-      inset: -28px -28px -28px -12px;
-      background: var(--indigo-bg);
-      border-radius: 24px;
-      z-index: 0;
-    }
-    .photo-main {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      object-position: top center;
-      border-radius: 16px;
+    .hero-crystal-canvas {
       display: block;
-      box-shadow: 0 24px 60px oklch(13% 0.04 265 / 0.18);
+      height: clamp(400px, calc(100svh - var(--nav-h) - 40px), 880px);
+      width: auto;
+      opacity: 0;
+      transition: opacity 0.8s var(--ease-out) 0.1s;
+      image-rendering: auto;
     }
-    .photo-name-tag {
-      position: absolute;
-      bottom: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: oklch(99% 0.003 265);
-      border: 1px solid var(--line);
-      border-radius: 100px;
-      padding: 8px 22px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--navy);
-      white-space: nowrap;
-      z-index: 2;
-      box-shadow: 0 4px 16px oklch(13% 0.04 265 / 0.08);
-      letter-spacing: -0.02em;
-    }
+    body.loaded .hero-crystal-canvas { opacity: 1; }
 
     /* Hero eyebrow entrance */
     .hero-badge {
@@ -450,11 +417,11 @@
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; min-height: auto; padding: 0 20px; gap: 0; }
       .hero-text { padding: 64px 0 44px; }
-      .hero-photo-col { padding: 0 0 56px; }
-      .photo-frame { max-width: 320px; }
+      .hero-crystal-col { justify-content: center; padding: 0 0 56px; }
+      .hero-crystal-canvas { height: clamp(260px, 55vw, 400px); width: auto; }
     }
     @media (max-width: 720px) {
-      .hero-photo-col { display: none; }
+      .hero-crystal-col { display: none; }
     }
 
     /* ── STATEMENT STRIP ── */
@@ -937,30 +904,6 @@
     .scroll-top:hover { background: var(--indigo-bg); color: var(--indigo); }
     .scroll-top:active { transform: scale(0.95); }
 
-    /* ── CRYSTAL PROGRESS ── */
-    .crystal-progress {
-      position: fixed;
-      right: clamp(16px, 2.5vw, 44px);
-      top: 50%;
-      transform: translateY(-50%);
-      width: clamp(180px, 20vw, 280px);
-      z-index: 40;
-      pointer-events: none;
-      mix-blend-mode: multiply;
-      /* No opacity here — opacity on child to avoid isolated-group stacking context */
-    }
-    .crystal-progress-canvas {
-      width: 100%;
-      height: auto;
-      display: block;
-      filter: brightness(1.15);
-      opacity: 0;
-      transition: opacity 0.5s var(--ease-out);
-      image-rendering: auto;
-    }
-    .crystal-progress.visible .crystal-progress-canvas { opacity: 1; }
-    @media (max-width: 860px) { .crystal-progress { display: none; } }
-
     /* ── SCROLL REVEAL ── */
     .reveal {
       opacity: 0;
@@ -1010,7 +953,7 @@
       .hero-lede,
       .hero-actions,
       .hero-badge,
-      .hero-photo-col,
+      .hero-crystal-canvas,
       .nav {
         opacity: 1 !important;
         transform: none !important;
@@ -1092,12 +1035,8 @@
     </div>
   </div>
 
-  <div class="hero-photo-col" aria-hidden="true">
-    <div class="photo-frame">
-      <div class="photo-bg-shape"></div>
-      <img class="photo-main" src="logos/hagai.jpeg" alt="Portrait of Hagai Heshes" width="380" height="507" loading="eager">
-      <span class="photo-name-tag">Hagai Heshes</span>
-    </div>
+  <div class="hero-crystal-col" aria-hidden="true">
+    <canvas class="hero-crystal-canvas" id="hero-crystal-canvas" width="1200" height="1724"></canvas>
   </div>
 </section>
 
@@ -1276,11 +1215,6 @@
   </div>
 </footer>
 
-<!-- Crystal scroll progress -->
-<div class="crystal-progress" id="crystal-progress" aria-hidden="true">
-  <canvas class="crystal-progress-canvas" id="crystal-progress-canvas" width="1200" height="1724"></canvas>
-</div>
-
 <!-- Scroll-to-top -->
 <button class="scroll-top" id="scroll-top" aria-label="Back to top">
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V3M3 7l4-4 4 4"/></svg>
@@ -1457,62 +1391,65 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ── Crystal scroll progress (canvas frame scrubbing) ── */
+  /* ── Hero crystal entrance animation ── */
   (function () {
-    var cpWrap = document.getElementById('crystal-progress');
-    var cpCanvas = document.getElementById('crystal-progress-canvas');
-    if (!cpCanvas || prefersReduced) return;
+    var canvas = document.getElementById('hero-crystal-canvas');
+    if (!canvas) return;
 
-    var ctx = cpCanvas.getContext('2d');
+    var ctx = canvas.getContext('2d');
     var TOTAL = 151;
+    var DURATION = 2600;
     var frames = new Array(TOTAL).fill(null);
-    var lastIdx = -1;
-    var queuePos = 0;
+    var loaded = 0;
+    var lastDrawn = -1;
+    var animStarted = false;
 
-    function pad(n) {
-      return n < 10 ? '00' + n : n < 100 ? '0' + n : '' + n;
-    }
+    function pad(n) { return n < 10 ? '00' + n : n < 100 ? '0' + n : '' + n; }
 
-    function drawFrame(idx) {
-      if (!frames[idx] || idx === lastIdx) return;
-      lastIdx = idx;
-      ctx.drawImage(frames[idx], 0, 0, cpCanvas.width, cpCanvas.height);
-    }
-
-    function loadNext() {
-      if (queuePos >= TOTAL) return;
-      var idx = queuePos++;
+    function loadFrame(idx) {
       var img = new Image();
       img.onload = function () {
         frames[idx] = img;
-        if (idx === 0) drawFrame(0);
-        loadNext();
+        loaded++;
+        if (!animStarted && loaded >= 6) { animStarted = true; requestAnimationFrame(play); }
       };
-      img.onerror = loadNext;
+      img.onerror = function () { loaded++; };
       img.src = 'animation/frames/ezgif-frame-' + pad(idx + 1) + '.jpg';
     }
 
-    loadNext(); loadNext(); loadNext(); loadNext();
-
-    var cpRafPending = false;
-    function cpUpdate() {
-      cpRafPending = false;
-      var scrolled = window.scrollY;
-      var totalH = document.body.scrollHeight - window.innerHeight;
-      if (totalH > 0) {
-        var progress = Math.min(Math.max(scrolled / totalH, 0), 1);
-        var idx = Math.min(Math.round(progress * (TOTAL - 1)), TOTAL - 1);
-        drawFrame(idx);
-      }
-      cpWrap.classList.toggle('visible', scrolled > 80);
+    if (prefersReduced) {
+      var still = new Image();
+      still.onload = function () { ctx.drawImage(still, 0, 0, canvas.width, canvas.height); };
+      still.src = 'animation/frames/ezgif-frame-151.jpg';
+      return;
     }
 
-    window.addEventListener('scroll', function () {
-      if (!cpRafPending) {
-        cpRafPending = true;
-        requestAnimationFrame(cpUpdate);
+    for (var i = 0; i < TOTAL; i++) loadFrame(i);
+
+    var startTime = null;
+    function play(ts) {
+      if (!startTime) startTime = ts;
+      var elapsed = ts - startTime;
+      var progress = Math.min(elapsed / DURATION, 1);
+      var idx = Math.min(Math.round(progress * (TOTAL - 1)), TOTAL - 1);
+
+      if (frames[idx] && idx !== lastDrawn) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(frames[idx], 0, 0, canvas.width, canvas.height);
+        lastDrawn = idx;
+      } else if (!frames[idx]) {
+        for (var j = idx - 1; j >= 0; j--) {
+          if (frames[j] && j !== lastDrawn) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(frames[j], 0, 0, canvas.width, canvas.height);
+            lastDrawn = j;
+            break;
+          }
+        }
       }
-    }, { passive: true });
+
+      if (progress < 1) requestAnimationFrame(play);
+    }
   })();
 
   /* ── Active nav links ── */
