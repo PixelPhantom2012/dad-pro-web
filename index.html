@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* ── Tokens ── */
@@ -32,6 +32,7 @@
       --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
       --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+      --gold:        #b8975a;
     }
 
     /* ── Reset ── */
@@ -39,7 +40,7 @@
     html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
-      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text-body);
       -webkit-font-smoothing: antialiased;
@@ -49,6 +50,10 @@
 
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
+
+    h1, h2, .hero-title, .pillar-title, .how-title, .deliv-title, .about-title, .contact-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
 
     :focus-visible {
       outline: 2px solid var(--indigo);
@@ -236,31 +241,14 @@
     .hero-text { padding: 80px 0; }
 
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--indigo-bg);
-      border: 1px solid oklch(50% 0.2 268 / 0.2);
+      display: inline-block;
       color: var(--indigo);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      padding: 5px 14px 5px 10px;
-      border-radius: 100px;
       margin-bottom: 44px;
-    }
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--indigo);
-      border-radius: 50%;
-      flex-shrink: 0;
-      animation: badge-pulse 2.5s ease-in-out infinite;
-    }
-    @keyframes badge-pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+      opacity: 0.8;
     }
 
     /* Split-text word containers */
@@ -268,8 +256,10 @@
       display: inline-block;
       overflow: hidden;
       vertical-align: bottom;
-      padding-bottom: 0.1em;
-      margin-bottom: -0.1em;
+      padding-bottom: 0.18em;
+      margin-bottom: -0.18em;
+      padding-right: 0.08em;
+      line-height: 1;
     }
     .hero-title-word-inner {
       display: inline-block;
@@ -294,7 +284,7 @@
 
     .hero-title {
       font-size: clamp(64px, 7.5vw, 96px);
-      font-weight: 800;
+      font-weight: 900;
       color: var(--navy);
       line-height: 0.95;
       letter-spacing: -0.05em;
@@ -302,11 +292,12 @@
     }
     .hero-title .the {
       display: block;
-      font-weight: 300;
+      font-weight: 400;
       font-size: 0.52em;
       letter-spacing: -0.03em;
       color: var(--text-dim);
-      margin-bottom: 2px;
+      margin-bottom: -0.05em;
+      line-height: 1;
     }
     .hero-title .main {
       display: block;
@@ -314,8 +305,8 @@
     }
 
     .hero-tagline {
-      font-size: clamp(17px, 1.6vw, 20px);
-      font-weight: 400;
+      font-size: clamp(19px, 1.9vw, 23px);
+      font-weight: 500;
       color: var(--text-body);
       line-height: 1.5;
       margin-bottom: 14px;
@@ -508,6 +499,24 @@
       to   { transform: translateX(-50%); }
     }
 
+    .statement-static {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 72px 48px;
+      text-align: center;
+    }
+    .statement-quote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 3vw, 38px);
+      font-weight: 400;
+      font-style: italic;
+      color: oklch(88% 0.005 265 / 0.75);
+      letter-spacing: -0.02em;
+      line-height: 1.45;
+    }
+    .statement-quote em { color: var(--indigo-dim); font-style: italic; }
+    @media (max-width: 600px) { .statement-static { padding: 56px 24px; } }
+
     /* ── PILLARS ── */
     .pillars-section {
       background: var(--bg);
@@ -597,8 +606,10 @@
     }
     .client-logo {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 10px;
       padding: 32px 24px;
       border-right: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
@@ -607,14 +618,21 @@
     }
     .client-logo:hover { background: var(--bg); }
     .client-logo img {
-      height: 28px;
+      height: 32px;
       width: auto;
       object-fit: contain;
       filter: grayscale(100%);
-      opacity: 0.35;
+      opacity: 0.55;
       transition: opacity 0.3s var(--ease-out), filter 0.3s var(--ease-out), transform 0.25s var(--ease-spring);
     }
-    .client-logo:hover img { opacity: 0.9; filter: grayscale(0%); transform: scale(1.05); }
+    .client-logo:hover img { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
+    .client-name {
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
 
     @media (max-width: 600px) {
       .clients-logos { grid-template-columns: repeat(2, 1fr); }
@@ -659,7 +677,7 @@
 
     /* ── DELIVERABLES ── */
     .deliv-section {
-      background: var(--bg);
+      background: var(--bg-alt);
       border-bottom: 1px solid var(--line);
     }
     .deliv-inner {
@@ -721,7 +739,7 @@
 
     /* ── ABOUT ── */
     .about-section {
-      background: var(--bg-alt);
+      background: var(--bg);
       border-bottom: 1px solid var(--line);
     }
     .about-inner {
@@ -757,8 +775,21 @@
     }
     .about-body p:last-child { margin-bottom: 0; }
 
+    .about-portrait {
+      width: 100%;
+      max-width: 180px;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 12px;
+      margin-top: 36px;
+      display: block;
+      box-shadow: 0 8px 32px oklch(13% 0.04 265 / 0.12);
+    }
+
     @media (max-width: 720px) {
       .about-inner { grid-template-columns: 1fr; gap: 36px; padding: 56px 20px; }
+      .about-portrait { display: none; }
     }
 
     /* ── CONTACT ── */
@@ -918,15 +949,16 @@
       mix-blend-mode: multiply;
       /* No opacity here — opacity on child to avoid isolated-group stacking context */
     }
-    .crystal-progress-video {
+    .crystal-progress-canvas {
       width: 100%;
       height: auto;
       display: block;
       filter: brightness(1.15);
       opacity: 0;
       transition: opacity 0.5s var(--ease-out);
+      image-rendering: auto;
     }
-    .crystal-progress.visible .crystal-progress-video { opacity: 1; }
+    .crystal-progress.visible .crystal-progress-canvas { opacity: 1; }
     @media (max-width: 860px) { .crystal-progress { display: none; } }
 
     /* ── SCROLL REVEAL ── */
@@ -998,13 +1030,13 @@
     <a href="#" class="nav-logo" aria-label="Hagai Heshes — Home">
       <svg class="nav-logo-mark crystal-parallax" id="nav-crystal" viewBox="0 0 28 28" width="22" height="22" fill="none" aria-hidden="true">
         <g transform="translate(14,14)">
-          <polygon points="0,-11 -5.5,-4 0,-2" fill="var(--indigo)" fill-opacity="0.22"/>
-          <polygon points="0,-11 5.5,-4 0,-2" fill="var(--indigo)" fill-opacity="0.45"/>
-          <polygon points="-5.5,-4 -7,5.5 0,7 0,-2" fill="var(--indigo)" fill-opacity="0.32"/>
-          <polygon points="5.5,-4 7,5.5 0,7 0,-2" fill="var(--indigo)" fill-opacity="0.72"/>
-          <polygon points="-7,5.5 0,11 0,7" fill="var(--indigo)" fill-opacity="0.18"/>
-          <polygon points="7,5.5 0,11 0,7" fill="var(--indigo)" fill-opacity="0.62"/>
-          <polygon points="0,-11 5.5,-4 7,5.5 0,11 -7,5.5 -5.5,-4" stroke="var(--indigo)" stroke-opacity="0.45" stroke-width="0.5"/>
+          <polygon points="0,-11 -5.5,-4 0,-2" fill="var(--gold)" fill-opacity="0.22"/>
+          <polygon points="0,-11 5.5,-4 0,-2" fill="var(--gold)" fill-opacity="0.45"/>
+          <polygon points="-5.5,-4 -7,5.5 0,7 0,-2" fill="var(--gold)" fill-opacity="0.32"/>
+          <polygon points="5.5,-4 7,5.5 0,7 0,-2" fill="var(--gold)" fill-opacity="0.72"/>
+          <polygon points="-7,5.5 0,11 0,7" fill="var(--gold)" fill-opacity="0.18"/>
+          <polygon points="7,5.5 0,11 0,7" fill="var(--gold)" fill-opacity="0.62"/>
+          <polygon points="0,-11 5.5,-4 7,5.5 0,11 -7,5.5 -5.5,-4" stroke="var(--gold)" stroke-opacity="0.45" stroke-width="0.5"/>
         </g>
       </svg>
       <span>Hagai Heshes</span>
@@ -1039,7 +1071,6 @@
 <section class="hero" id="hero" aria-label="Introduction">
   <div class="hero-text">
     <div class="hero-badge">
-      <span class="badge-dot" aria-hidden="true"></span>
       Positioning &amp; Go-to-Market
     </div>
     <h1 class="hero-title" id="hero-title">
@@ -1072,31 +1103,8 @@
 
 <!-- STATEMENT STRIP -->
 <div class="statement-section" aria-label="Mission statement">
-  <div class="statement-marquee-track" aria-hidden="true">
-    <div class="statement-marquee-item">
-      <p class="statement-text">The world is full of great products that never found their people. I fix <em>that</em>.</p>
-      <span class="statement-diamond"></span>
-    </div>
-    <div class="statement-marquee-item">
-      <p class="statement-text">Clarity is a competitive advantage. Most companies don't have it.</p>
-      <span class="statement-diamond"></span>
-    </div>
-    <div class="statement-marquee-item">
-      <p class="statement-text">If you can't explain what you do in a sentence, your customers can't either.</p>
-      <span class="statement-diamond"></span>
-    </div>
-    <div class="statement-marquee-item">
-      <p class="statement-text">The world is full of great products that never found their people. I fix <em>that</em>.</p>
-      <span class="statement-diamond"></span>
-    </div>
-    <div class="statement-marquee-item">
-      <p class="statement-text">Clarity is a competitive advantage. Most companies don't have it.</p>
-      <span class="statement-diamond"></span>
-    </div>
-    <div class="statement-marquee-item">
-      <p class="statement-text">If you can't explain what you do in a sentence, your customers can't either.</p>
-      <span class="statement-diamond"></span>
-    </div>
+  <div class="statement-static">
+    <p class="statement-quote">The world is full of great products that never found their people. I fix <em>that</em>.</p>
   </div>
 </div>
 
@@ -1127,14 +1135,14 @@
     <span class="t-label">Portfolio</span>
   </div>
   <div class="clients-logos stagger">
-    <div class="client-logo"><img src="logos/tytocare_logo-removebg-preview.png" alt="TytoCare" loading="lazy" height="28"></div>
-    <div class="client-logo"><img src="logos/quantalx_logo-removebg-preview.png" alt="QuantalX" loading="lazy" height="28"></div>
-    <div class="client-logo"><img src="logos/neurolief_logo-removebg-preview.png" alt="Neurolief" loading="lazy" height="28"></div>
-    <div class="client-logo"><img src="logos/Band-Logo.webp" alt="BAND.ai" loading="lazy" height="28"></div>
-    <div class="client-logo"><img src="logos/wd_logo-removebg-preview.png" alt="Western Digital" loading="lazy" height="28"></div>
-    <div class="client-logo"><img src="logos/seagate_logo-removebg-preview.png" alt="Seagate" loading="lazy" height="28"></div>
-    <div class="client-logo"><img src="logos/monday_logo-removebg-preview.png" alt="Monday.com" loading="lazy" height="28"></div>
-    <div class="client-logo"><img src="logos/wix_logo-removebg-preview.png" alt="Wix" loading="lazy" height="28"></div>
+    <div class="client-logo"><img src="logos/tytocare_logo-removebg-preview.png" alt="TytoCare" loading="lazy" height="32"><span class="client-name">TytoCare</span></div>
+    <div class="client-logo"><img src="logos/quantalx_logo-removebg-preview.png" alt="QuantalX" loading="lazy" height="32"><span class="client-name">QuantalX</span></div>
+    <div class="client-logo"><img src="logos/neurolief_logo-removebg-preview.png" alt="Neurolief" loading="lazy" height="32"><span class="client-name">Neurolief</span></div>
+    <div class="client-logo"><img src="logos/Band-Logo.webp" alt="BAND.ai" loading="lazy" height="32"><span class="client-name">Band</span></div>
+    <div class="client-logo"><img src="logos/wd_logo-removebg-preview.png" alt="Western Digital" loading="lazy" height="32"><span class="client-name">Western Digital</span></div>
+    <div class="client-logo"><img src="logos/seagate_logo-removebg-preview.png" alt="Seagate" loading="lazy" height="32"><span class="client-name">Seagate</span></div>
+    <div class="client-logo"><img src="logos/monday_logo-removebg-preview.png" alt="Monday.com" loading="lazy" height="32"><span class="client-name">Monday.com</span></div>
+    <div class="client-logo"><img src="logos/wix_logo-removebg-preview.png" alt="Wix" loading="lazy" height="32"><span class="client-name">Wix</span></div>
   </div>
 </section>
 
@@ -1190,6 +1198,7 @@
       <span class="t-label" style="display:block;margin-bottom:14px;">About</span>
       <span class="about-rule" aria-hidden="true"></span>
       <h2 class="about-title">Twenty years of making things clear.</h2>
+      <img class="about-portrait" src="logos/hagai.jpeg" alt="Hagai Heshes" loading="lazy" width="180">
     </div>
     <div class="about-body reveal" style="transition-delay:0.1s">
       <p>
@@ -1207,13 +1216,13 @@
   <div class="contact-bg-crystal" aria-hidden="true">
     <svg width="540" height="700" viewBox="0 0 260 340" fill="none">
       <g transform="translate(130,170)">
-        <polygon points="0,-150 -72,-55 0,-30" fill="var(--indigo)" opacity="0.18"/>
-        <polygon points="0,-150 72,-55 0,-30" fill="var(--indigo)" opacity="0.38"/>
-        <polygon points="-72,-55 -90,72 0,95 0,-30" fill="var(--indigo)" opacity="0.25"/>
-        <polygon points="72,-55 90,72 0,95 0,-30" fill="var(--indigo)" opacity="0.55"/>
-        <polygon points="-90,72 0,150 0,95" fill="var(--indigo)" opacity="0.12"/>
-        <polygon points="90,72 0,150 0,95" fill="var(--indigo)" opacity="0.62"/>
-        <polygon points="0,-150 72,-55 90,72 0,150 -90,72 -72,-55" stroke="var(--indigo)" stroke-opacity="0.35" stroke-width="0.75" fill="none"/>
+        <polygon points="0,-150 -72,-55 0,-30" fill="var(--gold)" opacity="0.18"/>
+        <polygon points="0,-150 72,-55 0,-30" fill="var(--gold)" opacity="0.38"/>
+        <polygon points="-72,-55 -90,72 0,95 0,-30" fill="var(--gold)" opacity="0.25"/>
+        <polygon points="72,-55 90,72 0,95 0,-30" fill="var(--gold)" opacity="0.55"/>
+        <polygon points="-90,72 0,150 0,95" fill="var(--gold)" opacity="0.12"/>
+        <polygon points="90,72 0,150 0,95" fill="var(--gold)" opacity="0.62"/>
+        <polygon points="0,-150 72,-55 90,72 0,150 -90,72 -72,-55" stroke="var(--gold)" stroke-opacity="0.35" stroke-width="0.75" fill="none"/>
       </g>
     </svg>
   </div>
@@ -1227,7 +1236,7 @@
         I work with a small number of clients. If you're building something and can't afford to be misunderstood, reach out.
       </p>
       <div class="contact-links">
-        <a href="https://mail.google.com/mail/?view=cm&to=hagaiheshes@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-email">
+        <a href="mailto:hagaiheshes@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-email">
           <span>hagaiheshes@gmail.com</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
         </a>
@@ -1241,13 +1250,13 @@
     <div class="contact-crystal-col" aria-hidden="true">
       <svg width="160" height="210" viewBox="0 0 260 340" fill="none">
         <g transform="translate(130,170)">
-          <polygon points="0,-150 -72,-55 0,-30" fill="var(--indigo)" opacity="0.18"/>
-          <polygon points="0,-150 72,-55 0,-30" fill="var(--indigo)" opacity="0.38"/>
-          <polygon points="-72,-55 -90,72 0,95 0,-30" fill="var(--indigo)" opacity="0.25"/>
-          <polygon points="72,-55 90,72 0,95 0,-30" fill="var(--indigo)" opacity="0.55"/>
-          <polygon points="-90,72 0,150 0,95" fill="var(--indigo)" opacity="0.12"/>
-          <polygon points="90,72 0,150 0,95" fill="var(--indigo)" opacity="0.62"/>
-          <polygon points="0,-150 72,-55 90,72 0,150 -90,72 -72,-55" stroke="var(--indigo)" stroke-opacity="0.35" stroke-width="0.75" fill="none"/>
+          <polygon points="0,-150 -72,-55 0,-30" fill="var(--gold)" opacity="0.18"/>
+          <polygon points="0,-150 72,-55 0,-30" fill="var(--gold)" opacity="0.38"/>
+          <polygon points="-72,-55 -90,72 0,95 0,-30" fill="var(--gold)" opacity="0.25"/>
+          <polygon points="72,-55 90,72 0,95 0,-30" fill="var(--gold)" opacity="0.55"/>
+          <polygon points="-90,72 0,150 0,95" fill="var(--gold)" opacity="0.12"/>
+          <polygon points="90,72 0,150 0,95" fill="var(--gold)" opacity="0.62"/>
+          <polygon points="0,-150 72,-55 90,72 0,150 -90,72 -72,-55" stroke="var(--gold)" stroke-opacity="0.35" stroke-width="0.75" fill="none"/>
         </g>
       </svg>
     </div>
@@ -1269,9 +1278,7 @@
 
 <!-- Crystal scroll progress -->
 <div class="crystal-progress" id="crystal-progress" aria-hidden="true">
-  <video class="crystal-progress-video" id="crystal-progress-video"
-    src="animation/kling_20260609__please_mak_5550_0-ezgif.com-reverse-video.mp4"
-    muted playsinline preload="auto"></video>
+  <canvas class="crystal-progress-canvas" id="crystal-progress-canvas" width="1200" height="1724"></canvas>
 </div>
 
 <!-- Scroll-to-top -->
@@ -1450,43 +1457,63 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ── Crystal scroll progress ── */
-  var cpWrap = document.getElementById('crystal-progress');
-  var cpVid = document.getElementById('crystal-progress-video');
-  if (cpVid) {
-    var cpOrigSrc = cpVid.src;
-    fetch(cpOrigSrc)
-      .then(function (r) { return r.blob(); })
-      .then(function (blob) {
-        cpVid.src = URL.createObjectURL(blob);
-        cpVid.load();
-      });
-    document.documentElement.addEventListener('touchstart', function () {
-      cpVid.play(); cpVid.pause();
-    }, { once: true });
+  /* ── Crystal scroll progress (canvas frame scrubbing) ── */
+  (function () {
+    var cpWrap = document.getElementById('crystal-progress');
+    var cpCanvas = document.getElementById('crystal-progress-canvas');
+    if (!cpCanvas || prefersReduced) return;
+
+    var ctx = cpCanvas.getContext('2d');
+    var TOTAL = 151;
+    var frames = new Array(TOTAL).fill(null);
+    var lastIdx = -1;
+    var queuePos = 0;
+
+    function pad(n) {
+      return n < 10 ? '00' + n : n < 100 ? '0' + n : '' + n;
+    }
+
+    function drawFrame(idx) {
+      if (!frames[idx] || idx === lastIdx) return;
+      lastIdx = idx;
+      ctx.drawImage(frames[idx], 0, 0, cpCanvas.width, cpCanvas.height);
+    }
+
+    function loadNext() {
+      if (queuePos >= TOTAL) return;
+      var idx = queuePos++;
+      var img = new Image();
+      img.onload = function () {
+        frames[idx] = img;
+        if (idx === 0) drawFrame(0);
+        loadNext();
+      };
+      img.onerror = loadNext;
+      img.src = 'animation/frames/ezgif-frame-' + pad(idx + 1) + '.jpg';
+    }
+
+    loadNext(); loadNext(); loadNext(); loadNext();
 
     var cpRafPending = false;
     function cpUpdate() {
       cpRafPending = false;
+      var scrolled = window.scrollY;
       var totalH = document.body.scrollHeight - window.innerHeight;
-      if (totalH > 0 && cpVid.duration) {
-        var progress = Math.min(Math.max(window.scrollY / totalH, 0), 1);
-        var target = progress * cpVid.duration;
-        if ('fastSeek' in cpVid) {
-          cpVid.fastSeek(target);
-        } else {
-          cpVid.currentTime = target;
-        }
+      if (totalH > 0) {
+        var progress = Math.min(Math.max(scrolled / totalH, 0), 1);
+        var idx = Math.min(Math.round(progress * (TOTAL - 1)), TOTAL - 1);
+        drawFrame(idx);
       }
-      cpWrap.classList.toggle('visible', window.scrollY > 80);
+      cpWrap.classList.toggle('visible', scrolled > 80);
     }
+
     window.addEventListener('scroll', function () {
       if (!cpRafPending) {
         cpRafPending = true;
         requestAnimationFrame(cpUpdate);
       }
     }, { passive: true });
-  }
+  })();
 
   /* ── Active nav links ── */
   var sections = document.querySelectorAll('section[id]');
