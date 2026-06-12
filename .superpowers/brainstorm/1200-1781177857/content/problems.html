@@ -1,0 +1,85 @@
+<style>
+.prob-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+}
+@media (max-width: 600px) { .prob-grid { grid-template-columns: 1fr; } }
+
+.prob-item {
+  border: 1.5px solid #e2e2ea;
+  border-radius: 10px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  font-family: sans-serif;
+}
+.prob-item:hover { border-color: #a5b4fc; background: #f8f8ff; }
+.prob-item.selected { border-color: #6366f1; background: #f0f0ff; }
+
+.prob-icon { font-size: 22px; margin-bottom: 10px; }
+.prob-title { font-size: 14px; font-weight: 600; color: #1a1a2e; margin-bottom: 5px; }
+.prob-desc { font-size: 12px; color: #666; line-height: 1.5; }
+</style>
+
+<h2>מה מפריע הכי הרבה?</h2>
+<p class="subtitle">אפשר לבחור יותר מאחד</p>
+
+<div class="prob-grid options" data-multiselect>
+
+  <div class="prob-item option" data-choice="hero-anim" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <div class="prob-icon">✦</div>
+      <div class="prob-title">אנימציית הכניסה של ה-Hero</div>
+      <div class="prob-desc">המילים שעולות, הכותרת, הכפתורים — הרגשה שמשהו לא חלק</div>
+    </div>
+  </div>
+
+  <div class="prob-item option" data-choice="scroll-reveal" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <div class="prob-icon">↑</div>
+      <div class="prob-title">Scroll reveals מוגזמים</div>
+      <div class="prob-desc">כל section "קופץ" בכניסה — נראה דיי AI-generated</div>
+    </div>
+  </div>
+
+  <div class="prob-item option" data-choice="sections-visual" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <div class="prob-icon">⬛</div>
+      <div class="prob-title">Sections כהים לא משתלבים</div>
+      <div class="prob-desc">הקטעים הכהים (Statement, How I Work, Contact) נראים כבדים מדי</div>
+    </div>
+  </div>
+
+  <div class="prob-item option" data-choice="overall-flat" onclick="toggleSelect(this)">
+    <div class="letter">D</div>
+    <div class="content">
+      <div class="prob-icon">□</div>
+      <div class="prob-title">האתר פשוט נראה שטוח/דגני</div>
+      <div class="prob-desc">אין מספיק אופי — נראה כמו template גנרי</div>
+    </div>
+  </div>
+
+  <div class="prob-item option" data-choice="hero-layout" onclick="toggleSelect(this)">
+    <div class="letter">E</div>
+    <div class="content">
+      <div class="prob-icon">⊞</div>
+      <div class="prob-title">פריסת ה-Hero לא מרשימה</div>
+      <div class="prob-desc">שתי עמודות עם קריסטל מימין — לא מרגיש מיוחד</div>
+    </div>
+  </div>
+
+  <div class="prob-item option" data-choice="typography" onclick="toggleSelect(this)">
+    <div class="letter">F</div>
+    <div class="content">
+      <div class="prob-icon">Aa</div>
+      <div class="prob-title">טיפוגרפיה חלשה</div>
+      <div class="prob-desc">הכותרות לא מספיק חזקות, אין היררכיה ברורה</div>
+    </div>
+  </div>
+
+</div>

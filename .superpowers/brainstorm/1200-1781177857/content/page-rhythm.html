@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Rhythm</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: sans-serif; background: #e8e8e8; padding: 24px; }
+h1 { font-size: 18px; color: #1a1a2e; margin-bottom: 6px; }
+.intro { font-size: 13px; color: #666; margin-bottom: 28px; line-height: 1.5; max-width: 60ch; }
+
+.cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 900px) { .cols { grid-template-columns: 1fr; } }
+
+.col-wrap { }
+.col-title { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+.col-sub { font-size: 11px; color: #888; margin-bottom: 12px; line-height: 1.4; }
+
+.page-strip {
+  border-radius: 10px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.13);
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: border-color 0.2s;
+}
+.page-strip:hover { border-color: #a5b4fc; }
+.page-strip.selected { border-color: #6366f1; }
+
+.select-badge {
+  display: none; position: absolute; top: 10px; right: 10px;
+  background: #6366f1; color: #fff;
+  font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; z-index: 10;
+}
+.page-strip.selected .select-badge { display: block; }
+.page-strip { position: relative; }
+
+/* ── SHARED SECTION BLOCKS ── */
+.s-nav { height: 38px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font-size: 9px; }
+.s-hero { padding: 24px 20px; min-height: 110px; display: flex; flex-direction: column; justify-content: center; }
+.s-hl { font-family: Georgia, serif; font-weight: 900; letter-spacing: -0.04em; line-height: 0.92; margin-bottom: 8px; }
+.s-sub { font-size: 9px; line-height: 1.55; max-width: 34ch; margin-bottom: 10px; }
+.s-btn { display: inline-block; font-size: 8.5px; font-weight: 700; padding: 5px 12px; border-radius: 3px; }
+.s-section { padding: 18px 20px; }
+.s-label { font-size: 7.5px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 6px; }
+.s-section-hl { font-family: Georgia, serif; font-size: 16px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 6px; }
+.s-body { font-size: 8px; line-height: 1.6; }
+.s-divider { height: 1px; }
+.s-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 16px 20px; }
+.s-grid-item { padding: 10px; border-radius: 4px; }
+.s-grid-hl { font-family: Georgia, serif; font-size: 11px; font-weight: 700; margin-bottom: 3px; }
+.s-grid-body { font-size: 7.5px; line-height: 1.5; }
+.s-logos { padding: 14px 20px; display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
+.s-logo-box { height: 24px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 7px; }
+.s-steps { padding: 18px 20px; }
+.s-step { padding: 8px 0; border-bottom-width: 1px; border-bottom-style: solid; }
+.s-step:last-child { border-bottom: none; }
+.s-step-num { font-size: 7.5px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 2px; }
+.s-step-text { font-size: 8.5px; line-height: 1.55; }
+.s-contact { padding: 24px 20px; min-height: 80px; display: flex; flex-direction: column; justify-content: center; }
+.s-contact-hl { font-family: Georgia, serif; font-size: 20px; font-weight: 800; line-height: 1.0; letter-spacing: -0.04em; margin-bottom: 10px; }
+.s-contact-btn { display: inline-block; font-size: 8.5px; font-weight: 700; padding: 6px 14px; border-radius: 3px; }
+
+/* ══════════════════════════════════════
+   OPTION A: Warm Layered
+   Hero=cream, Pillars=white, Clients=gold-tint,
+   How=dark, Deliv=cream, About=white, Contact=dark
+══════════════════════════════════════ */
+.a-nav { background: #faf7f2; border-bottom: 1px solid #e8e0d0; color: #888; }
+.a-nav .logo { font-family: Georgia, serif; font-size: 10px; font-weight: 700; color: #1a1208; }
+.a-nav .cta { background: #4f52c8; color: #fff; padding: 4px 10px; border-radius: 3px; font-size: 8px; }
+
+.a-hero { background: #faf7f2; }
+.a-hero .eyebrow { font-size: 7.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #b8975a; margin-bottom: 10px; }
+.a-hero .s-hl { font-size: 42px; color: #1a1208; }
+.a-hero .s-hl .the { display: block; font-size: 0.38em; font-weight: 400; color: #b0a090; }
+.a-hero .s-hl .main { color: #4f52c8; }
+.a-hero .s-sub { color: #6b5c4a; }
+.a-hero .s-btn { background: #4f52c8; color: #fff; }
+
+.a-statement { background: #1a1208; padding: 16px 20px; text-align: center; }
+.a-statement p { font-family: Georgia, serif; font-size: 13px; font-style: italic; color: rgba(250,247,242,0.7); letter-spacing: -0.02em; }
+.a-statement em { color: #b8975a; }
+
+.a-pillars { background: #fff; }
+.a-pillars .s-label { color: #b8975a; }
+.a-pillars .s-section-hl { color: #1a1208; }
+.a-pillars .s-grid-item { background: #faf7f2; }
+.a-pillars .num { font-family: Georgia, serif; font-size: 28px; font-weight: 900; color: rgba(184,151,90,0.35); letter-spacing: -0.04em; margin-bottom: 3px; }
+.a-pillars .s-grid-hl { color: #1a1208; font-size: 12px; }
+.a-pillars .s-grid-body { color: #6b5c4a; }
+
+.a-clients { background: #fdf6e8; border-top: 1px solid rgba(184,151,90,0.25); border-bottom: 1px solid rgba(184,151,90,0.25); }
+.a-clients .s-label { color: #b8975a; }
+.a-clients .s-logo-box { background: rgba(184,151,90,0.1); color: #b8975a; }
+
+.a-how { background: #1a1208; }
+.a-how .s-label { color: #b8975a; }
+.a-how .s-section-hl { color: #faf7f2; font-style: italic; }
+.a-how .s-step { border-color: rgba(255,255,255,0.08); }
+.a-how .s-step-num { color: #b8975a; }
+.a-how .s-step-text { color: rgba(250,247,242,0.65); }
+
+.a-deliv { background: #faf7f2; }
+.a-deliv .s-label { color: #b8975a; }
+.a-deliv .s-section-hl { color: #1a1208; }
+.a-deliv .s-body { color: #6b5c4a; }
+
+.a-about { background: #fff; }
+.a-about .s-label { color: #b8975a; }
+.a-about .s-section-hl { color: #1a1208; }
+.a-about .s-body { color: #555; }
+
+.a-contact { background: #1a1208; }
+.a-contact .s-contact-hl { color: #faf7f2; }
+.a-contact .s-contact-hl em { font-style: italic; color: #b8975a; }
+.a-contact .s-contact-btn { background: #4f52c8; color: #fff; }
+
+
+/* ══════════════════════════════════════
+   OPTION B: High-Contrast Alternating
+   Hero=white+border, Pillars=navy, Clients=white,
+   How=white, Deliv=navy, About=white+img, Contact=gold-accent
+══════════════════════════════════════ */
+.b-nav { background: #fff; border-bottom: 1px solid #e8e8e8; color: #888; }
+.b-nav .logo { font-family: Georgia, serif; font-size: 10px; font-weight: 700; color: #0d1126; }
+.b-nav .cta { background: #0d1126; color: #fff; padding: 4px 10px; border-radius: 3px; font-size: 8px; }
+
+.b-hero { background: #fff; border-bottom: 4px solid #b8975a; }
+.b-hero .eyebrow { font-size: 7.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #4f52c8; opacity: 0.7; margin-bottom: 10px; }
+.b-hero .s-hl { font-size: 44px; color: #0d1126; }
+.b-hero .s-hl .the { display: block; font-size: 0.36em; font-weight: 400; color: #aaa; }
+.b-hero .s-hl .main { color: #0d1126; }
+.b-hero .s-sub { color: #666; }
+.b-hero .s-btn { background: #0d1126; color: #fff; }
+
+.b-pillars { background: #0d1126; }
+.b-pillars .s-label { color: rgba(184,151,90,0.7); }
+.b-pillars .s-grid-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; }
+.b-pillars .num { font-family: Georgia, serif; font-size: 32px; font-weight: 900; color: rgba(184,151,90,0.4); letter-spacing: -0.04em; margin-bottom: 2px; }
+.b-pillars .s-grid-hl { color: #f0ede8; font-size: 12px; }
+.b-pillars .s-grid-body { color: rgba(240,237,232,0.5); }
+
+.b-clients { background: #f9f9f9; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+.b-clients .s-label { color: #999; }
+.b-clients .s-logo-box { background: #f0f0f0; color: #bbb; }
+
+.b-how { background: #fff; border-top: 1px solid #eee; }
+.b-how .s-label { color: #4f52c8; opacity: 0.6; }
+.b-how .s-section-hl { color: #0d1126; }
+.b-how .s-step { border-color: #eee; }
+.b-how .s-step-num { color: #b8975a; }
+.b-how .s-step-text { color: #555; }
+
+.b-deliv { background: #0d1126; }
+.b-deliv .s-label { color: rgba(184,151,90,0.7); }
+.b-deliv .s-section-hl { color: #f0ede8; }
+.b-deliv .s-body { color: rgba(240,237,232,0.5); }
+
+.b-about { background: #fff; border-top: 1px solid #eee; }
+.b-about .s-label { color: #999; }
+.b-about .s-section-hl { color: #0d1126; }
+.b-about .s-body { color: #555; }
+
+.b-contact { background: #fdf6e8; border-top: 3px solid #b8975a; }
+.b-contact .s-contact-hl { color: #1a1208; }
+.b-contact .s-contact-hl em { color: #4f52c8; font-style: italic; }
+.b-contact .s-contact-btn { background: #0d1126; color: #fff; }
+
+
+/* ══════════════════════════════════════
+   OPTION C: Editorial Sections w/ Texture
+   Every section has a distinct identity
+   through big type, borders, patterns
+══════════════════════════════════════ */
+.c-nav { background: #f8f6f3; border-bottom: 1px solid #e0dbd2; color: #888; }
+.c-nav .logo { font-family: Georgia, serif; font-size: 10px; font-weight: 700; color: #1a1208; }
+.c-nav .cta { border: 1px solid #1a1208; color: #1a1208; padding: 4px 10px; border-radius: 3px; font-size: 8px; }
+
+.c-hero { background: #f8f6f3; padding: 20px 20px 0; border-bottom: 1px solid #e0dbd2; position: relative; overflow: hidden; }
+.c-hero-big { font-family: Georgia, serif; font-size: 70px; font-weight: 900; letter-spacing: -0.06em; line-height: 0.85; color: #1a1208; margin-bottom: 14px; position: relative; }
+.c-hero-big .big-word { display: block; }
+.c-hero-big .big-word.accent { color: #4f52c8; }
+.c-hero-sub-row { display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 16px; }
+.c-hero .s-sub { color: #6b5c4a; max-width: 28ch; }
+.c-hero .s-btn { background: #1a1208; color: #f8f6f3; }
+
+.c-statement { background: #4f52c8; padding: 14px 20px; text-align: center; }
+.c-statement p { font-family: Georgia, serif; font-size: 12px; font-style: italic; color: rgba(255,255,255,0.85); letter-spacing: -0.02em; }
+.c-statement em { color: #fdf6e8; font-weight: 700; }
+
+.c-pillars { background: #f8f6f3; padding: 18px 20px; border-bottom: 1px solid #e0dbd2; }
+.c-pillars .row { display: flex; gap: 0; }
+.c-pillar { flex: 1; padding: 10px 14px; border-right: 1px solid #e0dbd2; }
+.c-pillar:last-child { border-right: none; }
+.c-pillar .num { font-family: Georgia, serif; font-size: 36px; font-weight: 900; color: rgba(184,151,90,0.4); letter-spacing: -0.05em; line-height: 1; margin-bottom: 4px; }
+.c-pillar .title { font-family: Georgia, serif; font-size: 12px; font-weight: 700; color: #1a1208; margin-bottom: 4px; }
+.c-pillar .body { font-size: 7.5px; color: #6b5c4a; line-height: 1.5; }
+
+.c-clients { background: #fff; border-bottom: 1px solid #eee; }
+.c-clients .s-label { color: #999; }
+.c-clients .s-logo-box { background: #f5f5f5; color: #ccc; }
+
+.c-how { background: #1a1208; }
+.c-how .s-label { color: rgba(184,151,90,0.7); }
+.c-how .s-section-hl { color: #f8f6f3; font-style: italic; font-size: 20px; }
+.c-how .s-step { border-color: rgba(255,255,255,0.07); }
+.c-how .s-step-num { color: #b8975a; }
+.c-how .s-step-text { color: rgba(248,246,243,0.6); }
+
+.c-deliv { background: #f8f6f3; border-top: 1px solid #e0dbd2; }
+.c-deliv .s-label { color: #b8975a; }
+.c-deliv .s-section-hl { color: #1a1208; }
+.c-deliv .s-body { color: #6b5c4a; }
+
+.c-about { background: #fff; border-top: 1px solid #eee; }
+.c-about .s-label { color: #999; }
+.c-about .s-section-hl { color: #1a1208; }
+.c-about .s-body { color: #555; }
+
+.c-contact { background: #f8f6f3; border-top: 1px solid #e0dbd2; }
+.c-contact .s-contact-hl { color: #1a1208; }
+.c-contact .s-contact-hl em { color: #4f52c8; font-style: italic; }
+.c-contact .s-contact-btn { background: #1a1208; color: #f8f6f3; }
+
+</style>
+<script>
+function pick(el) {
+  document.querySelectorAll('.page-strip').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+}
+</script>
+</head>
+<body>
+
+<h1>ה-rhythm של הדף — מה מרגיש נכון?</h1>
+<p class="intro">הבעיה הנוכחית: יותר מדי sections לבנים זהים ברצף. כל אפשרות פותרת את זה בצורה שונה.</p>
+
+<div class="cols">
+
+  <!-- ── A: Warm Layered ── -->
+  <div class="col-wrap">
+    <div class="col-title">A — Warm Layered</div>
+    <div class="col-sub">קרם / לבן / זהב-תחתית / כהה. גוונים חמים לאורך כל הדף.</div>
+    <div class="page-strip" onclick="pick(this)">
+      <div class="select-badge">✓ נבחר</div>
+      <!-- NAV -->
+      <div class="s-nav a-nav"><span class="logo">Hagai Heshes</span><div style="display:flex;gap:10px;font-size:8px"><span>Work</span><span>Approach</span><span>About</span></div><span class="cta">Get in touch</span></div>
+      <!-- HERO -->
+      <div class="s-hero a-hero">
+        <div class="eyebrow">Positioning & Go-to-Market</div>
+        <div class="s-hl"><span class="the">The</span><span class="main">Crystallizer</span></div>
+        <div class="s-sub">You know what you've built. I make sure everyone else does too.</div>
+        <div class="s-btn a-hero">Let's talk →</div>
+      </div>
+      <!-- STATEMENT -->
+      <div class="a-statement"><p>The world is full of great products that never found their people. I fix <em>that</em>.</p></div>
+      <!-- PILLARS -->
+      <div class="s-grid a-pillars">
+        <div class="s-grid-item"><div class="num">01</div><div class="s-grid-hl">Crystallization</div><div class="s-grid-body">Distilling what you're really about.</div></div>
+        <div class="s-grid-item"><div class="num">02</div><div class="s-grid-hl">Go-to-Market</div><div class="s-grid-body">Taking it to market with precision.</div></div>
+      </div>
+      <!-- CLIENTS -->
+      <div class="s-logos a-clients">
+        <div class="s-logo-box">TytoCare</div><div class="s-logo-box">monday</div><div class="s-logo-box">Wix</div><div class="s-logo-box">Seagate</div>
+      </div>
+      <!-- HOW -->
+      <div class="s-steps a-how">
+        <div class="s-label a-how">How I work</div>
+        <div class="s-step a-how"><div class="s-step-num">01</div><div class="s-step-text">I work with a small number of clients. Deeply, not broadly.</div></div>
+        <div class="s-step a-how"><div class="s-step-num">02</div><div class="s-step-text">No fluff, no shelfware. Fast and essential.</div></div>
+      </div>
+      <!-- DELIV -->
+      <div class="s-section a-deliv"><div class="s-label a-deliv">Deliverables</div><div class="s-section-hl a-deliv">What you walk away with</div><div class="s-body a-deliv" style="margin-top:6px">Positioning framework · Value props · GTM strategy · Sales deck</div></div>
+      <!-- ABOUT -->
+      <div class="s-section a-about"><div class="s-label a-about">About</div><div class="s-section-hl a-about">Twenty years of making things clear.</div><div class="s-body a-about" style="margin-top:4px">GTM across Fortune 500 and startups. CS + MSc Psychology, UPenn.</div></div>
+      <!-- CONTACT -->
+      <div class="s-contact a-contact"><div class="s-contact-hl a-contact">If this sounds like<br>what you <em>need</em>,<br>let's talk.</div><div class="s-contact-btn a-contact">hagaiheshes@gmail.com →</div></div>
+    </div>
+  </div>
+
+  <!-- ── B: High-Contrast ── -->
+  <div class="col-wrap">
+    <div class="col-title">B — High-Contrast</div>
+    <div class="col-sub">לבן / navy / לבן / navy — ניגוד חזק וחד. פחות חמים, יותר sharp.</div>
+    <div class="page-strip" onclick="pick(this)">
+      <div class="select-badge">✓ נבחר</div>
+      <div class="s-nav b-nav"><span class="logo">Hagai Heshes</span><div style="display:flex;gap:10px;font-size:8px"><span>Work</span><span>Approach</span><span>About</span></div><span class="cta">Get in touch</span></div>
+      <div class="s-hero b-hero">
+        <div class="eyebrow">Positioning & Go-to-Market</div>
+        <div class="s-hl"><span class="the">The</span><span class="main">Crystallizer</span></div>
+        <div class="s-sub">You know what you've built. I make sure everyone else does too.</div>
+        <div class="s-btn b-hero">Let's talk →</div>
+      </div>
+      <div class="s-grid b-pillars" style="padding:16px 20px;">
+        <div class="s-grid-item"><div class="num">01</div><div class="s-grid-hl">Crystallization</div><div class="s-grid-body">Distilling what you're really about.</div></div>
+        <div class="s-grid-item"><div class="num">02</div><div class="s-grid-hl">Go-to-Market</div><div class="s-grid-body">Taking it to market with precision.</div></div>
+      </div>
+      <div class="s-logos b-clients">
+        <div class="s-logo-box b-clients">TytoCare</div><div class="s-logo-box b-clients">monday</div><div class="s-logo-box b-clients">Wix</div><div class="s-logo-box b-clients">Seagate</div>
+      </div>
+      <div class="s-steps b-how" style="padding:16px 20px;">
+        <div class="s-label b-how" style="margin-bottom:8px">How I work</div>
+        <div class="s-step b-how"><div class="s-step-num b-how">01</div><div class="s-step-text b-how">I work with a small number of clients. Deeply, not broadly.</div></div>
+        <div class="s-step b-how"><div class="s-step-num b-how">02</div><div class="s-step-text b-how">No fluff, no shelfware. Fast and essential.</div></div>
+      </div>
+      <div class="s-section b-deliv"><div class="s-label b-deliv">Deliverables</div><div class="s-section-hl b-deliv">What you walk away with</div><div class="s-body b-deliv" style="margin-top:6px">Positioning framework · Value props · GTM strategy · Sales deck</div></div>
+      <div class="s-section b-about"><div class="s-label b-about">About</div><div class="s-section-hl b-about">Twenty years of making things clear.</div><div class="s-body b-about" style="margin-top:4px">GTM across Fortune 500 and startups. CS + MSc Psychology, UPenn.</div></div>
+      <div class="s-contact b-contact"><div class="s-contact-hl b-contact">If this sounds like<br>what you <em>need</em>,<br>let's talk.</div><div class="s-contact-btn b-contact">hagaiheshes@gmail.com →</div></div>
+    </div>
+  </div>
+
+  <!-- ── C: Editorial w/ Big Type ── -->
+  <div class="col-wrap">
+    <div class="col-title">C — Editorial Big Type</div>
+    <div class="col-sub">כל section מקבל אופי משלו דרך טיפוגרפיה גדולה ו-borders. חמים + editorial.</div>
+    <div class="page-strip" onclick="pick(this)">
+      <div class="select-badge">✓ נבחר</div>
+      <div class="s-nav c-nav"><span class="logo">Hagai Heshes</span><div style="display:flex;gap:10px;font-size:8px"><span>Work</span><span>Approach</span><span>About</span></div><span class="cta">Get in touch</span></div>
+      <!-- HERO: big typographic -->
+      <div class="c-hero">
+        <div class="c-hero-big">
+          <span class="big-word">The</span>
+          <span class="big-word accent">Crystal-</span>
+          <span class="big-word accent">lizer</span>
+        </div>
+        <div class="c-hero-sub-row">
+          <div class="s-sub c-hero">You know what you've built. I make sure everyone else does too.</div>
+          <div class="s-btn c-hero" style="flex-shrink:0">Let's talk →</div>
+        </div>
+      </div>
+      <!-- STATEMENT: indigo bg -->
+      <div class="c-statement"><p>The world is full of great products that never found their people. I fix <em>that</em>.</p></div>
+      <!-- PILLARS: side-by-side with borders -->
+      <div class="c-pillars">
+        <div class="row">
+          <div class="c-pillar"><div class="num">01</div><div class="title">Crystallization</div><div class="body">Distilling what you're really about.</div></div>
+          <div class="c-pillar"><div class="num">02</div><div class="title">Go-to-Market</div><div class="body">Taking it to market with precision.</div></div>
+        </div>
+      </div>
+      <!-- CLIENTS: white -->
+      <div class="s-logos c-clients" style="border-top:1px solid #eee;border-bottom:1px solid #eee;">
+        <div class="s-logo-box c-clients">TytoCare</div><div class="s-logo-box c-clients">monday</div><div class="s-logo-box c-clients">Wix</div><div class="s-logo-box c-clients">Seagate</div>
+      </div>
+      <!-- HOW: dark -->
+      <div class="s-steps c-how" style="padding:16px 20px;">
+        <div class="s-section-hl c-how" style="margin-bottom:10px;font-size:16px">How I work</div>
+        <div class="s-step c-how"><div class="s-step-num c-how">01</div><div class="s-step-text c-how">I work with a small number of clients. Deeply, not broadly.</div></div>
+        <div class="s-step c-how"><div class="s-step-num c-how">02</div><div class="s-step-text c-how">No fluff, no shelfware. Fast and essential.</div></div>
+      </div>
+      <!-- DELIV -->
+      <div class="s-section c-deliv"><div class="s-label c-deliv">Deliverables</div><div class="s-section-hl c-deliv">What you walk away with</div><div class="s-body c-deliv" style="margin-top:6px">Positioning framework · Value props · GTM strategy · Sales deck</div></div>
+      <!-- ABOUT -->
+      <div class="s-section c-about"><div class="s-label c-about">About</div><div class="s-section-hl c-about">Twenty years of making things clear.</div><div class="s-body c-about" style="margin-top:4px">GTM across Fortune 500 and startups. CS + MSc Psychology, UPenn.</div></div>
+      <!-- CONTACT -->
+      <div class="s-contact c-contact"><div class="s-contact-hl c-contact">If this sounds like<br>what you <em>need</em>,<br>let's talk.</div><div class="s-contact-btn c-contact">hagaiheshes@gmail.com →</div></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

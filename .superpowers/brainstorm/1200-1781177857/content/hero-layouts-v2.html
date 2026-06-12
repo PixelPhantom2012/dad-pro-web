@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Layout Options</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: sans-serif; background: #f0f0f0; padding: 24px; }
+
+h1 { font-size: 18px; color: #1a1a2e; margin-bottom: 6px; }
+.sub { font-size: 13px; color: #666; margin-bottom: 28px; }
+
+.option-wrap {
+  margin-bottom: 32px;
+}
+.option-label {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 10px;
+}
+.option-letter {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #1a1a2e; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+.option-label h2 { font-size: 15px; color: #1a1a2e; }
+.option-label p { font-size: 12px; color: #888; margin-top: 2px; }
+
+.preview-frame {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: border-color 0.2s;
+  position: relative;
+}
+.preview-frame:hover { border-color: #a5b4fc; }
+.preview-frame.selected { border-color: #6366f1; }
+
+.select-badge {
+  display: none;
+  position: absolute; top: 12px; right: 12px;
+  background: #6366f1; color: #fff;
+  font-size: 11px; font-weight: 700; padding: 4px 10px;
+  border-radius: 20px; z-index: 10;
+}
+.preview-frame.selected .select-badge { display: block; }
+
+/* ── MOCK NAV (shared) ── */
+.mock-nav {
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.mock-nav-logo { font-family: Georgia, serif; font-size: 15px; font-weight: 700; color: #0d1126; letter-spacing: -0.03em; }
+.mock-nav-links { display: flex; gap: 24px; font-size: 12px; color: #888; }
+.mock-nav-cta { background: #4f52c8; color: #fff; font-size: 11px; font-weight: 600; padding: 7px 16px; border-radius: 5px; }
+
+/* ── OPTION A: Typographic Full-Width ── */
+.hero-a {
+  background: #f9f7f4;
+  min-height: 420px;
+  display: flex; align-items: center;
+  padding: 64px 96px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-a-bg-crystal {
+  position: absolute; right: 80px; top: 50%;
+  transform: translateY(-50%);
+  font-family: Georgia, serif; font-size: 320px; font-weight: 900;
+  color: rgba(184,151,90,0.06); line-height: 1;
+  letter-spacing: -0.05em; pointer-events: none;
+  user-select: none;
+}
+.hero-a-content { position: relative; z-index: 1; max-width: 640px; }
+.hero-a .eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #b8975a; margin-bottom: 24px; }
+.hero-a .hl { font-family: Georgia, serif; font-size: 96px; font-weight: 900; line-height: 0.9; color: #0d1126; letter-spacing: -0.05em; margin-bottom: 28px; }
+.hero-a .hl .the { display: block; font-size: 0.38em; font-weight: 400; color: #aaa; letter-spacing: -0.02em; margin-bottom: 6px; line-height: 1; }
+.hero-a .hl .main { color: #4f52c8; display: block; }
+.hero-a .rule { width: 40px; height: 2px; background: #b8975a; margin-bottom: 20px; opacity: 0.7; }
+.hero-a .sub { font-size: 16px; color: #555; line-height: 1.7; max-width: 44ch; margin-bottom: 36px; }
+.hero-a .actions { display: flex; gap: 16px; align-items: center; }
+.hero-a .btn-p { background: #4f52c8; color: #fff; font-size: 13px; font-weight: 600; padding: 13px 26px; border-radius: 5px; }
+.hero-a .btn-g { font-size: 13px; color: #888; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
+
+/* ── OPTION B: Editorial Split ── */
+.hero-b {
+  display: grid; grid-template-columns: 55% 45%;
+  min-height: 420px;
+}
+.hero-b-left {
+  background: #fafaf8;
+  padding: 64px 64px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  border-right: 1px solid #e8e4dc;
+}
+.hero-b-right {
+  background: #0d1126;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-b-glow {
+  position: absolute; width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(184,151,90,0.2) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+.hero-b-diamond {
+  font-size: 120px; color: rgba(184,151,90,0.3);
+  position: relative; z-index: 1; line-height: 1;
+}
+.hero-b .eyebrow { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #b8975a; }
+.hero-b .hl { font-family: Georgia, serif; font-size: 72px; font-weight: 900; line-height: 0.92; color: #0d1126; letter-spacing: -0.045em; }
+.hero-b .hl .the { display: block; font-size: 0.4em; font-weight: 400; color: #aaa; letter-spacing: -0.02em; margin-bottom: 3px; line-height: 1; }
+.hero-b .hl .main { color: #4f52c8; }
+.hero-b .sub { font-size: 15px; color: #666; line-height: 1.65; max-width: 36ch; }
+.hero-b .btn-p { background: #4f52c8; color: #fff; font-size: 13px; font-weight: 600; padding: 12px 24px; border-radius: 5px; display: inline-block; }
+
+/* ── OPTION C: Statement-First ── */
+.hero-c {
+  background: #fff;
+  min-height: 420px;
+  display: flex; align-items: center;
+  padding: 64px 96px;
+  position: relative; overflow: hidden;
+}
+.hero-c::before {
+  content: '\201C';
+  position: absolute; font-family: Georgia, serif;
+  font-size: 600px; font-weight: 900; color: rgba(184,151,90,0.04);
+  top: -120px; left: -40px; line-height: 1; pointer-events: none; user-select: none;
+}
+.hero-c-content { position: relative; z-index: 1; max-width: 780px; }
+.hero-c .byline { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #b8975a; margin-bottom: 28px; }
+.hero-c .statement { font-family: Georgia, serif; font-size: 52px; font-weight: 700; font-style: italic; color: #0d1126; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 36px; }
+.hero-c .statement em { color: #4f52c8; }
+.hero-c .divider { width: 100%; height: 1px; background: #e8e8e8; margin-bottom: 24px; }
+.hero-c .author { font-size: 13px; color: #999; margin-bottom: 32px; letter-spacing: 0.04em; }
+.hero-c .sub { font-size: 15px; color: #666; line-height: 1.7; max-width: 48ch; margin-bottom: 32px; }
+.hero-c .btn-p { background: #0d1126; color: #fff; font-size: 13px; font-weight: 600; padding: 13px 26px; border-radius: 5px; display: inline-block; }
+</style>
+<script>
+function select(el) {
+  document.querySelectorAll('.preview-frame').forEach(f => f.classList.remove('selected'));
+  el.classList.add('selected');
+  const choice = el.dataset.choice;
+  const label = el.dataset.label;
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: 'selection', choice, label }, '*');
+  }
+}
+</script>
+</head>
+<body>
+
+<h1>פריסת ה-Hero — איזה כיוון?</h1>
+<p class="sub">לחץ על ה-mockup שמדבר אליך הכי הרבה</p>
+
+<!-- OPTION A -->
+<div class="option-wrap">
+  <div class="option-label">
+    <div class="option-letter">A</div>
+    <div>
+      <h2>Typographic Full-Width</h2>
+      <p>הכותרת שולטת בכל המסך. קריסטל כרקע עדין. גישה נקייה ופרמיום.</p>
+    </div>
+  </div>
+  <div class="preview-frame" data-choice="A" data-label="Typographic Full-Width" onclick="select(this)">
+    <div class="select-badge">✓ נבחר</div>
+    <div class="mock-nav">
+      <div class="mock-nav-logo">Hagai Heshes</div>
+      <div class="mock-nav-links"><span>Work</span><span>Approach</span><span>About</span></div>
+      <div class="mock-nav-cta">Get in touch</div>
+    </div>
+    <div class="hero-a">
+      <div class="hero-a-bg-crystal">✦</div>
+      <div class="hero-a-content">
+        <div class="eyebrow">Positioning & Go-to-Market</div>
+        <div class="hl">
+          <span class="the">The</span>
+          <span class="main">Crystallizer</span>
+        </div>
+        <div class="rule"></div>
+        <div class="sub">You know what you've built. I make sure everyone else does too.</div>
+        <div class="actions">
+          <div class="btn-p">Let's talk →</div>
+          <div class="btn-g">See my work</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OPTION B -->
+<div class="option-wrap">
+  <div class="option-label">
+    <div class="option-letter">B</div>
+    <div>
+      <h2>Editorial Split</h2>
+      <p>חצי בהיר / חצי כהה. ניגוד חזק. קריסטל בפנל הימני.</p>
+    </div>
+  </div>
+  <div class="preview-frame" data-choice="B" data-label="Editorial Split" onclick="select(this)">
+    <div class="select-badge">✓ נבחר</div>
+    <div class="mock-nav" style="background:#fafaf8;">
+      <div class="mock-nav-logo">Hagai Heshes</div>
+      <div class="mock-nav-links"><span>Work</span><span>Approach</span><span>About</span></div>
+      <div class="mock-nav-cta">Get in touch</div>
+    </div>
+    <div class="hero-b">
+      <div class="hero-b-left">
+        <div class="eyebrow">Positioning & Go-to-Market</div>
+        <div class="hl">
+          <span class="the">The</span>
+          <span class="main">Crystallizer</span>
+        </div>
+        <div class="sub">You know what you've built. I make sure everyone else does too.</div>
+        <div class="btn-p">Let's talk →</div>
+      </div>
+      <div class="hero-b-right">
+        <div class="hero-b-glow"></div>
+        <div class="hero-b-diamond">✦</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OPTION C -->
+<div class="option-wrap">
+  <div class="option-label">
+    <div class="option-letter">C</div>
+    <div>
+      <h2>Statement-First</h2>
+      <p>הסטייטמנט הגדול הוא ה-Hero. שם הוא קטן מעל. פחות "אני", יותר "הבעיה שאני פותר".</p>
+    </div>
+  </div>
+  <div class="preview-frame" data-choice="C" data-label="Statement-First" onclick="select(this)">
+    <div class="select-badge">✓ נבחר</div>
+    <div class="mock-nav" style="background:#fff; border-bottom:1px solid #eee;">
+      <div class="mock-nav-logo">Hagai Heshes</div>
+      <div class="mock-nav-links"><span>Work</span><span>Approach</span><span>About</span></div>
+      <div class="mock-nav-cta">Get in touch</div>
+    </div>
+    <div class="hero-c">
+      <div class="hero-c-content">
+        <div class="byline">Hagai Heshes — Positioning & Go-to-Market</div>
+        <div class="statement">The world is full of great products<br>that never found their people.<br>I fix <em>that</em>.</div>
+        <div class="divider"></div>
+        <div class="sub">Positioning and go-to-market for companies that can't afford to be misunderstood.</div>
+        <div class="btn-p">Let's talk →</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -19,6 +19,11 @@ Personal consulting website for **Hagai Heshes ("The Crystallizer")** — positi
 ## Mobile
 - Breakpoints in use: 480, 600, 680, 720, 840, 860px. Mobile nav uses a hamburger + `.mobile-drawer`. Hero crystal column is hidden ≤720px.
 
+## Visual Direction
+- **Light site** — keep the light background (`--bg`) as the base tone. No full dark-mode redesign.
+- **Tone:** blend of B (Light & Premium — clean, precise, Vercel/Resend feel) and C (Warm & Human — warm neutrals, personal senior-consultant feel). Not cold SaaS.
+- Dark sections (statement strip, how I work, contact) are fine as accent sections, but the overall site reads light.
+
 ## Working agreement
 - This is a spec/docs agent context: produce `spec.md`, do not write application code.
 - Preserve color palette, fonts, crystal geometry, existing mobile CSS, and accessibility features unless a change explicitly requires otherwise.
