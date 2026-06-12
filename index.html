@@ -29,7 +29,7 @@
         .nav { background: var(--bg-light); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; }
         .nav .container { display: flex; align-items: center; justify-content: space-between; height: 52px; }
         .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; letter-spacing: -0.01em; }
-        .nav-logo-dot { width: 7px; height: 7px; background: var(--accent-blue); transform: rotate(45deg); }
+        .nav-logo-crystal { display: flex; align-items: center; }
         .nav-links { display: flex; align-items: center; gap: 32px; }
         .nav-link { font-size: 13px; color: #666; text-decoration: none; font-weight: 500; transition: color 0.2s; }
         .nav-link:hover { color: var(--text-dark); }
@@ -61,20 +61,23 @@
 
         /* Core Capabilities */
         .capabilities { padding: 96px 0; border-bottom: 1px solid var(--border-color); }
-        .cap-heading { font-size: 54px; font-weight: 400; font-family: var(--font-serif); color: var(--text-dark); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 64px; }
+        .cap-heading { font-size: 44px; font-weight: 400; font-family: var(--font-serif); color: var(--text-dark); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 64px; }
+        .cap-deliverables-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #888; font-weight: 600; margin-bottom: 8px; display: block; }
         .cap-grid { display: grid; grid-template-columns: 1fr 1fr; }
         .cap-card { padding: 0 64px 0 0; }
         .cap-card:last-child { padding: 0 0 0 64px; border-left: 1px solid var(--border-color); }
         .cap-title { font-size: 30px; font-weight: 400; font-family: var(--font-serif); color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.01em; }
         .cap-desc { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 24px; }
-        .cap-deliverables { font-size: 13px; color: #999; letter-spacing: 0.01em; line-height: 1.9; }
+        .cap-deliverables { font-size: 13px; color: #555; letter-spacing: 0.01em; line-height: 1.9; }
 
         /* Clients Band */
         .section-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 12px; font-weight: 600; }
         .clients-band { padding: 56px 0; background: var(--bg-light); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
         .clients-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 32px; margin-top: 24px; }
-        .client-logo { height: 28px; width: auto; filter: grayscale(1) opacity(0.45); transition: opacity 0.2s; display: block; object-fit: contain; }
-        .client-logo:hover { opacity: 1; filter: grayscale(1) opacity(0.65); }
+        .client-logo { height: 28px; width: auto; filter: grayscale(1) opacity(0.45); transition: filter 0.2s; display: block; object-fit: contain; }
+        .client-logo:hover { filter: grayscale(1) opacity(0.65); }
+        .client-logo-monday { height: 36px; }
+        .client-logo-seagate { filter: grayscale(1) opacity(0.6); }
 
         /* How I Work */
         .approach-wrap { border-bottom: 1px solid var(--border-color); }
@@ -131,11 +134,17 @@
     <nav class="nav">
         <div class="container">
             <div class="nav-logo">
-                <div class="nav-logo-dot"></div>
+                <span class="nav-logo-crystal">
+                    <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="6.5,0.5 12,5 9.5,14.5 3.5,14.5 1,5" fill="#2D2AE8"/>
+                        <polygon points="6.5,0.5 12,5 6.5,3.2" fill="rgba(255,255,255,0.38)"/>
+                        <polygon points="1,5 12,5 9.5,14.5 3.5,14.5" fill="rgba(0,0,50,0.18)"/>
+                    </svg>
+                </span>
                 <span>Hagai Heshes</span>
             </div>
             <div class="nav-links">
-                <a class="nav-link" href="#work">Work</a>
+                <a class="nav-link" href="#services">Services</a>
                 <a class="nav-link" href="#approach">Approach</a>
                 <a class="nav-link" href="#about">About</a>
                 <a class="nav-cta" href="#contact">Get in touch</a>
@@ -147,7 +156,7 @@
         <div class="container">
             <div class="hero-left">
                 <h1 class="hero-title">The<br><em>Crystallizer</em></h1>
-                <p class="hero-sub">You know what you've built. I make sure everyone else does too. I distill what you're really about, then help you take it to market.</p>
+                <p class="hero-sub">You know what you've built. I make sure everyone else does too.<br>I distill what you're really about, then help you take it to market.</p>
                 <a class="btn-primary" href="#contact">Let's talk</a>
             </div>
         </div>
@@ -216,18 +225,20 @@
         </div>
     </section>
 
-    <section id="work" class="capabilities">
+    <section id="services" class="capabilities">
         <div class="container">
             <h2 class="cap-heading">Core Capabilities</h2>
             <div class="cap-grid">
                 <div class="cap-card">
                     <h3 class="cap-title">Crystallization</h3>
                     <p class="cap-desc">I absorb everything about your company and compress it into something essential: what you are, who you're truly for, why you win, and how to talk about it.</p>
+                    <span class="cap-deliverables-label">Deliverables</span>
                     <p class="cap-deliverables">Positioning &amp; messaging &nbsp;·&nbsp; Value propositions &nbsp;·&nbsp; Company narrative &nbsp;·&nbsp; Investor story</p>
                 </div>
                 <div class="cap-card">
                     <h3 class="cap-title">Go-to-Market</h3>
                     <p class="cap-desc">Once the foundation is solid, we go on the attack: the right motion, channels, and sequence to take it to market.</p>
+                    <span class="cap-deliverables-label">Deliverables</span>
                     <p class="cap-deliverables">GTM strategy &amp; plan &nbsp;·&nbsp; Sales deck &nbsp;·&nbsp; Website copy &nbsp;·&nbsp; Sales enablement</p>
                 </div>
             </div>
@@ -238,11 +249,11 @@
         <div class="container">
             <p class="section-label">Selected Clients</p>
             <div class="clients-row">
+                <img class="client-logo client-logo-monday" src="logos/monday_logo-removebg-preview.png" alt="Monday.com">
                 <img class="client-logo" src="logos/tytocare_logo-removebg-preview.png" alt="TytoCare">
                 <img class="client-logo" src="logos/quantalx_logo-removebg-preview.png" alt="QuantalX">
                 <img class="client-logo" src="logos/wd_logo-removebg-preview.png" alt="Western Digital">
-                <img class="client-logo" src="logos/seagate_logo-removebg-preview.png" alt="Seagate">
-                <img class="client-logo" src="logos/monday_logo-removebg-preview.png" alt="Monday.com">
+                <img class="client-logo client-logo-seagate" src="logos/seagate_logo-removebg-preview.png" alt="Seagate">
                 <img class="client-logo" src="logos/wix_logo-removebg-preview.png" alt="Wix">
                 <img class="client-logo" src="logos/Band-Logo.webp" alt="BAND">
             </div>
@@ -259,34 +270,16 @@
                 <div class="approach-right">
                     <div class="principles-grid">
 
-                        <div class="principle">
-                            <svg class="principle-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 2L18 10L10 18L2 10L10 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <circle cx="10" cy="10" r="2.5" fill="currentColor"/>
-                            </svg>
-                            <p class="principle-title">Small roster, deep focus</p>
-                            <p class="principle-desc">I work with a small number of clients at a time. Deeply, not broadly.</p>
-                        </div>
-
+                        <!-- Q1: Speed & Action -->
                         <div class="principle">
                             <svg class="principle-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3 10h14M13 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <p class="principle-title">No fluff, no shelf-ware</p>
-                            <p class="principle-desc">I move fast, get to the essential quickly, and leave you with something you can actually use.</p>
+                            <p class="principle-title">Sharp. Fast. Done.</p>
+                            <p class="principle-desc">I move fast, get to the essential quickly, and leave you with something you can actually use — not a report that collects dust.</p>
                         </div>
 
-                        <div class="principle">
-                            <svg class="principle-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="5" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-                                <circle cx="15" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M7.5 10h5" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M10 6V4M10 16v-2" stroke="currentColor" stroke-width="1" opacity="0.5"/>
-                            </svg>
-                            <p class="principle-title">Referral-only</p>
-                            <p class="principle-desc">Most clients come through referral. That's by design.</p>
-                        </div>
-
+                        <!-- Q2: Market Authority -->
                         <div class="principle">
                             <svg class="principle-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/>
@@ -294,7 +287,27 @@
                                 <path d="M2.5 10h15" stroke="currentColor" stroke-width="1" opacity="0.7"/>
                             </svg>
                             <p class="principle-title">U.S. market fluency</p>
-                            <p class="principle-desc">A decade living and working there. I know the market from the inside.</p>
+                            <p class="principle-desc">A decade living and working there. I don't just know the market — I know how it thinks.</p>
+                        </div>
+
+                        <!-- Q3: Process Iteration -->
+                        <div class="principle">
+                            <svg class="principle-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 4.5A7 7 0 1 1 5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M15 4.5V8.5H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <p class="principle-title">Tight loops, zero friction</p>
+                            <p class="principle-desc">I work in short, intense cycles — absorb, build, get feedback, refine. No long gaps. No surprises. Always moving.</p>
+                        </div>
+
+                        <!-- Q4: Scarcity & Dedication -->
+                        <div class="principle">
+                            <svg class="principle-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 2L18 10L10 18L2 10L10 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <circle cx="10" cy="10" r="2.5" fill="currentColor"/>
+                            </svg>
+                            <p class="principle-title">Few clients. Full attention.</p>
+                            <p class="principle-desc">I work with a small number of clients at a time. When I'm in, I'm fully in — not spread thin across a dozen accounts.</p>
                         </div>
 
                     </div>
@@ -334,7 +347,7 @@
         <div class="container">
             <span class="footer-copy">&copy; 2026 Hagai Heshes. All rights reserved.</span>
             <div class="footer-links">
-                <a href="#work" class="footer-link">Work</a>
+                <a href="#services" class="footer-link">Services</a>
                 <a href="#approach" class="footer-link">Approach</a>
                 <a href="#about" class="footer-link">About</a>
                 <a href="#contact" class="footer-link">Contact</a>
