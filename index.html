@@ -138,14 +138,12 @@
         .client-logo:hover { filter: grayscale(1) opacity(0.65); }
 
         /* How I Work */
-        .approach-wrap { border-bottom: 1px solid var(--border-color); }
-        .approach { display: grid; grid-template-columns: 0.8fr 1.2fr; }
-        .approach-left { padding: 80px 40px 80px 0; }
-        .approach-title { font-size: 44px; font-weight: 400; font-family: var(--font-serif); color: var(--text-dark); line-height: 1.15; letter-spacing: -0.01em; margin-top: 12px; }
-        .approach-right { padding: 80px 0 80px 64px; }
-        .principles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 40px; }
-        .principle-icon { color: var(--accent-blue); opacity: 0.75; margin-bottom: 14px; display: block; }
-        .principle-title { font-size: 15px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; letter-spacing: -0.01em; }
+        .approach-wrap { border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 80px 0; }
+        .approach-title { font-size: 44px; font-weight: 400; font-family: var(--font-serif); color: var(--text-dark); line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 56px; }
+        .principles-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+        .principle { border-top: 1px solid var(--border-color); padding-top: 28px; padding-right: 32px; }
+        .principle-icon { color: var(--accent-blue); opacity: 0.65; margin-bottom: 20px; display: block; }
+        .principle-title { font-size: 15px; font-weight: 600; color: var(--text-dark); margin-bottom: 10px; letter-spacing: -0.01em; }
         .principle-desc { font-size: 14px; color: #666; line-height: 1.6; }
 
         /* About */
@@ -183,8 +181,10 @@
         @media (max-width: 960px) {
             .hero-shell { margin: 12px 10px 0; border-radius: 28px 28px 0 0; }
             .nav { border-radius: 28px 28px 0 0; }
-            .hero .container, .cap-grid, .approach, .about, .cta-footer .container { grid-template-columns: 1fr; gap: 40px; }
-            .cap-card, .cap-card:last-child, .approach-left, .approach-right, .about-right { padding: 40px 0; border: none; }
+            .hero .container, .cap-grid, .about, .cta-footer .container { grid-template-columns: 1fr; gap: 40px; }
+            .cap-card, .cap-card:last-child, .about-right { padding: 40px 0; border: none; }
+            .principles-grid { grid-template-columns: 1fr 1fr; }
+            .approach-title { margin-bottom: 40px; }
             .about-photo-col { height: 340px; width: 100%; }
             .hero-crystal { display: none; }
             .hero-title { font-size: 48px; }
@@ -331,12 +331,9 @@
 
     <div class="approach-wrap">
         <div class="container" id="approach">
-            <section class="approach">
-                <div class="approach-left">
-                    <h2 class="approach-title reveal">How I<br>work</h2>
-                </div>
-                <div class="approach-right">
-                    <div class="principles-grid">
+            <section>
+                <h2 class="approach-title reveal">How I work</h2>
+                <div class="principles-grid">
 
                         <!-- Q1: Speed & Action -->
                         <div class="principle stagger">
@@ -379,7 +376,6 @@
                             <p class="principle-desc">I work with a small number of clients at a time. When I'm in, I'm fully in. Not spread thin across a dozen accounts.</p>
                         </div>
 
-                    </div>
                 </div>
             </section>
         </div>
