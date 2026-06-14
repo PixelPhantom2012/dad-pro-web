@@ -120,15 +120,15 @@
         .hero-crystal img { width: 100%; height: auto; display: block; }
 
         /* Core Capabilities */
-        .capabilities { padding: 96px 0; border-bottom: 1px solid var(--border-color); }
+        .capabilities { padding: 64px 0; border-bottom: 1px solid var(--border-color); }
         .cap-heading { font-size: 44px; font-weight: 400; font-family: var(--font-serif); color: var(--text-dark); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 64px; }
-        .cap-deliverables-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #888; font-weight: 600; margin-bottom: 8px; display: block; }
+        .cap-deliverables-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #444; font-weight: 600; margin-bottom: 8px; display: block; }
         .cap-grid { display: grid; grid-template-columns: 1fr 1fr; }
         .cap-card { padding: 0 64px 0 0; }
         .cap-card:last-child { padding: 0 0 0 64px; border-left: 1px solid var(--border-color); }
         .cap-title { font-size: 30px; font-weight: 400; font-family: var(--font-serif); color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.01em; }
         .cap-desc { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 24px; }
-        .cap-deliverables { font-size: 13px; color: #555; letter-spacing: 0.01em; line-height: 1.9; }
+        .cap-deliverables { font-size: 14px; color: #333; letter-spacing: 0.01em; line-height: 1.9; }
 
         /* Clients Band */
         .section-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 12px; font-weight: 600; }
@@ -147,12 +147,12 @@
         .principle-desc { font-size: 14px; color: #666; line-height: 1.6; }
 
         /* About */
-        .about { display: grid; grid-template-columns: 1fr 1.5fr; align-items: start; gap: 0; padding: 80px 0; }
-        .about-photo-col { aspect-ratio: 4/3; overflow: hidden; }
-        .about-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; }
-        .about-right { padding: 0 0 0 48px; border-left: 1px solid var(--border-color); }
+        .about { display: grid; grid-template-columns: 1fr 1.5fr; align-items: center; gap: 0; padding: 80px 0; }
+        .about-photo-col { overflow: hidden; width: 100%; aspect-ratio: 1 / 1; }
+        .about-photo { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+        .about-right { padding: 0 0 0 48px; }
         .about-body { font-size: 15px; color: #444; line-height: 1.75; margin-bottom: 20px; }
-        .about-title { font-size: 36px; font-weight: 400; font-family: var(--font-serif); color: var(--text-dark); line-height: 1.25; letter-spacing: -0.01em; margin-top: 20px; margin-bottom: 28px; }
+        .about-title { font-size: 36px; font-weight: 400; font-family: var(--font-serif); color: var(--text-dark); line-height: 1.25; letter-spacing: -0.01em; margin-top: 0; margin-bottom: 28px; }
 
         /* CTA Footer */
         .cta-footer { background: var(--bg-dark); color: #fff; padding: 96px 0; position: relative; overflow: visible; }
@@ -185,7 +185,7 @@
             .cap-card, .cap-card:last-child, .about-right { padding: 40px 0; border: none; }
             .principles-grid { grid-template-columns: 1fr 1fr; }
             .approach-title { margin-bottom: 40px; }
-            .about-photo-col { height: 340px; width: 100%; }
+            .about-photo-col { aspect-ratio: 1 / 1; width: 100%; }
             .hero-crystal { display: none; }
             .hero-title { font-size: 48px; }
             .cap-heading { font-size: 38px; margin-bottom: 40px; }
@@ -307,7 +307,7 @@
                     <h3 class="cap-title">Go-to-Market</h3>
                     <p class="cap-desc">Once the foundation is solid, we go on the attack: the right motion, channels, and sequence to take it to market.</p>
                     <span class="cap-deliverables-label">Deliverables</span>
-                    <p class="cap-deliverables">GTM strategy &amp; plan &nbsp;·&nbsp; Sales deck &nbsp;·&nbsp; Website copy &nbsp;·&nbsp; Sales enablement</p>
+                    <p class="cap-deliverables">GTM strategy &amp; plan &nbsp;·&nbsp; Sales deck &nbsp;·&nbsp; Website copy &nbsp;·&nbsp; Sales enablement &nbsp;·&nbsp; Investor deck</p>
                 </div>
             </div>
         </div>
@@ -338,7 +338,7 @@
                         <!-- Q1: Speed & Action -->
                         <div class="principle stagger">
                             <svg class="principle-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16 3L7 16h7l-2 9 12-14h-8l2-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 9L22 14L4 19L8 14Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="miter"/>
                             </svg>
                             <p class="principle-title">Sharp. Fast. Done.</p>
                             <p class="principle-desc">I move fast, get to the essential quickly, and leave you with something you can actually use. Not a report that collects dust.</p>
@@ -347,10 +347,11 @@
                         <!-- Q2: Market Authority -->
                         <div class="principle stagger">
                             <svg class="principle-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="14" cy="14" r="10.5" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M14 3.5C14 3.5 18 7.5 18 14s-4 10.5-4 10.5M14 3.5C14 3.5 10 7.5 10 14s4 10.5 4 10.5" stroke="currentColor" stroke-width="1" opacity="0.8"/>
-                                <path d="M3.5 14h21" stroke="currentColor" stroke-width="1" opacity="0.8"/>
-                                <path d="M5.5 8.5h17M5.5 19.5h17" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+                                <polygon points="14,3 22,8 22,20 14,25 6,20 6,8" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="miter"/>
+                                <line x1="6" y1="8" x2="22" y2="20" stroke="currentColor" stroke-width="0.75" opacity="0.45"/>
+                                <line x1="22" y1="8" x2="6" y2="20" stroke="currentColor" stroke-width="0.75" opacity="0.45"/>
+                                <line x1="6" y1="8" x2="22" y2="8" stroke="currentColor" stroke-width="0.75" opacity="0.45"/>
+                                <line x1="6" y1="20" x2="22" y2="20" stroke="currentColor" stroke-width="0.75" opacity="0.45"/>
                             </svg>
                             <p class="principle-title">U.S. market fluency</p>
                             <p class="principle-desc">A decade living and working there. I don't just know the market. I know how it thinks.</p>
@@ -359,7 +360,8 @@
                         <!-- Q3: Process Iteration -->
                         <div class="principle stagger">
                             <svg class="principle-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14 14 C12.5 8.5 3.5 8.5 3.5 14 C3.5 19.5 12.5 19.5 14 14 C15.5 8.5 24.5 8.5 24.5 14 C24.5 19.5 15.5 19.5 14 14 Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                                <path d="M14 3L21 10L14 14L7 10Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="miter"/>
+                                <path d="M14 14L21 18L14 25L7 18Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="miter"/>
                             </svg>
                             <p class="principle-title">Tight loops, zero friction</p>
                             <p class="principle-desc">I work in short, intense cycles: absorb, build, get feedback, refine. No long gaps. No surprises. Always moving.</p>
@@ -368,9 +370,9 @@
                         <!-- Q4: Scarcity & Dedication -->
                         <div class="principle stagger">
                             <svg class="principle-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="14" cy="14" r="3" fill="currentColor"/>
-                                <circle cx="14" cy="14" r="7" stroke="currentColor" stroke-width="1.5"/>
-                                <circle cx="14" cy="14" r="11.5" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+                                <path d="M14 4L24 14L14 24L4 14Z" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="miter" opacity="0.35"/>
+                                <path d="M14 9L19 14L14 19L9 14Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="miter"/>
+                                <path d="M14 4L14 9M19 14L24 14M14 19L14 24M4 14L9 14" stroke="currentColor" stroke-width="0.75" opacity="0.3"/>
                             </svg>
                             <p class="principle-title">Few clients. Full attention.</p>
                             <p class="principle-desc">I work with a small number of clients at a time. When I'm in, I'm fully in. Not spread thin across a dozen accounts.</p>
@@ -387,10 +389,9 @@
                 <img class="about-photo" src="logos/hagai.jpeg" alt="Hagai Heshes">
             </div>
             <div class="about-right reveal">
-                <p class="section-label">Background</p>
-                <h2 class="about-title">Twenty years of making things clear.</h2>
-                <p class="about-body">Twenty years of GTM experience across Fortune 500 and startups. B2B, B2B2C and D2C, spanning healthcare, tech, defense and beyond. I know the U.S. market from the inside, having lived and worked there for over a decade.</p>
-                <p class="about-body">My background is an unusual mix: Computer Science, a Master's in Psychology from UPenn, and a career spent at the intersection of strategic clarity and human insight. I understand not just markets, but the people in them.</p>
+                <h2 class="about-title">Twenty years of turning complexity into clarity.</h2>
+                <p class="about-body">I bring 20 years of go-to-market leadership experience across Fortune 500 companies and high-growth startups, spanning B2B, B2B2C, and direct-to-consumer markets in healthcare, technology, defense, and beyond. Having lived and worked in the United States for more than a decade, I understand the U.S. market from the inside.</p>
+                <p class="about-body">My background is an uncommon blend of computer science, psychology, and commercial strategy. I hold a degree in Computer Science and a Master's degree from the University of Pennsylvania, and have spent my career at the intersection of strategic clarity and human behavior. I help organizations understand not only markets and products, but also the motivations, decisions, and behaviors that drive adoption and growth.</p>
             </div>
         </section>
     </div>
