@@ -30,6 +30,8 @@ Personal consulting website for **Hagai Heshes ("The Crystallizer")** — positi
 - Preserve color palette, fonts, crystal geometry, existing mobile CSS, and accessibility features unless a change explicitly requires otherwise.
 
 ## Deployment — NEVER auto-push
-- **The site is live at https://pixelphantom2012.github.io/dad-pro-web/**
-- **NEVER run `git commit` or `git push` without explicit user confirmation.** Always show what will be committed and ask first.
-- After making file changes, stop and ask: "Ready to push?" — do not proceed automatically.
+- **The site is LIVE in production at https://pixelphantom2012.github.io/dad-pro-web/**
+- **Any `git push` immediately updates the live public site. There is no staging environment.**
+- **NEVER run `git commit` or `git push` without the user typing explicit confirmation.** "yes", "push it", "go ahead" — not implied consent.
+- After making file changes, always stop and ask: "Ready to push?" — never proceed automatically.
+- This rule applies even if the user previously said "go ahead" for something else — each push requires its own confirmation.
