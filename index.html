@@ -122,13 +122,13 @@
         /* Core Capabilities */
         .capabilities { padding: 64px 0; border-bottom: 1px solid var(--border-color); }
         .cap-heading { font-size: 44px; font-weight: 400; font-family: var(--font-serif); color: var(--text-dark); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 64px; }
-        .cap-deliverables-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #444; font-weight: 600; margin-bottom: 8px; display: block; }
+        .cap-deliverables-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #000; font-weight: 600; margin-bottom: 8px; display: block; }
         .cap-grid { display: grid; grid-template-columns: 1fr 1fr; }
         .cap-card { padding: 0 64px 0 0; }
         .cap-card:last-child { padding: 0 0 0 64px; border-left: 1px solid var(--border-color); }
         .cap-title { font-size: 30px; font-weight: 400; font-family: var(--font-serif); color: var(--text-dark); margin-bottom: 16px; letter-spacing: -0.01em; }
         .cap-desc { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 24px; }
-        .cap-deliverables { font-size: 14px; color: #333; letter-spacing: 0.01em; line-height: 1.9; }
+        .cap-deliverables { font-size: 14px; color: #000; letter-spacing: 0.01em; line-height: 1.9; }
 
         /* Clients Band */
         .section-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 12px; font-weight: 600; }
@@ -141,7 +141,7 @@
         .approach-wrap { border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 80px 0; }
         .approach-title { font-size: 44px; font-weight: 400; font-family: var(--font-serif); color: var(--text-dark); line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 56px; }
         .principles-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
-        .principle { border-top: 1px solid var(--border-color); padding-top: 28px; padding-right: 32px; }
+        .principle { padding-top: 28px; padding-right: 32px; }
         .principle-icon { color: var(--accent-blue); opacity: 0.65; margin-bottom: 20px; display: block; }
         .principle-title { font-size: 15px; font-weight: 600; color: var(--text-dark); margin-bottom: 10px; letter-spacing: -0.01em; }
         .principle-desc { font-size: 14px; color: #666; line-height: 1.6; }
@@ -188,9 +188,11 @@
             .about-photo-col { aspect-ratio: 1 / 1; width: 100%; }
             .hero-crystal { display: none; }
             .hero-title { font-size: 48px; }
-            .cap-heading { font-size: 38px; margin-bottom: 40px; }
-            .hero .container { min-height: calc(100dvh - var(--nav-h)); }
-            .hero-left { padding: 64px 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+            .cap-heading { font-size: 44px; font-weight: 400; margin-bottom: 40px; }
+            .approach-title { font-size: 40px; }
+            .hero-left { padding: 64px 0; }
+            .clients-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 16px; justify-items: center; align-items: center; }
+            .client-logo { height: auto; max-height: 24px; max-width: 100%; width: auto; }
         }
 
         @media (max-width: 600px) {
@@ -200,8 +202,10 @@
             .nav-links .nav-link { display: none; }
             .hero-title { font-size: 40px; }
             .hero-sub { font-size: 16px; }
-            .cap-heading { font-size: 32px; }
-            .approach-title, .about-title { font-size: 30px; }
+            .cap-heading { font-size: 36px; font-weight: 400; }
+            .approach-title { font-size: 34px; }
+            .about-title { font-size: 30px; }
+            .clients-row { grid-template-columns: repeat(3, 1fr); gap: 24px 12px; }
         }
     </style>
 </head>
@@ -324,7 +328,6 @@
                 <img class="client-logo stagger" src="logos/seagate_logo-removebg-preview 1.png" alt="Seagate">
                 <img class="client-logo stagger" src="logos/wix_logo-removebg-preview 1.png" alt="Wix">
                 <img class="client-logo stagger" src="logos/Band-Logo 1.png" alt="BAND">
-                <img class="client-logo stagger" src="logos/neurolief_logo-removebg-preview 1.png" alt="Neurolief">
             </div>
         </div>
     </div>
@@ -340,7 +343,7 @@
                             <svg class="principle-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 9L22 14L4 19L8 14Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="miter"/>
                             </svg>
-                            <p class="principle-title">Sharp. Fast. Done.</p>
+                            <p class="principle-title">Sharp. Fast.</p>
                             <p class="principle-desc">I move fast, get to the essential quickly, and leave you with something you can actually use. Not a report that collects dust.</p>
                         </div>
 
@@ -363,7 +366,7 @@
                                 <path d="M14 3L21 10L14 14L7 10Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="miter"/>
                                 <path d="M14 14L21 18L14 25L7 18Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="miter"/>
                             </svg>
-                            <p class="principle-title">Tight loops, zero friction</p>
+                            <p class="principle-title">Tight loops</p>
                             <p class="principle-desc">I work in short, intense cycles: absorb, build, get feedback, refine. No long gaps. No surprises. Always moving.</p>
                         </div>
 
@@ -389,7 +392,7 @@
                 <img class="about-photo" src="logos/hagai.jpeg" alt="Hagai Heshes">
             </div>
             <div class="about-right reveal">
-                <h2 class="about-title">Twenty years of turning complexity into clarity.</h2>
+                <h2 class="about-title">Twenty years of turning complexity into clarity</h2>
                 <p class="about-body">I bring 20 years of go-to-market leadership experience across Fortune 500 companies and high-growth startups, spanning B2B, B2B2C, and direct-to-consumer markets in healthcare, technology, defense, and beyond. Having lived and worked in the United States for more than a decade, I understand the U.S. market from the inside.</p>
                 <p class="about-body">My background is an uncommon blend of computer science, psychology, and commercial strategy. I hold a degree in Computer Science and a Master's degree from the University of Pennsylvania, and have spent my career at the intersection of strategic clarity and human behavior. I help organizations understand not only markets and products, but also the motivations, decisions, and behaviors that drive adoption and growth.</p>
             </div>
@@ -405,7 +408,7 @@
             <div class="cta-right reveal">
                 <div class="cta-actions">
                     <a class="btn-wa-primary" href="https://wa.me/972532851277">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="#25D366" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 0C4.03 0 0 4.03 0 9c0 1.58.41 3.07 1.14 4.36L0 18l4.77-1.12A8.96 8.96 0 0 0 9 18c4.97 0 9-4.03 9-9S13.97 0 9 0zm4.42 12.67c-.19.52-1.1 1-1.52 1.06-.39.06-.88.08-1.42-.09-.33-.1-.75-.25-1.29-.48-2.26-.97-3.73-3.27-3.84-3.42-.12-.15-.94-1.25-.94-2.39 0-1.14.59-1.7.8-1.93.22-.23.47-.29.63-.29h.45c.15 0 .35-.06.54.41.2.48.68 1.64.74 1.76.06.12.1.26.02.42-.08.16-.12.26-.23.39-.12.14-.25.31-.35.42-.12.12-.24.25-.1.48.14.23.6.97 1.28 1.57.88.77 1.63 1.01 1.86 1.12.23.12.37.1.51-.06.14-.16.59-.68.74-.92.16-.23.32-.19.53-.11.21.08 1.35.64 1.58.75.23.12.39.17.45.27.06.1.06.55-.13 1.07z"/>
                         </svg>
                         WhatsApp
